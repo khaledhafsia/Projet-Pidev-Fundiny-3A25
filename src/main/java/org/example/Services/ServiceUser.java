@@ -45,4 +45,29 @@ public class ServiceUser {
         }
         return user;
     }
+
+    public User validateUser(String email, String password) {
+        User user = null;
+        try {
+            user = verifyUser(email);
+            if (user != null && user.getPassword().equals(password)) {
+                return user;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle the exception appropriately
+        }
+        return null;
+    }
+
+    public User.role getUserRole(String email) {
+        try {
+            User user = verifyUser(email);
+            if (user != null) {
+                return user.getRole();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle the exception appropriately
+        }
+        return User.role.AUTRE; // Return a default role, like "AUTRE", when user not found or an error occurs
+    }
 }

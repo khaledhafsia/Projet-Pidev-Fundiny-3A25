@@ -3,7 +3,7 @@ package org.example.Controller;
 
 import org.example.Entities.User;
 import org.example.Entities.Owner;
-import org.example.Entities.Owner;
+import org.example.Entities.Funder;
 import org.example.Services.ServiceUser;
 import org.example.Services.ServiceOwner;
 import org.example.Services.ServiceFunder;
@@ -20,12 +20,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.mindrot.jbcrypt.BCrypt;
-public class SignInController {
-}
-/*
-    public class SignInController implements Initializable {
 
-}
+import java.io.IOException;
+import java.util.Objects;
+
+
+//public class SignInController implements Initializable {
+
+
+public class SignInController{
+
 
     @FXML
     private TextField tfEmail;
@@ -37,107 +41,104 @@ public class SignInController {
     FXMLLoader loader;
 
    // Initializes the controller class.
-
-    @Override
+/*
+   @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
+
+
+
+ */
 
     @FXML
     private void MdpOublie(ActionEvent event) {
     }
 
+
     @FXML
-    private void SignIn(ActionEvent event) {
+    private void SignIn(ActionEvent event) throws IOException {
         String email = tfEmail.getText();
         String password = tfMdp.getText();
 
-        if (!email.matches("^\\S+@\\S+\\.\\S+$")) {
-            // afficher un message d'erreur et sortir de la méthode
-            Alert alert = new Alert(Alert.AlertType.ERROR, "L'adresse email n'est pas au format correct.");
-            alert.showAndWait();
-        } else if (password.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Le mot de passe est obligatoire.");
-            alert.showAndWait();
-        } else {
-            //Si ne l'est pas
-            User user = new User();
-            Owner patient = new Owner();
-            Funder medecin = new Funder();
-            ServiceOwner ps = new ServiceOwner();
-            patient = ps.Verifier(email);
-            Session s = new Session();
-            ServiceFunder sm = new ServiceFunder();
-            medecin = sm.Verifier(email);
-            String role = "";
-            //On verifie s'il  s'agie d'un patient ou  un medecin
-            if (patient.getEmail() != null) {
-                //if (BCrypt.checkpw(password, patient.getPassword())) {
-                if ( patient.getPassword())) {
-                    try {
-                        user = (User) patient;
-                        for (int i = 0; i < user.getRole().length; i++) {
-                            role += user.getRole()[i];
-                        }
-                        s = new Session(user.getId(), user.getNom(), role);
-                        loader = new FXMLLoader(getClass().getResource("/com/changemakers/atpeace/gui/MenuFrontInterface.fxml"));
-                        Parent root = loader.load();
-                        Scene scene = new Scene(root);
-                        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                        stage.setScene(scene);
-                        stage.show();
-                    } catch (IOException ex) {
-                        Logger.getLogger(SignInController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-
-                }
-            } else if (medecin.getEmail() != null) {
-                if (BCrypt.checkpw(password, medecin.getPassword())) {
-                    try {
-                        user = (User) medecin;
-                        for (int i = 0; i < user.getRole().length; i++) {
-                            role += user.getRole()[i];
-                        }
-                        s = new Session(user.getId(), user.getNom(), role);
-                        loader = new FXMLLoader(getClass().getResource("/com/changemakers/atpeace/gui/RendezVousInterfaceM.fxml"));
-                        Parent root = loader.load();
-                        Scene scene = new Scene(root);
-                        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                        stage.setScene(scene);
-                        stage.show();
-                    } catch (IOException ex) {
-                        Logger.getLogger(SignInController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-
-            } else if (email == "Admin" && password == "admin") {
-                try {
-                    // Si l'utilisateur est l'admin
-                    role = "ROLE_ADMIN";
-                    s = new Session(1, "Admin", role);
-                    loader = new FXMLLoader(getClass().getResource("/com/changemakers/atpeace/gui/MenuInterface.fxml"));
-                    Parent root = loader.load();
-                    Scene scene = new Scene(root);
-                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (IOException ex) {
-                    Logger.getLogger(SignInController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Mot de passe incorrect.");
-                alert.showAndWait();
-            }
-            SessionService ss = new SessionService();
-            System.out.println("user: " + user.getId());
-
-            System.out.println("session : " + s.getId_user());
-            ss.Delete();
-            ss.Insert(s);
+        if (!email.matches("^\\S+@\\S+\\.\\S+$")){
+            showAlert("Email is not in a correct format.");
+            return;
         }
+
+        if (password.isEmpty()) {
+            showAlert("Password is required.");
+            return;
+        }
+
+        ServiceUser serviceUser = new ServiceUser();
+        User user = serviceUser.validateUser(email, password);
+
+        if (user != null) {
+            openInterfaceBasedOnRole(user.getRole(), event);
+        } else {
+            showAlert("Invalid email or password.");
+        }
+    }
+
+    private void openInterfaceBasedOnRole(User.role role, ActionEvent event) throws IOException {
+
+        switch (role) {
+            case Owner:
+                openOwnerInterface(event);
+                break;
+            case Funder:
+                openFunderInterface(event);
+                break;
+            case AUTRE:
+                openDefaultInterface(event);
+                break;
+            default:
+                openDefaultInterface(event);
+                break;
+        }
+    }
+
+    private void openOwnerInterface(ActionEvent event) throws IOException {
+        // Load the FXML file from the correct location
+        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/AjouterPersonne.fxml")));
+        Scene scene = new Scene(parent);
+
+        // Fetch the stage and set the scene
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    private void openFunderInterface(ActionEvent event) throws IOException {
+        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/AjouterPersonne.fxml")));
+        Scene scene = new Scene(parent);
+
+        // Fetch the stage and set the scene
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
 
     }
 
+    private void openDefaultInterface(ActionEvent event) throws IOException{
+        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/AjouterPersonne.fxml")));
+        Scene scene = new Scene(parent);
+
+        // Fetch the stage and set the scene
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR, message);
+        alert.showAndWait();
+    }
+
+
+
+
+
 }
 
-*/

@@ -1,0 +1,14 @@
+org\example\utils\MyDataBase.class
+org\example\Entities\User.class
+org\example\test\MainFX.class
+org\example\Controller\SignUpMController.class
+org\example\Entities\Owner.class
+org\example\Services\ServiceOwner.class
+org\example\Services\ServiceFunder.class
+org\example\Main.class
+org\example\Controller\SignInController.class
+org\example\test\Main.class
+org\example\Entities\User$role.class
+org\example\Controller\SignInController$1.class
+org\example\Services\ServiceUser.class
+org\example\Entities\Funder.class

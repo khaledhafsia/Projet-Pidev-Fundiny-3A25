@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="481.0" prefWidth="576.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controller.SignUpMController">
+<VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="663.0" prefWidth="727.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controller.SignUpMController">
     <children>
         <Label alignment="TOP_LEFT" text="Créer un compte">
             <VBox.margin>
@@ -24,7 +24,7 @@
             </font></Label>
       <ImageView fitHeight="150.0" fitWidth="419.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../logo.png" />
+            <Image url="@logo.png" />
          </image>
       </ImageView>
         <HBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="442.0">
@@ -52,7 +52,7 @@
         </HBox>
         <HBox alignment="CENTER" prefHeight="46.0" prefWidth="442.0">
             <children>
-                <TextField fx:id="tfEmail" prefHeight="26.0" prefWidth="570.0" promptText="Email" />
+                <TextField fx:id="tfEmail" prefHeight="26.0" prefWidth="726.0" promptText="Email" />
             </children>
             <VBox.margin>
                 <Insets top="10.0" />
@@ -75,7 +75,15 @@
                     <HBox.margin>
                         <Insets left="50.0" />
                     </HBox.margin>
+
+                    <!--
                 </RadioButton>
+            <RadioButton fx:id="rbadmin" mnemonicParsing="false" onAction="#selection" text="Admin">!-->
+               <toggleGroup>
+
+                  <ToggleGroup fx:id="user1" />
+               </toggleGroup>
+            </RadioButton>
             </children>
             <VBox.margin>
                 <Insets top="10.0" />
@@ -91,8 +99,16 @@
                 <Insets top="10.0" />
             </VBox.margin>
          <children>
-                <Button fx:id="sincrire" mnemonicParsing="false" onAction="#SignUp" prefHeight="28.0" prefWidth="106.0" styleClass="sign-btn" stylesheets="@Style.css" text="S'incrire" />
+                <Button fx:id="sincrire" mnemonicParsing="false" onAction="#SignUp" prefHeight="50.0" prefWidth="106.0" styleClass="sign-btn" stylesheets="@Style.css" text="S'incrire" />
          </children>
         </HBox>
+      <Button fx:id="clickHereButton" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#AlreadySignedUp" styleClass="passoublie-btn" stylesheets="@Style.css" text="déja inscris ? clicker ici !">
+         <padding>
+            <Insets left="15.0" />
+         </padding>
+         <font>
+            <Font size="8.0" />
+         </font>
+      </Button>
     </children>
 </VBox>

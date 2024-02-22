@@ -14,9 +14,13 @@ package org.example.Controller;
         import javafx.scene.control.ToggleGroup;
         import org.mindrot.jbcrypt.BCrypt;
 
+        import java.io.IOException;
         import java.net.URL;
         import java.util.ResourceBundle;
-
+        import javafx.fxml.FXMLLoader;
+        import javafx.scene.Parent;
+        import javafx.scene.Scene;
+        import javafx.stage.Stage;
 public class SignUpMController implements Initializable {
 
     @FXML
@@ -37,6 +41,11 @@ public class SignUpMController implements Initializable {
     private RadioButton rbfunder;
     @FXML
     private Button sincrire;
+    @FXML
+    private RadioButton rbadmin;
+    @FXML
+    private Button clickHereButton;
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -87,6 +96,11 @@ public class SignUpMController implements Initializable {
             } else if (rbfunder.isSelected()) {
                 Funder funder = new Funder(nom, prenom, email, hashpwd, User.role.Funder, "500.0");
                 ServiceUser.insertUser(funder, String.valueOf(funder.getParticipation()), "participation");
+           /* } else if (rbadmin.isSelected()) {
+                User user = new User(0, nom, prenom, email, hashpwd, User.role.ADMIN);
+
+
+            */
             } else {
                 showAlert("Please select the type of account to create.");
                 return;
@@ -111,4 +125,24 @@ public class SignUpMController implements Initializable {
         Alert alert = new Alert(type, content);
         alert.showAndWait();
     }
+
+
+    @FXML
+    private void AlreadySignedUp() {
+        try {
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/SignIn.fxml"));
+            Parent root = loader.load();
+
+            // Create a new scene with the loaded FXML content
+            Scene scene = new Scene(root);
+
+            // Get the stage from the button and set the new scene
+            Stage stage = (Stage) clickHereButton.getScene().getWindow();
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

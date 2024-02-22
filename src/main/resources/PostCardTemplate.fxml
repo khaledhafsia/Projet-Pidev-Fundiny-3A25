@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="143.0" prefWidth="327.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controller.PostCardController">
+   <children>
+      <!-- Add your labels or other components here -->
+      <Label fx:id="nameLabel" prefHeight="93.0" prefWidth="327.0" text="Label" />
+      <Label fx:id="emailLabel" prefHeight="83.0" prefWidth="327.0" text="Label" />
+   </children>
+</VBox>

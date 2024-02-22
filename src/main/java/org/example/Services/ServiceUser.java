@@ -1,11 +1,15 @@
 package org.example.Services;
 
+import org.example.Entities.Funder;
+import org.example.Entities.Owner;
 import org.example.Entities.User;
 import org.example.utils.MyDataBase;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ServiceUser {
 
@@ -68,6 +72,41 @@ public class ServiceUser {
         } catch (SQLException e) {
             e.printStackTrace(); // Handle the exception appropriately
         }
-        return User.role.AUTRE; // Return a default role, like "AUTRE", when user not found or an error occurs
+        return User.role.ADMIN; // Return a default role, like "AUTRE", when user not found or an error occurs
+    }
+
+    // Add this method to ServiceUser.java
+    public List<User> getAllUsers() {
+        User user = null;
+        List<User> userList = new ArrayList<>();
+        String query = "SELECT * FROM `user`";
+
+        try (PreparedStatement statement = cnx.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String nom = resultSet.getString("nom");
+                String prenom = resultSet.getString("prenom");
+                String email = resultSet.getString("email");
+                String password = resultSet.getString("password");
+                User.role userRole = User.role.valueOf(resultSet.getString("role"));
+
+                // Assuming the role determines the type of user, handle accordingly
+                if (userRole == User.role.Funder) {
+                    float participation = resultSet.getFloat("participation");
+                    userList.add(new Funder(id, nom, prenom, email, password, userRole, participation));
+                } else if (userRole == User.role.Owner) {
+                    float capital = resultSet.getFloat("capital");
+                    userList.add(new Owner(id, nom, prenom, email, password, userRole, capital));
+                } else {
+                    userList.add(new User(id, nom, prenom, email, password, userRole));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle the exception appropriately
+            System.out.println("aaaaaaaaaaaaaaaa");
+        }
+        return userList;
+
     }
 }

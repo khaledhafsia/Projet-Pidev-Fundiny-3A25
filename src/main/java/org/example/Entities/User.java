@@ -7,7 +7,7 @@ public class User {
     }
 
     public enum role {
-        AUTRE,
+        ADMIN,
         Owner,
         Funder
     }
@@ -32,7 +32,7 @@ public class User {
         return nom;
     }*/
 
-    public User(int id,String nom, String prenom, String telephone, String adresse, String email, String password) {
+    public User(int id, String nom, String prenom,String email, String password) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -50,8 +50,8 @@ public class User {
         this.password = password;
     }
 
-    public User(int id, String nom, String prenom, String email, String password, User.role role) {
-        this.id = id;
+    public User(int i, String nom, String prenom, String email, String password, User.role role) {
+
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
@@ -59,7 +59,7 @@ public class User {
         this.role = role;
     }
 
-    public User(int id, String nom, String prenom, String telephone, String email) {
+    public User(int id, String nom, String prenom,String email) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;

@@ -2,16 +2,11 @@ package org.example.Controller;
 
 
 import org.example.Entities.User;
-import org.example.Entities.Owner;
-import org.example.Entities.Funder;
 import org.example.Services.ServiceUser;
-import org.example.Services.ServiceOwner;
-import org.example.Services.ServiceFunder;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -19,7 +14,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -90,7 +84,7 @@ public class SignInController{
             case Funder:
                 openFunderInterface(event);
                 break;
-            case AUTRE:
+            case ADMIN:
                 openDefaultInterface(event);
                 break;
             default:
@@ -101,7 +95,7 @@ public class SignInController{
 
     private void openOwnerInterface(ActionEvent event) throws IOException {
         // Load the FXML file from the correct location
-        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/AjouterPersonne.fxml")));
+        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/DashboardOwner.fxml")));
         Scene scene = new Scene(parent);
 
         // Fetch the stage and set the scene
@@ -109,20 +103,20 @@ public class SignInController{
         stage.setScene(scene);
         stage.show();
     }
-
     private void openFunderInterface(ActionEvent event) throws IOException {
-        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/AjouterPersonne.fxml")));
+        // Load the FXML file from the correct location
+        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/DashboardFunder.fxml")));
         Scene scene = new Scene(parent);
 
         // Fetch the stage and set the scene
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
-
     }
+
 
     private void openDefaultInterface(ActionEvent event) throws IOException{
-        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/AjouterPersonne.fxml")));
+        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/DashboardAdmin.fxml")));
         Scene scene = new Scene(parent);
 
         // Fetch the stage and set the scene

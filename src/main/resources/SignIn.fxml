@@ -5,19 +5,26 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="325.0" prefWidth="256.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controller.SignInController">
+<VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="468.0" prefWidth="761.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controller.SignInController">
    <children>
-      <Label text="Se connecter ">
+      <Label prefHeight="46.0" prefWidth="96.0" text="Se connecter ">
          <font>
             <Font size="16.0" />
          </font></Label>
+      <ImageView fitHeight="125.0" fitWidth="200.0">
+         <image>
+            <Image url="@logo.png" />
+         </image>
+      </ImageView>
       <HBox prefHeight="29.0" prefWidth="232.0">
          <children>
-            <TextField fx:id="tfEmail" prefHeight="26.0" prefWidth="210.0" promptText="Email">
+            <TextField fx:id="tfEmail" prefHeight="26.0" prefWidth="765.0" promptText="Email">
                <HBox.margin>
                   <Insets top="20.0" />
                </HBox.margin></TextField>
@@ -25,7 +32,7 @@
       </HBox>
       <HBox alignment="CENTER_LEFT" prefHeight="24.0" prefWidth="232.0">
          <children>
-            <PasswordField fx:id="tfMdp" prefHeight="26.0" prefWidth="209.0" promptText="mot de passe" />
+            <PasswordField fx:id="tfMdp" prefHeight="26.0" prefWidth="760.0" promptText="mot de passe" />
          </children>
          <VBox.margin>
             <Insets top="20.0" />
@@ -33,7 +40,7 @@
       </HBox>
       <HBox alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="232.0">
          <children>
-            <Button fx:id="mdpoublie" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#MdpOublie" styleClass="passoublie-btn" stylesheets="@Style.css" text="Mot de passe oublié ?" HBox.hgrow="ALWAYS">
+            <Button fx:id="mdpoublie" alignment="BASELINE_LEFT" graphicTextGap="8.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#MdpOublie" opacity="0.68" prefHeight="31.0" prefWidth="525.0" styleClass="passoublie-btn" stylesheets="@Style.css" text="Mot de passe oublié ?" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
@@ -44,7 +51,7 @@
                   <Font size="8.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#SignIn" prefHeight="31.0" prefWidth="94.0" styleClass="sign-btn" stylesheets="@Style.css" text="se connecter">
+            <Button mnemonicParsing="false" onAction="#SignIn" prefHeight="31.0" prefWidth="170.0" styleClass="sign-btn" stylesheets="@Style.css" text="se connecter">
                <padding>
                   <Insets right="20.0" />
                </padding>

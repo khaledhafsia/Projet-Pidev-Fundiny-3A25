@@ -4,16 +4,15 @@ import org.example.Entities.Funder;
 import org.example.Entities.Owner;
 import org.example.Entities.User;
 import org.example.utils.MyDataBase;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ServiceUser {
 
     private static Connection cnx;
+    Statement stm;
 
     public ServiceUser() {
         cnx = MyDataBase.getInstance().getCnx();
@@ -109,4 +108,48 @@ public class ServiceUser {
         return userList;
 
     }
+    public void updateUserAttribute(int userId, String attributeType, String attributeValue) throws SQLException {
+        String query = "UPDATE `user` SET " + attributeType + " = ? WHERE id = ?";
+        try(PreparedStatement statement = cnx.prepareStatement(query)){
+            statement.setString(1, attributeValue);
+            statement.setInt(2, userId);
+            statement.executeUpdate();
+        }
+    }
+
+
+    public void deleteUser(int id) throws SQLException {
+        String query = "DELETE FROM `user` WHERE id = ?";
+        stm = cnx.createStatement();
+        stm.executeUpdate(query);
+        }
+
+
+
 }
+
+/*
+
+    public void deleteUser(int userId) throws SQLException {
+        String query = "DELETE FROM `user` WHERE id = ?";
+        try (PreparedStatement statement = cnx.prepareStatement(query)) {
+            statement.setInt(1, userId);
+            statement.executeUpdate();
+        }
+    }
+
+
+    public void deleteUser(int id) throws SQLException {
+        String req = "DELETE FROM `user` WHERE `id`=?";
+        PreparedStatement ps = cnx.prepareStatement(req);
+        ps.setInt(1, id);
+        int rowsDeleted = ps.executeUpdate();
+        if (rowsDeleted == 0) {
+            System.out.println("No rows were deleted for ID " + id);
+        } else {
+            System.out.println(rowsDeleted + " rows were deleted for ID " + id);
+        }
+    }
+ */
+
+

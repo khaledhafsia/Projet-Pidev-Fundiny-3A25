@@ -43,7 +43,7 @@ public class AdminController {
                 postCardContainer.getChildren().add(postCard);
             }
 
-            logger.log(Level.INFO, "AdminController initialized successfully."); // Add this line
+            logger.log(Level.INFO, "AdminController initialized successfully.");
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Error loading PostCardTemplate.fxml", e);
         } catch (Exception ex) {

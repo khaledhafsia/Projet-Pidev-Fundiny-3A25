@@ -8,20 +8,24 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import org.example.Entities.Funder;
+import org.example.Entities.Owner;
 import org.example.Entities.User;
 import javafx.scene.control.Alert;
 import org.example.Services.ServiceUser;
 import javafx.scene.control.ButtonType;
 import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class PostCardController {
-    /* @FXML
+    @FXML
      private Label titleLabel;
 
-
-     */
     @FXML
     private Label nameLabel;
 
@@ -29,22 +33,21 @@ public class PostCardController {
     private Label emailLabel;
 
     @FXML
-    private Label roleLabel;
+    private Button UpdateButton;
     @FXML
-    private Button OnActionupdate;
+    private Button BanButton;
     @FXML
-    private Button OnActionBan;
-    @FXML
-    private Button OnActionDelete;
+    private Button DeleteButton;
     private User currentUser;
 
 
     public void initialize(User user) {
         this.currentUser = user;
-        // titleLabel.setText("User Information");
+         titleLabel.setText("User Information");
         nameLabel.setText(user.getNom() + " " + user.getPrenom());
         emailLabel.setText(user.getEmail());
-        // Optional: roleLabel.setText(user.getRole());
+
+
     }
 
     @FXML
@@ -53,19 +56,16 @@ public class PostCardController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/UpdateUser.fxml"));
             Parent root = loader.load();
 
-            UpdateUserController updateUserController = loader.getController();
-            updateUserController.initData(currentUser);
+            UpdateUserController controller = loader.getController();
+            controller.initData(currentUser);
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
-            stage.setTitle("Update User");
             stage.show();
-
         } catch (IOException e) {
-            e.printStackTrace(); // Handle the exception appropriately (e.g., show an error message to the user)
+            e.printStackTrace();
         }
     }
-
     @FXML
     private void handleDeleteAction(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -91,7 +91,56 @@ public class PostCardController {
             }
         }
     }
+
+    @FXML
+    private void handleBanAction(ActionEvent event) {
+
+    }
+
 }
+    /*
+
+
+    @FXML
+    private void handleDeleteAction(ActionEvent event) {
+        try {
+            ServiceUser serviceUser = new ServiceUser();
+            serviceUser.deleteUser(currentUser.getId());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+    }
+
+
+
+    /*
+    @FXML
+    private void handleUpdateAction(ActionEvent event) {
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UpdateUser.fxml"));
+            Parent root = loader.load();
+
+            UpdateUserController updateUserController = loader.getController();
+            updateUserController.initData(currentUser);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Update User");
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace(); // Handle the exception appropriately (e.g., show an error message to the user)
+        }
+    }
+
+
+ */
+
+
+
 
 
 

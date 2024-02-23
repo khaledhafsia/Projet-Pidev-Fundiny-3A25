@@ -64,5 +64,13 @@
             <Insets top="25.0" />
          </VBox.margin>
       </HBox>
+      <Button fx:id="clickHereButton" alignment="BASELINE_LEFT" graphicTextGap="8.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#AlreadySignedUp" opacity="0.68" prefHeight="31.0" prefWidth="525.0" styleClass="passoublie-btn" stylesheets="@Style.css" text="Don't have an account ?">
+         <padding>
+            <Insets left="15.0" />
+         </padding>
+         <font>
+            <Font size="8.0" />
+         </font>
+      </Button>
    </children>
 </VBox>

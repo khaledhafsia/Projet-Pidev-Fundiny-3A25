@@ -3,10 +3,7 @@ package org.example.Controller;
 
 import org.example.Entities.User;
 import org.example.Entities.Owner;
-import org.example.Entities.Owner;
 import org.example.Services.ServiceUser;
-import org.example.Services.ServiceOwner;
-import org.example.Services.ServiceFunder;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

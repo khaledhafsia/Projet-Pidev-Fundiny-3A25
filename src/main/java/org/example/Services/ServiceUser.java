@@ -71,7 +71,7 @@ public class ServiceUser {
         } catch (SQLException e) {
             e.printStackTrace(); // Handle the exception appropriately
         }
-        return User.role.ADMIN; // Return a default role, like "AUTRE", when user not found or an error occurs
+        return User.role.ADMIN;
     }
 
     // Add this method to ServiceUser.java
@@ -103,53 +103,53 @@ public class ServiceUser {
             }
         } catch (SQLException e) {
             e.printStackTrace(); // Handle the exception appropriately
-            System.out.println("aaaaaaaaaaaaaaaa");
         }
         return userList;
 
     }
+
+    public void updateUserAttribute(int userId, String attributeType, String attributeValue) {
+        try {
+            String query = "UPDATE `user` SET `" + attributeType + "` = ? WHERE id = ?";
+            PreparedStatement statement = cnx.prepareStatement(query);
+            statement.setString(1, attributeValue);
+            statement.setInt(2, userId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle the exception appropriately
+        }
+    }
+
+    public void deleteUser(int id) throws SQLException {
+
+        String req = "DELETE FROM user WHERE `id` = " + id;
+        stm = cnx.createStatement();
+        stm.executeUpdate(req);
+    }
+
+
+}
+    /*
+
+    public void deleteUser(int id) throws SQLException {
+        String query = "DELETE FROM `user` WHERE id = ?";
+        try (PreparedStatement statement = cnx.prepareStatement(query)) {
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        }
+    }
+}
+
+/*
     public void updateUserAttribute(int userId, String attributeType, String attributeValue) throws SQLException {
         String query = "UPDATE `user` SET " + attributeType + " = ? WHERE id = ?";
-        try(PreparedStatement statement = cnx.prepareStatement(query)){
+        try (PreparedStatement statement = cnx.prepareStatement(query)) {
             statement.setString(1, attributeValue);
             statement.setInt(2, userId);
             statement.executeUpdate();
         }
     }
 
-
-    public void deleteUser(int id) throws SQLException {
-        String query = "DELETE FROM `user` WHERE id = ?";
-        stm = cnx.createStatement();
-        stm.executeUpdate(query);
-        }
-
-
-
-}
-
-/*
-
-    public void deleteUser(int userId) throws SQLException {
-        String query = "DELETE FROM `user` WHERE id = ?";
-        try (PreparedStatement statement = cnx.prepareStatement(query)) {
-            statement.setInt(1, userId);
-            statement.executeUpdate();
-        }
-    }
-
-
-    public void deleteUser(int id) throws SQLException {
-        String req = "DELETE FROM `user` WHERE `id`=?";
-        PreparedStatement ps = cnx.prepareStatement(req);
-        ps.setInt(1, id);
-        int rowsDeleted = ps.executeUpdate();
-        if (rowsDeleted == 0) {
-            System.out.println("No rows were deleted for ID " + id);
-        } else {
-            System.out.println(rowsDeleted + " rows were deleted for ID " + id);
-        }
-    }
  */
 
 

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
@@ -24,45 +26,43 @@
                   <Font name="System Bold Italic" size="17.0" />
                </font>
             </Label>
-            <ImageView fitHeight="36.0" fitWidth="35.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../3A37ChangeMakersJava-main/src/Images/diete.png" />
-               </image>
-            </ImageView>
             <Label layoutX="43.0" layoutY="32.0" prefHeight="56.0" prefWidth="86.0" text="ultlisateur">
                <font>
                   <Font name="System Bold Italic" size="17.0" />
                </font>
             </Label>
+
+
+
+            <Button fx:id="RefreshButton" layoutX="46.0" layoutY="493.0" mnemonicParsing="false" onAction="#Refresh" text="Refresh" />
+
          </children>
       </Pane>
       <Pane layoutX="-2.0" layoutY="1.0" prefHeight="136.0" prefWidth="974.0">
          <children>
-            <TextField fx:id="search" layoutX="221.0" layoutY="18.0" prefHeight="36.0" prefWidth="400.0" promptText="search" style="-fx-background-color: lightblue; -fx-background-radius: 50;">
+            <TextField fx:id="search" layoutX="214.0" layoutY="54.0" prefHeight="36.0" prefWidth="400.0" promptText="search" style="-fx-background-color: lightblue; -fx-background-radius: 50;">
                <font>
                   <Font name="Georgia" size="10.0" />
                </font>
             </TextField>
-            <ImageView fitHeight="21.0" fitWidth="36.0" layoutX="628.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../3A37ChangeMakersJava-main/src/Images/loupe.png" />
-               </image>
-            </ImageView>
             <Label layoutX="705.0" layoutY="26.0" text="Khaled hafsia">
                <font>
                   <Font name="Bodoni MT" size="18.0" />
                </font>
             </Label>
-            <ImageView fitHeight="47.0" fitWidth="53.0" layoutX="843.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../3A37ChangeMakersJava-main/src/Images/utilisateur.png" />
-               </image>
-            </ImageView>
             <ImageView fitHeight="71.0" fitWidth="195.0" layoutX="35.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@logo.png" />
                </image>
             </ImageView>
+            <Button fx:id="SignOutButton" alignment="BASELINE_LEFT" graphicTextGap="8.0" layoutX="670.0" layoutY="75.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#SignOut" opacity="0.68" prefHeight="31.0" prefWidth="176.0" styleClass="passoublie-btn" stylesheets="@Style.css" text="Sign out">
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+               <font>
+                  <Font size="8.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
    </children>

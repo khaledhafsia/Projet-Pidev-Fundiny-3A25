@@ -3,14 +3,17 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 
 <VBox prefHeight="143.0" prefWidth="327.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controller.PostCardController">
    <children>
       <!-- Add your labels or other components here -->
-      <Label fx:id="nameLabel" prefHeight="93.0" prefWidth="327.0" text="Label" />
-      <Label fx:id="emailLabel" prefHeight="83.0" prefWidth="327.0" text="Label" />
-      <Button fx:id="OnActionupdate" mnemonicParsing="false" onAction="#handleUpdateAction" prefHeight="28.0" prefWidth="326.0" styleClass="sign-btn"  text="    Update" />
-      <Button fx:id="OnActionBan" mnemonicParsing="false" onAction="#handleUpdateAction" prefHeight="28.0" prefWidth="326.0" styleClass="sign-btn"  text="       Ban" />
-      <Button fx:id="OnActionDelete" mnemonicParsing="false" onAction="#handleDeleteAction" prefHeight="28.0" prefWidth="325.0" styleClass="sign-btn"  text="Perma Ban" textFill="#800017"/>
+      <Label fx:id="titleLabel" prefHeight="18.0" prefWidth="167.0" text="Label" textFill="RED" />
+      <Circle fill="DODGERBLUE" radius="18.0" stroke="BLACK" strokeType="INSIDE" />
+      <Label fx:id="nameLabel" prefHeight="18.0" prefWidth="154.0" text="Label" />
+      <Label fx:id="emailLabel" prefHeight="18.0" prefWidth="154.0" text="Label" />
+      <Button fx:id="UpdateButton" mnemonicParsing="false" onAction="#handleUpdateAction" prefHeight="28.0" prefWidth="326.0" styleClass="sign-btn" text="    Update name" textFill="#666133" />
+      <Button fx:id="BanButton" mnemonicParsing="false" onAction="#handleBanAction" prefHeight="28.0" prefWidth="326.0" styleClass="sign-btn" text="       Ban" />
+      <Button fx:id="DeleteButton" mnemonicParsing="false" onAction="#handleDeleteAction" prefHeight="28.0" prefWidth="325.0" styleClass="sign-btn" text="Perma Ban" textFill="#5c52c7" />
    </children>
 </VBox>

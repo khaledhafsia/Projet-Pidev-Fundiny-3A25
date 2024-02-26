@@ -5,9 +5,11 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import tn.esprit.models.Collaboration;
 import tn.esprit.models.Projet;
 import tn.esprit.services.ServiceProjet;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 public class ModifierProjetController {
@@ -38,7 +40,7 @@ public class ModifierProjetController {
 
     // Méthode pour valider la modification du projet
     @FXML
-    void validerModification(ActionEvent event) {
+    void validerModification(ActionEvent event) throws IOException {
         if (projet != null) {
             // Mettre à jour les données du projet
             projet.setNomPr(nomPrT.getText());
@@ -46,7 +48,7 @@ public class ModifierProjetController {
             String.valueOf(projet.getDateD());
             try {
                 int CA = Integer.parseInt(CAT.getText());
-                CA = projet.getCA();
+                projet.setCA(CA);
                 // Utilisez la valeur de CA ici
             } catch (NumberFormatException e) {
                 // Gérez l'exception ici (par exemple, affichez un message d'erreur)
@@ -64,5 +66,8 @@ public class ModifierProjetController {
         } else {
             System.out.println("Aucun projet à modifier.");
         }
+    }
+
+    public void initData(Collaboration collaboration) {
     }
 }

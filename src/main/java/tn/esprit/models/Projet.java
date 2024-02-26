@@ -1,6 +1,6 @@
 package tn.esprit.models;
 import java.sql.Date;
-import java.time.LocalDate;
+
 
 
 public class Projet {
@@ -20,8 +20,6 @@ public class Projet {
         this.CA = CA;
     }
 
-    public Projet(int id, String nomPr, String nomPo, LocalDate dateD, int ca) {
-    }
 
     public int getId() {
         return id;

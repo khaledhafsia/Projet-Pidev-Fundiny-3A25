@@ -13,6 +13,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import tn.esprit.models.Projet;
 import tn.esprit.services.ServiceProjet;
@@ -65,7 +66,7 @@ public class AjouterProjetController {
 
     }
     @FXML
-    void Afficher(ActionEvent event)throws IOException {
+    void Afficher(MouseEvent event)throws IOException {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/AfficherProjet.fxml"));
             Parent my_root = (Parent)fxmlLoader.load();
@@ -78,12 +79,6 @@ public class AjouterProjetController {
             System.out.println("FXML file path: " + getClass().getResource("/AfficherProjet.fxml"));
             e.printStackTrace();
         }
-
-        /*String projets = sp.getAll().toString();
-        Aff.setText(projets);*/
-        /*ArrayList<Projet> projets = sp.getAll();
-        lv.setItems(FXCollections.observableArrayList(projets));*/
-
 
 
     }

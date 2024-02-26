@@ -3,8 +3,9 @@ package tn.esprit.services;
 import tn.esprit.models.Projet;
 import tn.esprit.interfaces.IService;
 import tn.esprit.utils.MyDataBase;
+
+import javax.swing.*;
 import java.sql.*;
-import java.time.LocalDate;
 import java.sql.Date;
 
 
@@ -36,7 +37,7 @@ public class ServiceProjet implements IService<Projet> {
     @Override
     public ArrayList<Projet> getAll() {
         ArrayList<Projet> projets = new ArrayList<>();
-        String qry = "SELECT * FROM `projet`";
+        String qry = "SELECT * FROM projet";
 
         try (Statement stm = cnx.createStatement();
              ResultSet rs = stm.executeQuery(qry)) {
@@ -45,19 +46,14 @@ public class ServiceProjet implements IService<Projet> {
                 int id = rs.getInt(1);
                 String nomPr = rs.getString(2);
                 String nomPo = rs.getString(3);
-                LocalDate dateD = null;
-                LocalDate sqlDate = rs.getDate("dateD").toLocalDate();
-                if (sqlDate != null) {
-                    dateD = sqlDate ;
-                }
-
+                Date dateD = rs.getDate("dateD");
                 int CA = rs.getInt(5);
 
                 Projet pr = new Projet(id, nomPr, nomPo,dateD, CA);
                 projets.add(pr);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+           e.printStackTrace();
         }
 
         return projets;
@@ -70,7 +66,7 @@ public class ServiceProjet implements IService<Projet> {
             stm.setString(1, projet.getNomPr());
             stm.setString(2, projet.getNomPo());
             stm.setString(3, String.valueOf(projet.getDateD()));
-            stm.setFloat(4, projet.getCA());
+            stm.setInt(4, projet.getCA());
             stm.setInt(5, projet.getId());
 
             int rowsAffected = stm.executeUpdate();
@@ -83,6 +79,7 @@ public class ServiceProjet implements IService<Projet> {
             System.out.println("Erreur lors de la mise à jour du projet : " + e.getMessage());
         }
     }
+
 
     @Override
     public boolean delete(Projet projet) {
@@ -102,6 +99,7 @@ public class ServiceProjet implements IService<Projet> {
         } catch (SQLException e) {
             System.out.println("Erreur lors de la suppression du projet : " + e.getMessage());
             return false; // Erreur lors de la suppression
-        }
+        }}
+
     }
-}
+

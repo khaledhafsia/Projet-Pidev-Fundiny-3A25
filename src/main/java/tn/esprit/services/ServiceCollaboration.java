@@ -32,28 +32,24 @@ public class ServiceCollaboration implements IService<Collaboration> {
 
     @Override
     public ArrayList<Collaboration> getAll() {
-        ArrayList<Collaboration> collaborations = new ArrayList();
-        String qry = "SELECT * FROM `collaboration`" ;
-        try {
-            Statement stm = cnx.createStatement();
-            ResultSet rs = stm.executeQuery(qry);
-            while(rs.next()){
-                Collaboration cl = new Collaboration();
-                cl.setId_collaboration(rs.getInt(1));
-                cl.setNomColl(rs.getString(2));
-                cl.setTypeColl(rs.getString(3));
-                cl.setDateColl(rs.getDate(4));
+        ArrayList<Collaboration> collaborations = new ArrayList<>();
+        String qry = "SELECT * FROM collaboration" ;
+        try (Statement stm = cnx.createStatement();
+             ResultSet rs = stm.executeQuery(qry)) {
 
-                Collaboration c = new Collaboration();
-                collaborations.add(cl);
+            while (rs.next()) {
+                int id_collaboration = rs.getInt("id_collaboration");
+                String nomColl = rs.getString("nomColl");
+                String TypeColl = rs.getString("TypeColl");
+                Date dateColl = rs.getDate("dateColl");
+                int id = rs.getInt("id");
 
+                Collaboration sc = new Collaboration(id_collaboration, nomColl, TypeColl,dateColl, id);
+                collaborations.add(sc);
             }
-
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
-
-
 
         return collaborations;
     }
@@ -82,17 +78,17 @@ public class ServiceCollaboration implements IService<Collaboration> {
 
     @Override
     public boolean delete(Collaboration collaboration) {
-        String qry = "DELETE FROM `collaboration` WHERE `id_collaboration`=?";
+        String qry = "DELETE FROM collaboration WHERE `id_collaboration`=?";
         try {
             PreparedStatement stm = cnx.prepareStatement(qry);
-            stm.setInt(1, collaboration.getId());
+            stm.setInt(1, collaboration.getId_collaboration());
 
             int rowsAffected = stm.executeUpdate();
             if (rowsAffected == 0) {
-                System.out.println("Aucune ligne supprimée pour la collaboration avec l'ID : " + collaboration.getId());
+                System.out.println("Aucune ligne supprimée pour la collaboration avec l'ID : " + collaboration.getId_collaboration());
                 return false; // Aucune ligne supprimée
             } else {
-                System.out.println("Collaboration supprimée avec succès, ID : " + collaboration.getId());
+                System.out.println("Collaboration supprimée avec succès, ID : " + collaboration.getId_collaboration());
                 return true; // Suppression réussie
             }
         } catch (SQLException e) {

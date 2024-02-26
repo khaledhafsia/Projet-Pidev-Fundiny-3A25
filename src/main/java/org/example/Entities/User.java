@@ -6,6 +6,8 @@
 
         }
 
+
+
         public enum role {
             ADMIN,
             Owner,
@@ -31,7 +33,14 @@
           public StringProperty nomProperty() {
             return nom;
         }*/
+         public User(int id) {
+             this.id = id;
+         }
 
+        public User(int id, String nom) {
+            this.id = id;
+            this.nom = nom;
+        }
         public User(int id, String nom, String prenom,String email, String password) {
             this.id = id;
             this.nom = nom;
@@ -42,7 +51,7 @@
 
         }
 
-        public User(String nom, String prenom, String telephone, String adresse, String email, String password) {
+        public User(String nom, String prenom, String email, String password) {
             this.nom = nom;
             // this.nom.set(nom);
             this.prenom = prenom;
@@ -67,7 +76,13 @@
         }
 
 
-
+        public User(String nom, String prenom, String email, String hashpwd, User.role role) {
+            this.nom = nom;
+            this.prenom = prenom;
+            this.email = email;
+            this.password = hashpwd;
+            this.role = role;
+        }
 
 
         public int getId() {

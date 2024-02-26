@@ -17,6 +17,7 @@
       <ScrollPane layoutX="147.0" layoutY="143.0" prefHeight="558.0" prefWidth="758.0">
          <content>
             <VBox fx:id="postCardContainer" prefHeight="435.0" prefWidth="666.0" />
+
          </content>
       </ScrollPane>
       <Pane layoutY="149.0" prefHeight="546.0" prefWidth="144.0">

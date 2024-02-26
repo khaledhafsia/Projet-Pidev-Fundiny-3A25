@@ -1,7 +1,9 @@
 package org.example.Controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import org.example.Entities.User;
 import org.example.Services.ServiceUser;
 import javafx.event.ActionEvent;
@@ -16,6 +18,7 @@ public class UpdateUserController {
 
     private User currentUser;
 
+    // Method to initialize data, called from PostCardController
     public void initData(User user) {
         this.currentUser = user;
     }
@@ -33,5 +36,37 @@ public class UpdateUserController {
             }
 
         }
+        closeWindow();
+    }
+    private void showAlert(String content, Alert.AlertType type) {
+        Alert alert = new Alert(type, content);
+        alert.showAndWait();
+    }
+    /*
+    @FXML
+    private void handleSaveAction(ActionEvent event) {
+        String newName = newNameTextField.getText();
+        if (!newName.isEmpty()) {
+            currentUser.setNom(newName);
+
+            closeWindow();
+        } else {
+        }
+    }
+    private void closeWindow() {
+        Stage stage = (Stage) newNameTextField.getScene().getWindow();
+        stage.close();
+    }
+
+     */
+    @FXML
+    private void handleCancelAction(ActionEvent event) {
+        closeWindow();
+    }
+
+    private void closeWindow() {
+        Stage stage = (Stage) attributeField.getScene().getWindow();
+        stage.close();
     }
 }
+

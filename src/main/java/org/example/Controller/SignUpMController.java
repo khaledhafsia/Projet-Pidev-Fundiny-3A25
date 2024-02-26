@@ -96,11 +96,11 @@ public class SignUpMController implements Initializable {
             } else if (rbfunder.isSelected()) {
                 Funder funder = new Funder(nom, prenom, email, hashpwd, User.role.Funder, "500.0");
                 ServiceUser.insertUser(funder, String.valueOf(funder.getParticipation()), "participation");
-           /* } else if (rbadmin.isSelected()) {
-                User user = new User(0, nom, prenom, email, hashpwd, User.role.ADMIN);
+            } else if (rbadmin.isSelected()) {
+                User user = new User( nom, prenom, email, hashpwd, User.role.ADMIN);
 
 
-            */
+
             } else {
                 showAlert("Please select the type of account to create.");
                 return;

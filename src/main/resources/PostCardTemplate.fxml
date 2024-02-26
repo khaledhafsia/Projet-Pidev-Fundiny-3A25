@@ -12,8 +12,13 @@
       <Circle fill="DODGERBLUE" radius="18.0" stroke="BLACK" strokeType="INSIDE" />
       <Label fx:id="nameLabel" prefHeight="18.0" prefWidth="154.0" text="Label" />
       <Label fx:id="emailLabel" prefHeight="18.0" prefWidth="154.0" text="Label" />
+      <Label fx:id="idLabel" prefHeight="18.0" prefWidth="154.0" text="Label" />
+      <Label fx:id="roleLabel" prefHeight="18.0" prefWidth="154.0" text="Label" />
+
+      <Button fx:id="DeleteButton" onAction="#handleDeleteAction" prefHeight="26.0" prefWidth="327.0" text="Delete" />
+<!--      <Button fx:id="DeleteButton" mnemonicParsing="false" onAction="#HandleDeleteAction" prefHeight="28.0" prefWidth="325.0" styleClass="sign-btn" text="Perma Ban" textFill="#5c52c7" />
+ !-->
       <Button fx:id="UpdateButton" mnemonicParsing="false" onAction="#handleUpdateAction" prefHeight="28.0" prefWidth="326.0" styleClass="sign-btn" text="    Update name" textFill="#666133" />
       <Button fx:id="BanButton" mnemonicParsing="false" onAction="#handleBanAction" prefHeight="28.0" prefWidth="326.0" styleClass="sign-btn" text="       Ban" />
-      <Button fx:id="DeleteButton" mnemonicParsing="false" onAction="#handleDeleteAction" prefHeight="28.0" prefWidth="325.0" styleClass="sign-btn" text="Perma Ban" textFill="#5c52c7" />
    </children>
 </VBox>

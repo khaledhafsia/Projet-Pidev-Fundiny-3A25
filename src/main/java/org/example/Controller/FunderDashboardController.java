@@ -24,9 +24,11 @@ public class FunderDashboardController {
     @FXML
     private Button SignOutButton;
     private User currentUser;
+    private AdminController adminController;
 
-    public void initialize(User user) {
+    public void initialize(User user,AdminController adminController) {
         this.currentUser = user;
+        this.adminController = adminController;
         titleLabel.setText("Welcome to your Porject  Funder Interface");
         nameLabel.setText(user.getNom() + " " + user.getPrenom());
 

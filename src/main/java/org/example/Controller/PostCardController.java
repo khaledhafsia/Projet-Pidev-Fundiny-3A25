@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 import org.example.Entities.User;
 
 import java.io.IOException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.Label;
 public class PostCardController {
@@ -35,13 +34,13 @@ public class PostCardController {
 
     private AdminController adminController;
 
-    public void initialize(User user, AdminController controller) {
+    public void initialize(User user, AdminController adminController) {
         this.currentUser = user;
-        this.adminController = controller;
+        this.adminController = adminController;
         titleLabel.setText("User Information");
         nameLabel.setText(user.getNom() + " " + user.getPrenom());
         emailLabel.setText(user.getEmail());
-        idLabel.setText(String.valueOf(user.getId()));
+        //idLabel.setText(String.valueOf(user.getId()));
         roleLabel.setText(String.valueOf(user.getRole()));
         logger.info("User ID initialized in PostCardController: " + user.getId());
     }
@@ -53,7 +52,6 @@ public class PostCardController {
             logger.info("Deleting user with ID: " + id);
 
             if (id != 0) {
-                // Ask for confirmation before deleting the user
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Confirmation");
                 alert.setHeaderText("Delete User");
@@ -61,23 +59,22 @@ public class PostCardController {
                 alert.showAndWait().ifPresent(response -> {
                     if (response == ButtonType.OK) {
                         adminController.deleteCurrentUser(id);
-                        adminController.Refresh(); // Refresh the UI after deletion
+                        adminController.initialize();
                     }
                 });
             } else {
-                logger.warning("Invalid user ID: " + id); // Log the specific user ID causing the issue
-                // Optionally, display an error message to the user
+                logger.warning("Invalid user ID: " + id);
                 Alert errorAlert = new Alert(Alert.AlertType.ERROR);
                 errorAlert.setContentText("Invalid user ID. Unable to delete the user.");
                 errorAlert.showAndWait();
             }
         } else {
             logger.warning("AdminController or currentUser is null");
-            // Optionally, display an error message to the user
             Alert errorAlert = new Alert(Alert.AlertType.ERROR);
             errorAlert.setContentText("Unable to delete the user. An error occurred.");
             errorAlert.showAndWait();
         }
+        Refresh();
     }
     @FXML
     private void handleUpdateAction(ActionEvent event) {
@@ -93,10 +90,20 @@ public class PostCardController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Refresh();
     }
 
     @FXML
     private void handleBanAction(ActionEvent event) {
-        // Existing handleBanAction code
     }
+    private void Refresh() {
+        if (adminController != null) {
+            adminController.initialize();
+        } else {
+            logger.warning("AdminController is null, cannot refresh UI.");
+        }
+    }
+
 }
+
+

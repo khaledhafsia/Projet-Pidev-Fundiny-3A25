@@ -76,14 +76,14 @@
                         <Insets left="50.0" />
                     </HBox.margin>
 
-                    <!--!-->
-                </RadioButton>
-            <RadioButton fx:id="rbadmin" mnemonicParsing="false" onAction="#selection" text="Admin">
+                    <!--            <RadioButton fx:id="rbadmin" mnemonicParsing="false" onAction="#selection" text="Admin">
                <toggleGroup>
 
                   <ToggleGroup fx:id="user1" />
                </toggleGroup>
-            </RadioButton>
+            </RadioButton>!-->
+                </RadioButton>
+
             </children>
             <VBox.margin>
                 <Insets top="10.0" />

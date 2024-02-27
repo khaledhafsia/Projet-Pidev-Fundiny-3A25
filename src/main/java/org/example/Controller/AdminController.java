@@ -1,5 +1,6 @@
 package org.example.Controller;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,7 +8,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.example.Entities.User;
@@ -16,10 +16,9 @@ import org.example.Services.ServiceUser;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.example.Controller.PostCardController;
+
 public class AdminController {
 
     private static final Logger logger = Logger.getLogger(AdminController.class.getName());
@@ -39,39 +38,38 @@ public class AdminController {
     public AdminController() {
         userService = new ServiceUser();
     }
+    @FXML
+    public void initialize() {
+        try {
+            List<User> userList = userService.getAllUsers();
 
-        @FXML
-        public void initialize() {
-            try {
-                // Fetch users from the database
-                List<User> userList = userService.getAllUsers();
+            logger.log(Level.INFO, "User list size: {0}", userList.size());
 
-                logger.log(Level.INFO, "User list size: {0}", userList.size());
+            for (User user : userList) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/PostCardTemplate.fxml"));
+                VBox postCard = loader.load();
+                PostCardController controller = loader.getController();
 
-                for (User user : userList) {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/PostCardTemplate.fxml"));
-                    VBox postCard = loader.load();
-                    PostCardController controller = loader.getController();
-
-                    // Initialize each PostCardController with the corresponding user
-                    controller.initialize(user, this);
-                    postCardContainer.getChildren().add(postCard);
-                    logger.info("User ID being initialized: " + user.getId());
-                }
-
-                logger.log(Level.INFO, "AdminController initialized successfully.");
-            } catch (IOException e) {
-                logger.log(Level.SEVERE, "Error loading PostCardTemplate.fxml", e);
-            } catch (Exception ex) {
-                logger.log(Level.SEVERE, "An unexpected error occurred", ex);
+                // Initialize each PostCardController with the corresponding user
+                controller.initialize(user, this);
+                postCardContainer.getChildren().add(postCard);
+                logger.info("User ID being initialized: " + user.getId());
             }
+
+            logger.log(Level.INFO, "AdminController initialized successfully.");
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "Error loading PostCardTemplate.fxml", e);
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, "An unexpected error occurred", ex);
         }
+    }
+
 
 
     public void deleteCurrentUser(int id) {
         try {
             userService.deleteUser(id);
-            Refresh();
+            initialize();
         } catch (SQLException e) {
             e.printStackTrace();
             Alert errorAlert = new Alert(Alert.AlertType.ERROR);
@@ -84,36 +82,9 @@ public class AdminController {
 
     }
 
-
-
-
-
-
     @FXML
-    private void handleRefresh(ActionEvent event) {
-        Refresh();
-    }
-    @FXML
-    void Refresh() {
-        postCardContainer.getChildren().clear(); // Clear the current UI elements
-
-        try {
-            List<User> userList = userService.getAllUsers();
-
-            for (User user : userList) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/PostCardTemplate.fxml"));
-                VBox postCard = loader.load();
-                PostCardController controller = loader.getController();
-                controller.initialize(user, this); // Pass the AdminController instance
-                postCardContainer.getChildren().add(postCard);
-            }
-
-            logger.log(Level.INFO, "UI refreshed successfully.");
-        } catch (IOException e) {
-            logger.log(Level.SEVERE, "Error loading PostCardTemplate.fxml", e);
-        } catch (Exception ex) {
-            logger.log(Level.SEVERE, "An unexpected error occurred", ex);
-        }
+    public void handleRefresh(ActionEvent event) {
+        initialize();
     }
 
     @FXML

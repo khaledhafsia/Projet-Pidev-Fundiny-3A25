@@ -59,8 +59,8 @@
             this.password = password;
         }
 
-        public User(int i, String nom, String prenom, String email, String password, User.role role) {
-
+        public User(int id, String nom, String prenom, String email, String password, User.role role) {
+            this.id = id;
             this.nom = nom;
             this.prenom = prenom;
             this.email = email;
@@ -86,11 +86,13 @@
 
 
         public int getId() {
-            return id;
+
+             return id;
         }
 
         public void setId(int id) {
-            this.id = id;
+
+             this.id = id;
         }
 
         public String getNom() {

@@ -15,15 +15,15 @@
             <Font name="System Bold Italic" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="158.0" layoutY="158.0" text="User ID" />
-      <Label layoutX="158.0" layoutY="233.0" text="Projet ID" />
-      <Label layoutX="158.0" layoutY="304.0" text="Montant" />
-      <Label layoutX="158.0" layoutY="383.0" text="Description" />
-      <TextField fx:id="usertf2" layoutX="287.0" layoutY="154.0" prefHeight="26.0" prefWidth="194.0" />
-      <TextField fx:id="projettf2" layoutX="287.0" layoutY="229.0" prefHeight="26.0" prefWidth="194.0" />
-      <TextField fx:id="montanttf2" layoutX="287.0" layoutY="300.0" prefHeight="26.0" prefWidth="194.0" />
-      <TextArea fx:id="descriptiontf2" layoutX="287.0" layoutY="383.0" prefHeight="90.0" prefWidth="193.0" />
-      <Button layoutX="482.0" layoutY="502.0" mnemonicParsing="false" onAction="#backBtn" text="Retour" />
-      <Button layoutX="396.0" layoutY="502.0" mnemonicParsing="false" onAction="#miseajour" text="Modifier" />
+      <Label layoutX="161.0" layoutY="105.0" text="User ID" visible="false" />
+      <Label layoutX="158.0" layoutY="146.0" text="Projet ID" visible="false" />
+      <Label layoutX="158.0" layoutY="192.0" text="Montant" />
+      <Label layoutX="158.0" layoutY="271.0" text="Description" />
+      <TextField fx:id="usertf2" layoutX="286.0" layoutY="101.0" prefHeight="26.0" prefWidth="194.0" visible="false" />
+      <TextField fx:id="projettf2" layoutX="286.0" layoutY="141.0" prefHeight="26.0" prefWidth="194.0" visible="false" />
+      <TextField fx:id="montanttf2" layoutX="287.0" layoutY="188.0" prefHeight="26.0" prefWidth="194.0" />
+      <TextArea fx:id="descriptiontf2" layoutX="287.0" layoutY="271.0" prefHeight="90.0" prefWidth="193.0" />
+      <Button layoutX="481.0" layoutY="466.0" mnemonicParsing="false" onAction="#backBtn" text="Retour" />
+      <Button layoutX="395.0" layoutY="466.0" mnemonicParsing="false" onAction="#miseajour" text="Modifier" />
    </children>
 </AnchorPane>

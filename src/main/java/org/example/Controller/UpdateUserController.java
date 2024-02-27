@@ -15,11 +15,14 @@ public class UpdateUserController {
 
     @FXML
     private TextField attributeField;
+    private AdminController adminController;
 
     private User currentUser;
 
     // Method to initialize data, called from PostCardController
-    public void initData(User user) {
+    //public void initData(User user, AdminController adminController) {
+        public void initData(User user ){
+        //this.adminController = adminController;
         this.currentUser = user;
     }
 
@@ -30,35 +33,24 @@ public class UpdateUserController {
             ServiceUser serviceUser = new ServiceUser();
             // Check user role to determine which attribute to update
             if (currentUser.getRole() == User.role.Funder) {
-                serviceUser.updateUserAttribute(currentUser.getId(), "nom", attributeValue);
+                serviceUser.updateUserAttribute(currentUser.getId(), "participation", attributeValue);
             } else if (currentUser.getRole() == User.role.Owner) {
-                serviceUser.updateUserAttribute(currentUser.getId(), "nom", attributeValue);
+                serviceUser.updateUserAttribute(currentUser.getId(), "capital", attributeValue);
             }
 
         }
         closeWindow();
+        Refresh();
     }
     private void showAlert(String content, Alert.AlertType type) {
         Alert alert = new Alert(type, content);
         alert.showAndWait();
     }
-    /*
-    @FXML
-    private void handleSaveAction(ActionEvent event) {
-        String newName = newNameTextField.getText();
-        if (!newName.isEmpty()) {
-            currentUser.setNom(newName);
+    private void Refresh() {
 
-            closeWindow();
-        } else {
-        }
-    }
-    private void closeWindow() {
-        Stage stage = (Stage) newNameTextField.getScene().getWindow();
-        stage.close();
-    }
+        adminController.Refresh();
 
-     */
+    }
     @FXML
     private void handleCancelAction(ActionEvent event) {
         closeWindow();

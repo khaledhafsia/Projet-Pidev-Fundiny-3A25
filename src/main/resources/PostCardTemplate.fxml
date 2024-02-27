@@ -14,12 +14,14 @@
       <Circle fill="DODGERBLUE" radius="18.0" stroke="BLACK" strokeType="INSIDE" />
       <Label fx:id="nameLabel" prefHeight="18.0" prefWidth="154.0" text="Label" />
       <Label fx:id="emailLabel" prefHeight="18.0" prefWidth="154.0" text="Label" />
-      <!-- <Label fx:id="idLabel" prefHeight="18.0" prefWidth="154.0" text="Label" />  !-->
+      <Label fx:id="roleLabel" prefHeight="18.0" prefWidth="154.0" text="Label" textFill="#0400ff" />
 
-      <Label fx:id="roleLabel" prefHeight="18.0" prefWidth="154.0" text="Label" />
- <!--      <Button fx:id="DeleteButton" mnemonicParsing="false" onAction="#HandleDeleteAction" prefHeight="28.0" prefWidth="325.0" styleClass="sign-btn" text="Perma Ban" textFill="#5c52c7" />
-  !-->
-      <Button fx:id="UpdateButton" mnemonicParsing="false" onAction="#handleUpdateAction" prefHeight="34.0" prefWidth="333.0" styleClass="sign-btn" text="               Update name" textFill="#666133">
+
+      <Label fx:id="capitalLabel" prefHeight="18.0" prefWidth="154.0" text="Label" />
+      <Label fx:id="participationlabel" prefHeight="18.0" prefWidth="154.0" text="Label" />
+      <!--!-->
+
+      <Button fx:id="UpdateButton" mnemonicParsing="false" onAction="#handleUpdateAction" prefHeight="34.0" prefWidth="333.0" styleClass="sign-btn" text=" Update Capitale/participaation" textFill="#666133">
          <graphic>
             <ImageView fitHeight="27.0" fitWidth="44.0">
                <image>
@@ -28,7 +30,7 @@
             </ImageView>
          </graphic></Button>
 
-       <Button fx:id="DeleteButton" onAction="#handleDeleteAction" prefHeight="34.0" prefWidth="334.0" text="                     Pema Ban">
+       <Button fx:id="DeleteButton" onAction="#handleDeleteAction" prefHeight="34.0" prefWidth="334.0" text="              Pema Ban                    ">
          <graphic>
             <ImageView fitHeight="22.0" fitWidth="31.0">
                <image>
@@ -36,7 +38,7 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <Button fx:id="BanButton" mnemonicParsing="false" onAction="#handleBanAction" prefHeight="31.0" prefWidth="334.0" styleClass="sign-btn" text="                             Ban">
+      <Button fx:id="BanButton" mnemonicParsing="false" onAction="#handleBanAction" prefHeight="31.0" prefWidth="334.0" styleClass="sign-btn" text="                   Ban                        ">
          <graphic>
             <ImageView fitHeight="23.0" fitWidth="40.0">
                <image>

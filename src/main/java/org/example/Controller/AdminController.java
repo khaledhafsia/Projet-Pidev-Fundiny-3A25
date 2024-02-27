@@ -108,4 +108,16 @@ public class AdminController {
             e.printStackTrace();
         }
     }
+    @FXML
+    private void DashboardAdmin() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/DashboardAdmin.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) SignOutButton.getScene().getWindow();
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

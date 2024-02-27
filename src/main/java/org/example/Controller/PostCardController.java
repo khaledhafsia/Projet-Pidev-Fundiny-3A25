@@ -9,6 +9,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
+import org.example.Entities.Funder;
+import org.example.Entities.Owner;
 import org.example.Entities.User;
 
 import java.io.IOException;
@@ -29,7 +31,10 @@ public class PostCardController {
     private Label idLabel;
     @FXML
     private Label roleLabel;
-
+    @FXML
+    private Label capitalLabel;
+    @FXML
+    private Label participationlabel;
     private User currentUser;
 
     private AdminController adminController;
@@ -40,9 +45,30 @@ public class PostCardController {
         titleLabel.setText("User Information");
         nameLabel.setText(user.getNom() + " " + user.getPrenom());
         emailLabel.setText(user.getEmail());
-        //idLabel.setText(String.valueOf(user.getId()));
         roleLabel.setText(String.valueOf(user.getRole()));
-        //logger.info("User ID initialized in PostCardController: " + user.getId());
+
+        switch (user.getRole()) {
+        case Owner:
+            capitalLabel.setText(String.valueOf(((Owner) user).getCapital()));
+            participationlabel.setText("");
+            break;
+        case Funder:
+            participationlabel.setText(String.valueOf(((Funder) user).getParticipation()));
+            capitalLabel.setText("");
+            break;
+            case ADMIN:
+            participationlabel.setText("");
+            capitalLabel.setText("");
+                break;
+            default:
+                break;
+        }
+
+
+
+
+
+
     }
 
     @FXML
@@ -87,10 +113,11 @@ public class PostCardController {
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
+            Refresh();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Refresh();
+
     }
 
     @FXML

@@ -27,7 +27,7 @@
 
 
             <Button fx:id="RefreshButton" layoutX="21.0" layoutY="465.0" mnemonicParsing="false" onAction="#handleRefresh" prefHeight="30.0" prefWidth="129.0" text="Refresh" />
-            <Button layoutX="-2.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="158.0" text="Gestionaire ultlisateur " />
+            <Button layoutX="-2.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="158.0" text="Gestionaire ultlisateur " onAction="#DashboardAdmin" />
             <Button layoutX="-2.0" layoutY="39.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="158.0" text="Gestionaire blog" />
             <Button layoutX="-2.0" layoutY="80.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="158.0" text="Gestionaire Evenement" />
 

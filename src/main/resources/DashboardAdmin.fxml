@@ -10,53 +10,48 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="AdminController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="702.0" prefWidth="912.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controller.AdminController">
+<AnchorPane fx:id="AdminController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="771.0" prefWidth="1030.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controller.AdminController">
    <children>
-      <ScrollPane layoutX="147.0" layoutY="143.0" prefHeight="558.0" prefWidth="758.0">
+      <ScrollPane layoutX="213.0" layoutY="143.0" prefHeight="558.0" prefWidth="758.0">
          <content>
-            <VBox fx:id="postCardContainer" prefHeight="435.0" prefWidth="666.0" />
+            <VBox fx:id="postCardContainer" prefHeight="571.0" prefWidth="1255.0" />
 
          </content>
       </ScrollPane>
-      <Pane layoutY="149.0" prefHeight="546.0" prefWidth="144.0">
+      <Pane layoutY="149.0" prefHeight="930.0" prefWidth="171.0">
          <children>
-            <Label layoutX="43.0" layoutY="4.0" prefHeight="56.0" prefWidth="119.0" text="Gestionaire ">
-               <font>
-                  <Font name="System Bold Italic" size="17.0" />
-               </font>
-            </Label>
-            <Label layoutX="43.0" layoutY="32.0" prefHeight="56.0" prefWidth="86.0" text="ultlisateur">
-               <font>
-                  <Font name="System Bold Italic" size="17.0" />
-               </font>
-            </Label>
 
 
 
-            <Button fx:id="RefreshButton" layoutX="46.0" layoutY="493.0" mnemonicParsing="false" onAction="#handleRefresh" text="Refresh" />
+            <Button fx:id="RefreshButton" layoutX="21.0" layoutY="465.0" mnemonicParsing="false" onAction="#handleRefresh" prefHeight="30.0" prefWidth="129.0" text="Refresh" />
+            <Button layoutX="-2.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="158.0" text="Gestionaire ultlisateur " />
+            <Button layoutX="-2.0" layoutY="39.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="158.0" text="Gestionaire blog" />
+            <Button layoutX="-2.0" layoutY="80.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="158.0" text="Gestionaire Evenement" />
 
          </children>
       </Pane>
       <Pane layoutX="-2.0" layoutY="1.0" prefHeight="136.0" prefWidth="974.0">
          <children>
-            <TextField fx:id="search" layoutX="214.0" layoutY="54.0" prefHeight="36.0" prefWidth="400.0" promptText="search" style="-fx-background-color: lightblue; -fx-background-radius: 50;">
+            <TextField fx:id="search" layoutX="212.0" layoutY="19.0" prefHeight="49.0" prefWidth="563.0" promptText="search" style="-fx-background-color: lightblue; -fx-background-radius: 50;">
                <font>
                   <Font name="Georgia" size="10.0" />
                </font>
             </TextField>
-            <Label layoutX="705.0" layoutY="26.0" text="Khaled hafsia">
-               <font>
-                  <Font name="Bodoni MT" size="18.0" />
-               </font>
-            </Label>
             <ImageView fitHeight="71.0" fitWidth="195.0" layoutX="35.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@logo.png" />
                </image>
             </ImageView>
-            <Button fx:id="SignOutButton" alignment="BASELINE_LEFT" graphicTextGap="8.0" layoutX="670.0" layoutY="75.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#SignOut" opacity="0.68" prefHeight="31.0" prefWidth="176.0" styleClass="passoublie-btn" stylesheets="@Style.css" text="Sign out">
+            <Circle fill="DODGERBLUE" layoutX="809.0" layoutY="25.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="844.0" layoutY="9.0" text="Khaled hafsia">
+               <font>
+                  <Font name="Bodoni MT" size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="SignOutButton" alignment="BASELINE_LEFT" graphicTextGap="8.0" layoutX="796.0" layoutY="68.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#SignOut" prefHeight="50.0" prefWidth="171.0" styleClass="passoublie-btn" stylesheets="@Style.css" text="Sign out">
                <padding>
                   <Insets left="15.0" />
                </padding>

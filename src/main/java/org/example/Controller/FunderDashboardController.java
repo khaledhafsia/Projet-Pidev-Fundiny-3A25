@@ -23,6 +23,10 @@ public class FunderDashboardController {
 
     @FXML
     private Button SignOutButton;
+    public void initData(User user) {
+        this.currentUser = user;
+    }
+
     private User currentUser;
     private AdminController adminController;
 

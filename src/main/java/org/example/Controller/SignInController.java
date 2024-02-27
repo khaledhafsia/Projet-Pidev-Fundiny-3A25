@@ -1,6 +1,5 @@
 package org.example.Controller;
 
-
 import org.example.Entities.User;
 import org.example.Services.ServiceUser;
 
@@ -18,12 +17,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
-
-//public class SignInController implements Initializable {
-
-
 public class SignInController{
-
 
     @FXML
     private TextField tfEmail;
@@ -33,24 +27,13 @@ public class SignInController{
     private Button mdpoublie;
     @FXML
     private Button clickHereButton;
+    private User currentUser;
 
-    FXMLLoader loader;
-
-   // Initializes the controller class.
-/*
-   @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }
-
-
-
- */
+    private FXMLLoader loader;
 
     @FXML
     private void MdpOublie(ActionEvent event) {
     }
-
 
     @FXML
     private void SignIn(ActionEvent event) throws IOException {
@@ -71,20 +54,19 @@ public class SignInController{
         User user = serviceUser.validateUser(email, password);
 
         if (user != null) {
-            openInterfaceBasedOnRole(user.getRole(), event);
+            openInterfaceBasedOnRole(user.getRole(), event, user);
         } else {
             showAlert("Invalid email or password.");
         }
     }
 
-    private void openInterfaceBasedOnRole(User.role role, ActionEvent event) throws IOException {
-
+    private void openInterfaceBasedOnRole(User.role role, ActionEvent event, User user) throws IOException {
         switch (role) {
             case Owner:
-                openOwnerInterface(event);
+                openOwnerInterface(event, user);
                 break;
             case Funder:
-                openFunderInterface(event);
+                openFunderInterface(event, user);
                 break;
             case ADMIN:
                 openDefaultInterface(event);
@@ -95,33 +77,36 @@ public class SignInController{
         }
     }
 
-    private void openOwnerInterface(ActionEvent event) throws IOException {
-        // Load the FXML file from the correct location
-        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/DashboardOwner.fxml")));
+    private void openOwnerInterface(ActionEvent event, User user) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/DashboardOwner.fxml"));
+        Parent parent = loader.load();
         Scene scene = new Scene(parent);
 
-        // Fetch the stage and set the scene
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
-    }
-    private void openFunderInterface(ActionEvent event) throws IOException {
-        // Load the FXML file from the correct location
-        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/DashboardFunder.fxml")));
-        Scene scene = new Scene(parent);
+        OwnerDashboardController controller = loader.getController();
+        controller.initData(user);
 
-        // Fetch the stage and set the scene
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
     }
 
+    private void openFunderInterface(ActionEvent event, User user) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/DashboardFunder.fxml"));
+        Parent parent = loader.load();
+        Scene scene = new Scene(parent);
+
+        FunderDashboardController controller = loader.getController();
+        controller.initData(user);
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
 
     private void openDefaultInterface(ActionEvent event) throws IOException{
         Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/DashboardAdmin.fxml")));
         Scene scene = new Scene(parent);
 
-        // Fetch the stage and set the scene
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
@@ -132,25 +117,18 @@ public class SignInController{
         alert.showAndWait();
     }
 
-
     @FXML
     private void AlreadySignedUp() {
         try {
-            // Load the new FXML file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/SignUp.fxml"));
+            loader = new FXMLLoader(getClass().getResource("/SignUp.fxml"));
             Parent root = loader.load();
 
-            // Create a new scene with the loaded FXML content
             Scene scene = new Scene(root);
 
-            // Get the stage from the button and set the new scene
             Stage stage = (Stage) clickHereButton.getScene().getWindow();
             stage.setScene(scene);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-
 }
-

@@ -29,8 +29,7 @@ public class SignUpMController implements Initializable {
     private TextField tfPrenom;
     @FXML
     private TextField tfEmail;
-    @FXML
-    private TextField tfTelephone;
+
     @FXML
     private TextField tfPassword;
     @FXML
@@ -110,11 +109,21 @@ public class SignUpMController implements Initializable {
         } catch (Exception ex) {
             showAlert(ex.getMessage());
         }
+
+
+        tfNom.setText("");
+        tfPrenom.setText("");
+        tfEmail.setText("");
+        tfPassword.setText("");;
+
+
+
+
+
     }
 
     @FXML
     private void selection(ActionEvent event) {
-        // Method stub for RadioButton selection, leaving this blank as it may not be needed.
     }
 
     private void showAlert(String content) {

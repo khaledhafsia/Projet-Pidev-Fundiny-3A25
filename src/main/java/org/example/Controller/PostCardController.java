@@ -42,7 +42,7 @@ public class PostCardController {
         emailLabel.setText(user.getEmail());
         //idLabel.setText(String.valueOf(user.getId()));
         roleLabel.setText(String.valueOf(user.getRole()));
-        logger.info("User ID initialized in PostCardController: " + user.getId());
+        //logger.info("User ID initialized in PostCardController: " + user.getId());
     }
 
     @FXML
@@ -97,11 +97,9 @@ public class PostCardController {
     private void handleBanAction(ActionEvent event) {
     }
     private void Refresh() {
-        if (adminController != null) {
-            adminController.initialize();
-        } else {
-            logger.warning("AdminController is null, cannot refresh UI.");
-        }
+
+            adminController.Refresh();
+
     }
 
 }

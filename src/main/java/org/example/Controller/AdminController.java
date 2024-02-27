@@ -50,7 +50,6 @@ public class AdminController {
                 VBox postCard = loader.load();
                 PostCardController controller = loader.getController();
 
-                // Initialize each PostCardController with the corresponding user
                 controller.initialize(user, this);
                 postCardContainer.getChildren().add(postCard);
                 logger.info("User ID being initialized: " + user.getId());
@@ -83,9 +82,19 @@ public class AdminController {
     }
 
     @FXML
-    public void handleRefresh(ActionEvent event) {
+    private void handleRefresh(ActionEvent event) {
+        Refresh();
+    }
+    @FXML
+    void Refresh() {
+        EmptyView();
         initialize();
     }
+    @FXML
+    void EmptyView() {
+        postCardContainer.getChildren().clear();
+    }
+
 
     @FXML
     private void SignOut() {

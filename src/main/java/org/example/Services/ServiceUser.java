@@ -53,7 +53,6 @@
         }
 
 
-
         public User validateUser(String email, String password) {
             User user = null;
             try {
@@ -119,82 +118,7 @@
             }
             return userList;
         }
-        /*
-        public List<User> getAllUsers() {
-            List<User> userList = new ArrayList<>();
-            String query = "SELECT * FROM `user`";
 
-            try (PreparedStatement statement = cnx.prepareStatement(query);
-                 ResultSet resultSet = statement.executeQuery()) {
-
-                while (resultSet.next()) {
-                    int id = resultSet.getInt("id");
-                    logger.log(Level.INFO, "Fetched user with ID: {0}", id);
-
-                    String nom = resultSet.getString("nom");
-                    String prenom = resultSet.getString("prenom");
-                    String email = resultSet.getString("email");
-                    String password = resultSet.getString("password");
-                    User.role userRole = User.role.valueOf(resultSet.getString("role"));
-                    User user;
-
-                    // Assuming the role determines the type of user, handle accordingly
-                    if (userRole == User.role.Funder) {
-                        float participation = resultSet.getFloat("participation");
-                        user = new Funder(id, nom, prenom, email, password, userRole, participation);
-                    } else if (userRole == User.role.Owner) {
-                        float capital = resultSet.getFloat("capital");
-                        user = new Owner(id, nom, prenom, email, password, userRole, capital);
-                    } else {
-                        user = new User(id, nom, prenom, email, password, userRole);
-                    }
-
-                    userList.add(user);
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-                logger.log(Level.SEVERE, "SQL Exception: " + e.getMessage());
-            }
-            return userList;
-        }
-
-        public List<User> getAllUsers() {
-            List<User> userList = new ArrayList<>();
-            String query = "SELECT * FROM `user`";
-
-            try (PreparedStatement statement = cnx.prepareStatement(query);
-                 ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
-                    int id = resultSet.getInt("id");
-                    String nom = resultSet.getString("nom");
-                    String prenom = resultSet.getString("prenom");
-                    String email = resultSet.getString("email");
-                    String password = resultSet.getString("password");
-                    User.role userRole = User.role.valueOf(resultSet.getString("role"));
-                    User user;
-
-                    // Assuming the role determines the type of user, handle accordingly
-                    if (userRole == User.role.Funder) {
-                        float participation = resultSet.getFloat("participation");
-                        user = new Funder(id, nom, prenom, email, password, userRole, participation);
-                    } else if (userRole == User.role.Owner) {
-                        float capital = resultSet.getFloat("capital");
-                        user = new Owner(id, nom, prenom, email, password, userRole, capital);
-                    } else {
-                        user = new User(id, nom, prenom, email, password, userRole);
-                    }
-
-                    // Add the constructed user to the list
-                    userList.add(user);
-                }
-            } catch (SQLException e) {
-                e.printStackTrace(); // Handle the exception appropriately
-            }
-            return userList;
-        }
-
-
-         */
         public void updateUserAttribute(int userId, String attributeType, String attributeValue) {
             try {
                 String query = "UPDATE `user` SET `" + attributeType + "` = ? WHERE id = ?";
@@ -218,94 +142,5 @@
                 System.out.println(rowsDeleted + " rows were deleted for ID " + id);
             }
         }
-            /*
-        public static void updateUser(User user) throws Exception {
-            Connection con = null;
-            PreparedStatement ps = null;
-            try {
-                con = DBConnection.getConnection();
-                String query = "UPDATE users SET ... WHERE id = ?";
-                ps = con.prepareStatement(query);
-                ps.setInt(1, user.getId());
-
-                ps.executeUpdate();
-            } catch (Exception e) {
-                throw new Exception("Error updating user: " + e.getMessage());
-            } finally {
-                if (ps != null) {
-                    ps.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            }
-        }
-
-        public static void updateUser(int userId, String newName) {
-            try {
-                String query = "UPDATE `user` SET nom = ? WHERE id = ?";
-                PreparedStatement statement = cnx.prepareStatement(query);
-                statement.setString(1, newName);
-                statement.setInt(2, userId);
-                statement.executeUpdate();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                // Handle update error
-            }
-        }
-
-         */
-
     }
-    /*
-
-        public void deleteUser(int userId) throws SQLException {
-            String query = "DELETE FROM `user` WHERE id = ?";
-            try (PreparedStatement statement = cnx.prepareStatement(query)) {
-                statement.setInt(1, userId);
-                statement.executeUpdate();
-            }
-        }
-
-
-
-        public void deleteUser(int id) {
-            try {
-                String req = "DELETE FROM `user` WHERE `id` = ?";
-                PreparedStatement ps = cnx.prepareStatement(req);
-                ps.setInt(1, id);
-                ps.executeUpdate();
-                System.out.println("User deleted !");
-            } catch (SQLException ex) {
-                System.out.println("User not deleted ! " + ex.getMessage());
-            }
-
-        }
-
-
-    }
-
-
-
-        public void updateUserAttribute(int userId, String attributeType, String attributeValue) throws SQLException {
-            String query = "UPDATE `user` SET " + attributeType + " = ? WHERE id = ?";
-            try (PreparedStatement statement = cnx.prepareStatement(query)) {
-                statement.setString(1, attributeValue);
-                statement.setInt(2, userId);
-                statement.executeUpdate();
-            }
-        }
-        public void updateUserAttribute(int userId, String attributeType, String attributeValue) {
-            try {
-                String query = "UPDATE `user` SET `" + attributeType + "` = ? WHERE id = ?";
-                PreparedStatement statement = cnx.prepareStatement(query);
-                statement.setString(1, attributeValue);
-                statement.setInt(2, userId);
-                statement.executeUpdate();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-     */
-
 

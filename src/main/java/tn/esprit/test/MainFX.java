@@ -15,7 +15,7 @@ public class MainFX extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterProjet.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Back.fxml"));
         Parent root = loader.load();
         // Configurer la scène et afficher la fenêtre
         Scene scene = new Scene(root);

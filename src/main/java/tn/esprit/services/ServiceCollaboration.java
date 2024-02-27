@@ -56,19 +56,19 @@ public class ServiceCollaboration implements IService<Collaboration> {
 
     @Override
     public void update(Collaboration collaboration) {
-        String qry = "UPDATE `collaboration` SET `nomColl`=?, `typeColl`=?, `dateColl`=? WHERE `id_collaboration`=?";
+        String qry = "UPDATE collaboration SET `nomColl`=?, `typeColl`=?, `dateColl`=? WHERE `id_collaboration`=?";
         try {
             PreparedStatement stm = cnx.prepareStatement(qry);
             stm.setString(1, collaboration.getNomColl());
             stm.setString(2, collaboration.getTypeColl());
             stm.setString(3, String.valueOf(collaboration.getDateColl()));
-            stm.setInt(4, collaboration.getId());
+            stm.setInt(4, collaboration.getId_collaboration());
 
             int rowsAffected = stm.executeUpdate();
             if (rowsAffected == 0) {
-                System.out.println("Aucune ligne mise à jour pour la collaboration avec l'ID : " + collaboration.getId());
+                System.out.println("Aucune ligne mise à jour pour la collaboration avec l'ID : " + collaboration.getId_collaboration());
             } else {
-                System.out.println("Mise à jour réussie pour la collaboration avec l'ID : " + collaboration.getId());
+                System.out.println("Mise à jour réussie pour la collaboration avec l'ID : " + collaboration.getId_collaboration());
             }
         } catch (SQLException e) {
             System.out.println("Erreur lors de la mise à jour de la collaboration : " + e.getMessage());

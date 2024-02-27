@@ -51,19 +51,13 @@ public class AjouterProjetController {
 
     @FXML
     void Ajouter(ActionEvent event) throws SQLException {
-
-        if(nomPrT.getText().isEmpty() || nomPoT.getText().isEmpty() || dateDT.getValue()==null || CAT.getText().isEmpty()){
-            System.out.println("empty");
-        }
-        else {
+        if (InputValidator.validateFields(nomPrT, nomPoT, dateDT, CAT)) {
             LocalDate localDate = dateDT.getValue();
             Date sqlDate = Date.valueOf(localDate);
-            sp.add(new Projet(1,nomPrT.getText(), nomPoT.getText(), sqlDate, Integer.parseInt(CAT.getText())));
-
+            sp.add(new Projet(1, nomPrT.getText(), nomPoT.getText(), sqlDate, Integer.parseInt(CAT.getText())));
+        } else {
+            System.out.println("Veuillez remplir tous les champs correctement.");
         }
-
-
-
     }
     @FXML
     void Afficher(MouseEvent event)throws IOException {
@@ -82,5 +76,49 @@ public class AjouterProjetController {
 
 
     }
+    public static boolean validateFields(TextField nomPrT, TextField nomPoT, DatePicker dateDT, TextField CAT) {
+        return isNotEmpty(nomPrT) &&
+                isNotEmpty(nomPoT) &&
+                containsOnlyLetters(nomPrT) &&
+                containsOnlyLetters(nomPoT) &&
+                isValidDate(dateDT) &&
+                isInteger(CAT);
+    }
 
+    private static boolean isNotEmpty(TextField textField) {
+        if (textField.getText().isEmpty()) {
+            System.out.println("Le champ " + textField.getId() + " ne doit pas être vide.");
+            return false;
+        }
+        return true;
+    }
+
+    private static boolean containsOnlyLetters(TextField textField) {
+        String text = textField.getText();
+        if (!text.matches("^[a-zA-Z]+$")) {
+            System.out.println("Le champ " + textField.getId() + " ne doit contenir que des lettres.");
+            return false;
+        }
+        return true;
+    }
+
+    private static boolean isValidDate(DatePicker datePicker) {
+        LocalDate date = datePicker.getValue();
+        if (date == null) {
+            System.out.println("Veuillez sélectionner une date valide.");
+            return false;
+        }
+        return true;
+    }
+
+    private static boolean isInteger(TextField textField) {
+        try {
+            Integer.parseInt(textField.getText());
+            return true;
+        } catch (NumberFormatException e) {
+            System.out.println("Le champ " + textField.getId() + " doit contenir un entier valide.");
+            return false;
+        }
+    }
 }
+

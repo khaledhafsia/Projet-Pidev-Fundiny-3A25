@@ -21,9 +21,6 @@ public class ModifierProjetController {
     private TextField nomPoT;
 
     @FXML
-    private TextField dateDT;
-
-    @FXML
     private TextField CAT;
     // Déclarer une variable pour contenir le projet à modifier
     private Projet projet;
@@ -34,7 +31,6 @@ public class ModifierProjetController {
 
         nomPrT.setText(projet.getNomPr());
         nomPoT.setText(projet.getNomPo());
-        dateDT.setText(new SimpleDateFormat("dd-MM-yyyy").format(projet.getDateD()));
         CAT.setText(String.valueOf(projet.getCA()));
     }
 
@@ -42,32 +38,35 @@ public class ModifierProjetController {
     @FXML
     void validerModification(ActionEvent event) throws IOException {
         if (projet != null) {
-            // Mettre à jour les données du projet
-            projet.setNomPr(nomPrT.getText());
-            projet.setNomPo(nomPoT.getText());
-            String.valueOf(projet.getDateD());
-            try {
-                int CA = Integer.parseInt(CAT.getText());
-                projet.setCA(CA);
-                // Utilisez la valeur de CA ici
-            } catch (NumberFormatException e) {
-                // Gérez l'exception ici (par exemple, affichez un message d'erreur)
-                System.err.println("Erreur : la valeur dans le champ CAT n'est pas un entier valide.");
+            // Vérifier la validité des champs en utilisant la classe InputValidator
+            boolean fieldsValid = InputValidatorMp.validateFields(nomPrT, nomPoT,CAT);
+
+            if (fieldsValid) {
+                // Mettre à jour les données du projet
+                projet.setNomPr(nomPrT.getText());
+                projet.setNomPo(nomPoT.getText());
+                try {
+                    int CA = Integer.parseInt(CAT.getText());
+                    projet.setCA(CA);
+                    // Utilisez la valeur de CA ici
+                } catch (NumberFormatException e) {
+                    // Gérez l'exception ici (par exemple, affichez un message d'erreur)
+                    System.err.println("Erreur : la valeur dans le champ CAT n'est pas un entier valide.");
+                }
+
+                // Appeler la méthode update pour mettre à jour le projet
+                ServiceProjet sp = new ServiceProjet();
+                sp.update(projet);
+
+                // Fermer la fenêtre de modification
+                ((Node) (event.getSource())).getScene().getWindow().hide();
+            } else {
+                System.out.println("Certains champs ne sont pas valides. Veuillez vérifier les saisies.");
             }
-
-            // Appeler la méthode update pour mettre à jour le projet
-            ServiceProjet sp = new ServiceProjet();
-            sp.update(projet);
-
-
-
-            // Fermer la fenêtre de modification
-            ((Node) (event.getSource())).getScene().getWindow().hide();
         } else {
             System.out.println("Aucun projet à modifier.");
         }
     }
 
-    public void initData(Collaboration collaboration) {
-    }
+
 }

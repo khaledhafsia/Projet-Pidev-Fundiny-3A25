@@ -7,9 +7,13 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import tn.esprit.models.Collaboration;
 import tn.esprit.services.ServiceCollaboration;
+
+import java.io.IOException;
+import java.sql.Date;
+import java.time.LocalDate;
 import controllers.InputValidator;
 
-public class ModifierCollaborationController {
+public class BackModifierCController {
 
     @FXML
     private TextField nomC;
@@ -20,6 +24,7 @@ public class ModifierCollaborationController {
     @FXML
     private DatePicker dateC;
     private Collaboration collaboration;
+    ServiceCollaboration sc = new ServiceCollaboration();
 
     @FXML
     void validerModification(ActionEvent event) {
@@ -33,6 +38,16 @@ public class ModifierCollaborationController {
                 // Mettre à jour les données de la collaboration
                 collaboration.setNomColl(nomC.getText());
                 collaboration.setTypeColl(typeC.getText());
+
+                // Convertir la date du DatePicker en Date SQL
+                LocalDate localDate = dateC.getValue();
+                if (localDate != null) {
+                    Date sqlDate = Date.valueOf(localDate);
+                    collaboration.setDateColl(sqlDate);
+                } else {
+                    System.out.println("Veuillez sélectionner une date valide.");
+                    return; // Sortir de la méthode si la date est null
+                }
 
                 // Appeler la méthode update pour mettre à jour la collaboration
                 ServiceCollaboration sc = new ServiceCollaboration();
@@ -49,9 +64,17 @@ public class ModifierCollaborationController {
     }
 
 
+
+
+
+
+
+
+
     public void initData(Collaboration collaboration) {
-        this.collaboration=collaboration;
+        this.collaboration = collaboration;
         nomC.setText(collaboration.getNomColl());
         typeC.setText(collaboration.getTypeColl());
     }
 }
+

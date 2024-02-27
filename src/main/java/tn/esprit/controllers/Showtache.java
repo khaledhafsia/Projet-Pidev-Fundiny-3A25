@@ -37,10 +37,8 @@ public class Showtache {
     }
 
     public void setTasks(List<taches> tasks) {
-        // Clear the existing items in the ListView
         listview.getItems().clear();
 
-        // Populate the ListView with task details
         for (taches task : tasks) {
             listview.getItems().add(task);
         }
@@ -55,18 +53,14 @@ public class Showtache {
     @FXML
     void addtache(ActionEvent event) {
         try {
-            // Load the FXML file for the "Add Task" form
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/addtache.fxml"));
             Parent root = loader.load();
 
-            // Get the controller for the "Add Task" form
             Addtache controller = loader.getController();
 
-            // Pass the selected investment ID to the controller
             controller.initData(selectedInvestissement);
 
-            // Replace the scene content with the update form
-            Stage stage = (Stage) listview.getScene().getWindow(); // Get the current stage
+            Stage stage = (Stage) listview.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
@@ -154,18 +148,14 @@ public class Showtache {
         try {
             Parent root = loader.load();
 
-            // Get the controller
             Updatetache controller = loader.getController();
-            // Initialize data in the controller
             controller.initData(selectedTache);
 
             Updatetache controller2 = loader.getController();
 
-            // Pass the selected investment ID to the controller
             controller2.initInv(selectedInvestissement);
 
-            // Replace the scene content with the update form
-            Stage stage = (Stage) listview.getScene().getWindow(); // Get the current stage
+            Stage stage = (Stage) listview.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();

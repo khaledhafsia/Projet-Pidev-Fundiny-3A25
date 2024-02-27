@@ -49,19 +49,16 @@ public class Updateinvestissement {
 
         if (isInputValid())
         {
-        // Retrieve modified data from form fields
         int userID = Integer.parseInt(usertf2.getText());
         int projetID = Integer.parseInt(projettf2.getText());
         double montant = Double.parseDouble(montanttf2.getText());
         String description = descriptiontf2.getText();
 
-        // Update the selected investissements object with modified data
         selectedInvestissement.setUserID(userID);
         selectedInvestissement.setProjetID(projetID);
         selectedInvestissement.setMontant(montant);
         selectedInvestissement.setDescription(description);
 
-        // Call the update method from the service class
         serviceInvestissements sp = new serviceInvestissements();
 
             sp.update(selectedInvestissement);
@@ -70,7 +67,6 @@ public class Updateinvestissement {
             alert.setContentText("mise à jour terminée");
             alert.showAndWait();
         } else {
-            // Handle case where input is not valid
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur de validation");
             alert.setHeaderText("Veuillez corriger les champs invalides.");

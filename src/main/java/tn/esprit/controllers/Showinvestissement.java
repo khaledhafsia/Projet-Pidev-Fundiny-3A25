@@ -104,13 +104,10 @@ public class Showinvestissement {
         try {
             Parent root = loader.load();
 
-            // Get the controller
             Updateinvestissement controller = loader.getController();
-            // Initialize data in the controller
             controller.initData(selectedInvestissement);
 
-            // Replace the scene content with the update form
-            Stage stage = (Stage) listview.getScene().getWindow(); // Get the current stage
+            Stage stage = (Stage) listview.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
@@ -123,11 +120,10 @@ public class Showinvestissement {
     void handleDelete(ActionEvent event) throws SQLException {
         investissements selectedInvestissement = listview.getSelectionModel().getSelectedItem();
         if (selectedInvestissement != null) {
-            // Call the delete method to delete it from the database
+
             serviceInvestissements sp = new serviceInvestissements();
             boolean deleted = sp.delete(selectedInvestissement);
             {
-                // Remove the selected item from the list view
                 listview.getItems().remove(selectedInvestissement);
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Success");
@@ -164,15 +160,12 @@ public class Showinvestissement {
         try {
             Parent root = loader.load();
 
-            // Get the controller
             Addtache controller = loader.getController();
-            // Initialize data in the controller
             controller.initData(selectedInvestissement);
 
 
 
-            // Replace the scene content with the update form
-            Stage stage = (Stage) listview.getScene().getWindow(); // Get the current stage
+            Stage stage = (Stage) listview.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
@@ -183,43 +176,33 @@ public class Showinvestissement {
 
     @FXML
     void showtache(ActionEvent event) {
-        // Get the selected investment from the ListView
         investissements selectedInvestissement = listview.getSelectionModel().getSelectedItem();
 
         if (selectedInvestissement != null) {
-            // Retrieve the selected investment ID
             int selectedInvestissementID = selectedInvestissement.getInvID();
 
-            // Retrieve tasks associated with the selected investment ID
             List<taches> tasks = st.getTasksByInvestissementID(selectedInvestissementID);
 
-            // Load the FXML file for the tasks window
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/showtache.fxml"));
 
             try {
                 Parent root = loader.load();
-                // Get the controller for the tasks window
                 Showtache controller = loader.getController();
 
-                // Pass the tasks to the controller
                 controller.setTasks(tasks);
 
                 Showtache controller2 = loader.getController();
 
-                // Pass the tasks to the controller
                 controller2.initTask(selectedInvestissement);
-                Stage stage = (Stage) listview.getScene().getWindow(); // Get the current stage
+                Stage stage = (Stage) listview.getScene().getWindow();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
             } catch (IOException e) {
                 e.printStackTrace();
-                return; // Return if the FXML file cannot be loaded
             }
 
         } else {
-            // Handle case where no investment is selected
-            // Show an error message or provide feedback to the user
             System.out.println("Please select an investment first.");
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur de selection");

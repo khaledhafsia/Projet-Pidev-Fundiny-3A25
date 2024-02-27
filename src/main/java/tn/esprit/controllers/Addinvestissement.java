@@ -47,7 +47,7 @@ public class Addinvestissement {
             tfmontant.clear();
             tfdescription.clear();
         } else {
-            // Handle case where input is not valid
+
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur de validation");
             alert.setHeaderText("Veuillez corriger les champs invalides.");

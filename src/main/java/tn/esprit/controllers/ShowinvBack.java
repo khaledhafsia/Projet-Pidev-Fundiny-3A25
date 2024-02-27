@@ -57,11 +57,11 @@ public class ShowinvBack implements Initializable {
     void handleDelete(ActionEvent event) throws SQLException {
         investissements selectedInvestissement = listview.getSelectionModel().getSelectedItem();
         if (selectedInvestissement != null) {
-            // Call the delete method to delete it from the database
+
             serviceInvestissements sp = new serviceInvestissements();
             boolean deleted = sp.delete(selectedInvestissement);
             {
-                // Remove the selected item from the list view
+
                 listview.getItems().remove(selectedInvestissement);
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Success");

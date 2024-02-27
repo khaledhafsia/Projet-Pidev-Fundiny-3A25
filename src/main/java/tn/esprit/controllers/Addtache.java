@@ -48,7 +48,6 @@ public class Addtache implements Initializable {
         this.selectedInvestissement = selectedInvestissement;
         prioritetf.getItems().addAll(options);
         statuttf.getItems().addAll(options2);
-        // Populate form fields with selected investment data
         invidtf.setText(String.valueOf(selectedInvestissement.getInvID()));
     }
 
@@ -57,9 +56,7 @@ public class Addtache implements Initializable {
     void addBtn(ActionEvent event) throws SQLException {
         if (isInputValid())
         {
-            // Retrieve the selected date from the date picker
             LocalDate localDate = datetf.getValue();
-            // Convert LocalDate to java.sql.Date
             java.sql.Date sqlDate = java.sql.Date.valueOf(localDate);
 
             sp.add(new taches(1,Integer.parseInt(invidtf.getText()), titretf.getText(), prioritetf.getValue(), statuttf.getValue(),sqlDate));
@@ -73,7 +70,6 @@ public class Addtache implements Initializable {
             datetf.setValue(null);
 
         } else {
-            // Handle case where input is not valid
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur de validation");
             alert.setHeaderText("Veuillez corriger les champs invalides.");
@@ -93,12 +89,11 @@ public class Addtache implements Initializable {
 
             Showtache controller = loader.getController();
 
-            // Pass the tasks to the controller
+
             controller.setTasks(tasks);
 
             Showtache controller2 = loader.getController();
 
-            // Pass the tasks to the controller
             controller.initTask(selectedInvestissement);
 
 
@@ -112,7 +107,7 @@ public class Addtache implements Initializable {
     }
 
     private boolean isInputValid() {
-        // Validate text fields and choice box
+
         boolean isValid = !titretf.getText().isEmpty()
                 && prioritetf.getValue() != null
                 && statuttf.getValue() != null
@@ -124,12 +119,12 @@ public class Addtache implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Add a listener to the text property of the DatePicker's editor
+
         datetf.getEditor().textProperty().addListener((obs, oldValue, newValue) -> {
             try {
                 LocalDate.parse(newValue, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             } catch (DateTimeParseException e) {
-                // If the entered text is not a valid date, clear the date picker value
+
                 datetf.getEditor().setText("");
             }
         });

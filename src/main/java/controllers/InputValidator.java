@@ -42,7 +42,8 @@ public class InputValidator {
     public static boolean isValidDate(DatePicker datePicker) {
         LocalDate date = datePicker.getValue();
         if (date == null) {
-            showAlert("Erreur de saisie", "Le champ " + " ne doit pas être vide.");            return false;
+            showAlert("Erreur de saisie", "Le champ " + " ne doit pas être vide ou incorrecte.");
+            return false;
         }
         return true;
     }

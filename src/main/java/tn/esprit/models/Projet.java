@@ -41,17 +41,9 @@ public class Projet {
     }
 
 
-    /*public Float getCA() {
-        return CA;
-    }*/
-
     public void setNomPr(String nomPr) {
         this.nomPr = nomPr;
     }
-
-    /*public void setId(int id) {
-        this.id = id;
-    }*/
 
     public void setNomPo(String nomPo) {
         this.nomPo = nomPo;

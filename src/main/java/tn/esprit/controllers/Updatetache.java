@@ -95,7 +95,7 @@ public class Updatetache implements Initializable {
 
             Showtache controller2 = loader.getController();
 
-            controller.initTask(selectedInvestissement);
+            controller2.initTask(selectedInvestissement);
 
 
 

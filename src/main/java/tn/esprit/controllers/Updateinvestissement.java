@@ -70,7 +70,7 @@ public class Updateinvestissement {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur de validation");
             alert.setHeaderText("Veuillez corriger les champs invalides.");
-            alert.setContentText("Tous les champs sont requis !\n user ID, projet ID et montant doivent être des chiffres ! ");
+            alert.setContentText("Tous les champs sont requis !\n le montant doit être un chiffre ! ");
             alert.showAndWait();
         }
 
@@ -78,7 +78,6 @@ public class Updateinvestissement {
 
     public void initData(investissements selectedInvestissement) {
         this.selectedInvestissement = selectedInvestissement;
-        // Populate form fields with selected investment data
         usertf2.setText(String.valueOf(selectedInvestissement.getUserID()));
         projettf2.setText(String.valueOf(selectedInvestissement.getProjetID()));
         montanttf2.setText(String.valueOf(selectedInvestissement.getMontant()));
@@ -87,8 +86,8 @@ public class Updateinvestissement {
 
     private boolean isInputValid() {
         return (!usertf2.getText().isEmpty() && !projettf2.getText().isEmpty() && !montanttf2.getText().isEmpty() &&
-                !descriptiontf2.getText().isEmpty() && isInteger(usertf2.getText()) && isInteger(projettf2.getText()) &&
-                isNumeric(montanttf2.getText()));
+                !descriptiontf2.getText().isEmpty()/* && isInteger(usertf2.getText()) && isInteger(projettf2.getText()) &&
+                isNumeric(montanttf2.getText()))*/);
     }
 
     private boolean isInteger(String str) {

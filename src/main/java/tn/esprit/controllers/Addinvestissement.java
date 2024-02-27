@@ -37,7 +37,7 @@ public class Addinvestissement {
         Timestamp currentTimestamp = Timestamp.valueOf(LocalDateTime.now());
         if (isInputValid())
         {
-            sp.add(new investissements(1,Integer.parseInt(tfuserid.getText()), Integer.parseInt(tfprojetid.getText()), Double.parseDouble(tfmontant.getText()), tfdescription.getText(),currentTimestamp));
+            sp.add(new investissements(1,22, 23, Double.parseDouble(tfmontant.getText()), tfdescription.getText(),currentTimestamp));
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Success");
             alert.setContentText("Investissement ajoutée");
@@ -51,7 +51,7 @@ public class Addinvestissement {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur de validation");
             alert.setHeaderText("Veuillez corriger les champs invalides.");
-            alert.setContentText("Tous les champs sont requis !\n user ID, projet ID et montant doivent être des chiffres ! ");
+            alert.setContentText("Tous les champs sont requis !\n le montant doit être un chiffre ! ");
             alert.showAndWait();
         }
 
@@ -71,9 +71,9 @@ public class Addinvestissement {
     }
 
     private boolean isInputValid() {
-        return !tfuserid.getText().isEmpty() && !tfprojetid.getText().isEmpty() && !tfmontant.getText().isEmpty() &&
-                !tfdescription.getText().isEmpty() && isInteger(tfuserid.getText()) && isInteger(tfprojetid.getText()) &&
-                isNumeric(tfmontant.getText());
+        return /*!tfuserid.getText().isEmpty() && !tfprojetid.getText().isEmpty() &&*/ !tfmontant.getText().isEmpty() &&
+                !tfdescription.getText().isEmpty()/* && isInteger(tfuserid.getText()) && isInteger(tfprojetid.getText()) &&
+                isNumeric(tfmontant.getText())*/;
     }
 
     private boolean isInteger(String str) {

@@ -114,11 +114,11 @@ public class reclamationViewController implements javafx.fxml.Initializable {
                     if (selectedReclamation != null) {
                         try {
                             // Load the FXML file for the edit window
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/addReclamation.fxml"));
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/editReclamation.fxml"));
                             Parent parent = loader.load();
 
                             // Get the controller from the loader
-                            AddReclamationControllers editController = loader.getController();
+                            EditReclamationController editController = loader.getController();
 
                             // Pass the selected Reclamation to the controller
                             //editController.setReclamation(selectedReclamation);

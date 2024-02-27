@@ -15,13 +15,13 @@ public class serviceReponse implements IServices<Reponse> {
 
     @Override
     public void add(Reponse reponse) {
-        String qry = "INSERT INTO `reponses`(`ID_Reclamation`, `ID_Administrateur`, `Contenu_Reponse`, `Date_Reponse`) VALUES (?, ?, ?, ?)";
+        String qry = "INSERT INTO `reponses`(`ID_Utilisateur`, `emailUser`, `objet`, `texte`) VALUES (?, ?, ?, ?)";
         try {
             PreparedStatement stm = cnx.prepareStatement(qry);
-            stm.setInt(1, reponse.getID_Reclamation());
-            stm.setInt(2, reponse.getID_Administrateur());
-            stm.setString(3, reponse.getContenu_Reponse());
-            stm.setDate(4, new java.sql.Date(reponse.getDate_Reponse().getTime()));
+            stm.setInt(1, reponse.getID_Utilisateur());
+            stm.setString(2, reponse.getemail());
+            stm.setString(3, reponse.getobjet());
+            stm.setString(4, reponse.gettexte());
 
             stm.executeUpdate();
         } catch (SQLException e) {
@@ -39,10 +39,10 @@ public class serviceReponse implements IServices<Reponse> {
             while (rs.next()) {
                 Reponse reponse = new Reponse();
                 reponse.setID_Reponse(rs.getInt("ID_Reponse"));
-                reponse.setID_Reclamation(rs.getInt("ID_Reclamation"));
-                reponse.setID_Administrateur(rs.getInt("ID_Administrateur"));
-                reponse.setContenu_Reponse(rs.getString("Contenu_Reponse"));
-                reponse.setDate_Reponse(rs.getDate("Date_Reponse"));
+                reponse.setID_Utilisateur(rs.getInt("ID_Utilisateur"));
+                reponse.setemail(rs.getString("email"));
+                reponse.setobjet(rs.getString("objet"));
+                reponse.settexte(rs.getString("texte"));
                 reponses.add(reponse);
             }
         } catch (SQLException e) {
@@ -62,11 +62,10 @@ public class serviceReponse implements IServices<Reponse> {
 
         try {
             PreparedStatement stm = cnx.prepareStatement(qry);
-            stm.setInt(1, reponse.getID_Reclamation());
-            stm.setInt(2, reponse.getID_Administrateur());
-            stm.setString(3, reponse.getContenu_Reponse());
-            stm.setDate(4, new java.sql.Date(reponse.getDate_Reponse().getTime()));
-            stm.setInt(5, reponse.getID_Reponse());
+            stm.setString(1, reponse.getemail());
+            stm.setString(2, reponse.getemail());
+            stm.setString(3, reponse.getobjet());
+            stm.setString(4, reponse.gettexte());
 
             stm.executeUpdate();
         } catch (SQLException e) {

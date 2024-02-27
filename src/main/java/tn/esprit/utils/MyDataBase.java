@@ -1,6 +1,7 @@
 package tn.esprit.utils;
 
 import tn.esprit.models.Reclamation;
+import tn.esprit.models.Reponse;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -54,6 +55,24 @@ public class MyDataBase {
         }
         return adminNames;
     }
+
+    public List<String> getAllusersNames() {
+        List<String> usersNames = new ArrayList<>();
+        try {
+            connection = getInstance().getCnx(); // Use getInstance to get the instance
+            String query = "SELECT Nom FROM utilisateur";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String nom = resultSet.getString("Nom");
+                usersNames.add(nom);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MyDataBase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return usersNames;
+    }
+
 
     public List<String> getAllProjectsNames() {
         List<String> ProjectName = new ArrayList<>();
@@ -193,6 +212,50 @@ public class MyDataBase {
             }
         }
 
+    public List<Reponse> getAllReponse() {
+        List<Reponse> reponsesList = new ArrayList<>();
+
+        try {
+            connection = getInstance().getCnx();
+            String query = "SELECT * FROM reponses";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Reponse reponse = new Reponse();
+                reponse.setID_Reponse(Integer.parseInt(resultSet.getString("ID_Reponse")));
+                reponse.setemail(resultSet.getString("email"));
+                reponse.setID_Utilisateur(Integer.parseInt(resultSet.getString("ID_Utilisateur")));
+                reponse.setobjet(resultSet.getString("objet"));
+                reponse.settexte(resultSet.getString("texte"));
+
+                reponsesList.add(reponse);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MyDataBase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return reponsesList;
+    }
+
+    public void deleteReponse(Reponse reponse) {
+        try {
+            connection = getInstance().getCnx();
+            String query = "DELETE FROM reponses WHERE ID_Reponse = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, String.valueOf(reponse.getID_Reponse()));
+
+            int affectedRows = preparedStatement.executeUpdate();
+            if (affectedRows > 0) {
+                System.out.println("Reclamation deleted successfully from the database.");
+            } else {
+                System.out.println("Failed to delete reclamation from the database.");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(MyDataBase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
         // ... (existing code)
 }
 

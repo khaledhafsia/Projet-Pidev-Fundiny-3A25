@@ -3,22 +3,22 @@ import java.util.Date;
 
 public class Reponse {
     private int ID_Reponse;
-    private int ID_Reclamation;
-    private int ID_Administrateur;
-    private String Contenu_Reponse;
-    private Date Date_Reponse;
+    private int ID_Utilisateur;
+    private String email;
+    private String objet;
+    private String texte;
 
     // Constructors (you can create more if needed)
 
     public Reponse() {
     }
 
-    public Reponse(int ID_Reponse, int ID_Reclamation, int ID_Administrateur, String Contenu_Reponse, Date Date_Reponse) {
+    public Reponse(int ID_Reponse, int ID_Utilisateur, String email, String objet, String texte) {
         this.ID_Reponse = ID_Reponse;
-        this.ID_Reclamation = ID_Reclamation;
-        this.ID_Administrateur = ID_Administrateur;
-        this.Contenu_Reponse = Contenu_Reponse;
-        this.Date_Reponse = Date_Reponse;
+        this.ID_Utilisateur = ID_Utilisateur;
+        this.email = email;
+        this.objet = objet;
+        this.texte = texte;
     }
 
     // Getters and Setters (you can generate these using your IDE)
@@ -31,35 +31,35 @@ public class Reponse {
         this.ID_Reponse = ID_Reponse;
     }
 
-    public int getID_Reclamation() {
-        return ID_Reclamation;
+    public int getID_Utilisateur() {
+        return ID_Utilisateur;
     }
 
-    public void setID_Reclamation(int ID_Reclamation) {
-        this.ID_Reclamation = ID_Reclamation;
+    public void setID_Utilisateur(int ID_Utilisateur) {
+        this.ID_Utilisateur = ID_Utilisateur;
     }
 
-    public int getID_Administrateur() {
-        return ID_Administrateur;
+    public String getemail() {
+        return email;
     }
 
-    public void setID_Administrateur(int ID_Administrateur) {
-        this.ID_Administrateur = ID_Administrateur;
+    public void setemail(String email) {
+        this.email = email;
     }
 
-    public String getContenu_Reponse() {
-        return Contenu_Reponse;
+    public String getobjet() {
+        return objet;
     }
 
-    public void setContenu_Reponse(String Contenu_Reponse) {
-        this.Contenu_Reponse = Contenu_Reponse;
+    public void setobjet(String objet) {
+        this.objet = objet;
     }
 
-    public Date getDate_Reponse() {
-        return Date_Reponse;
+    public String gettexte() {
+        return texte;
     }
 
-    public void setDate_Reponse(Date Date_Reponse) {
-        this.Date_Reponse = Date_Reponse;
+    public void settexte(String texte) {
+        this.texte = texte;
     }
 }

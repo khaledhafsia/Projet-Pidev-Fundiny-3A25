@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
-
+<AnchorPane prefHeight="488.0" prefWidth="706.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controls.addReponseController">
+   <children>
+      <Label layoutX="28.0" layoutY="36.0" text="Envoyer reponse: " textFill="DARKTURQUOISE">
+         <font>
+            <Font name="Verdana Bold" size="31.0" />
+         </font>
+      </Label>
+      <Label layoutX="28.0" layoutY="92.0" text="DE : " />
+      <TextField fx:id="emailFld" layoutX="54.0" layoutY="88.0" prefHeight="27.0" prefWidth="620.0" />
+      <Label layoutX="28.0" layoutY="138.0" text="A : " />
+      <Label layoutX="7.0" layoutY="187.0" text="OBJET : " />
+      <TextField fx:id="objetFld" layoutX="54.0" layoutY="183.0" prefHeight="27.0" prefWidth="620.0" />
+      <TextArea fx:id="texte" layoutX="54.0" layoutY="221.0" prefHeight="200.0" prefWidth="620.0" />
+      <Label layoutX="6.0" layoutY="291.0" text="TEXTE : " />
+      <Button layoutX="468.0" layoutY="436.0" mnemonicParsing="false" onMouseClicked="#save" prefHeight="39.0" prefWidth="85.0" text="Envoyer" />
+      <Button layoutX="587.0" layoutY="436.0" mnemonicParsing="false" onMouseClicked="#cancel" prefHeight="39.0" prefWidth="85.0" text="Cancel" />
+      <ComboBox fx:id="userComboBox" layoutX="54.0" layoutY="134.0" prefHeight="27.0" prefWidth="200.0" />
+   </children>
 </AnchorPane>

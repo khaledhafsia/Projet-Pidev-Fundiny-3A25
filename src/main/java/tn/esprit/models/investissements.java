@@ -71,10 +71,10 @@ public class investissements {
     @Override
     public String toString() {
         return "investissements{" +
-                "invID=" + invID +
-                ", userID=" + userID +
-                ", projetID=" + projetID +
-                ", montant=" + montant +
+//                "invID=" + invID +
+//                ", userID=" + userID +
+//                ", projetID=" + projetID +
+                " montant=" + montant +
                 ", description='" + description + '\'' +
                 ", date='" + date + '\'' +
                 "}\n";

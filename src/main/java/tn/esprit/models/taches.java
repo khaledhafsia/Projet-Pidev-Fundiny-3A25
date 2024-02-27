@@ -70,9 +70,9 @@ public class taches {
     @Override
     public String toString() {
         return "taches{" +
-                "tacheID=" + tacheID +
-                ", invID=" + invID +
-                ", titre='" + titre + '\'' +
+//                "tacheID=" + tacheID +
+//                ", invID=" + invID +
+                " titre='" + titre + '\'' +
                 ", priorite='" + priorite + '\'' +
                 ", statut='" + statut + '\'' +
                 ", echeanceD=" + echeanceD +

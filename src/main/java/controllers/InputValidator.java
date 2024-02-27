@@ -26,7 +26,7 @@ public class InputValidator {
 
     public static boolean containsOnlyLetters(TextField textField) {
         String text = textField.getText();
-        if (!text.matches("^[a-zA-Z ]+$")) { // Ajout de l'espace dans l'expression régulière
+        if (!text.matches("^[a-zA-Z ]+$")) {
             showAlert("Erreur de saisie", "Le champ " + textField.getId() + " ne doit contenir que des lettres et des espaces.");            return false;
         }
         return true;

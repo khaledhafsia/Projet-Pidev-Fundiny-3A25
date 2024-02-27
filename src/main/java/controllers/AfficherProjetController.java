@@ -45,9 +45,10 @@ public class AfficherProjetController implements Initializable {
 
     @FXML
     void actualiser(ActionEvent event) {
-        lv.refresh();
-        lvc.refresh();
-
+        projets = sp.getAll();
+        collaborations = sc.getAll();
+        lv.setItems(FXCollections.observableArrayList(projets));
+        lvc.setItems(FXCollections.observableArrayList(collaborations));
     }
     @FXML
     void modifier(MouseEvent event) throws IOException {
@@ -59,7 +60,7 @@ public class AfficherProjetController implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ModifierProjet.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
                 ModifierProjetController modifierProjetController = fxmlLoader.getController();
-                modifierProjetController.initData(projetAModifier);// Passer le projet à modifier au contrôleur de la page de modification
+                modifierProjetController.initData(projetAModifier);
                 Stage stage = new Stage();
                 stage.setTitle("Modifier Projet");
                 stage.setScene(new Scene(root));
@@ -75,7 +76,7 @@ public class AfficherProjetController implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ModifierCollaboration.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
                 ModifierCollaborationController modifierCollaborationController = fxmlLoader.getController();
-                modifierCollaborationController.initData(collaborationAModifier);// Passer le projet à modifier au contrôleur de la page de modification
+                modifierCollaborationController.initData(collaborationAModifier);
                 Stage stage = new Stage();
                 stage.setTitle("Modifier Collaboration");
                 stage.setScene(new Scene(root));
@@ -132,16 +133,16 @@ public class AfficherProjetController implements Initializable {
         Projet projetACollaborer = lv.getSelectionModel().getSelectedItem();
 
         if (projetACollaborer != null) {
-            int idProjet = projetACollaborer.getId(); // Récupérer l'ID du projet sélectionné
+            int idProjet = projetACollaborer.getId();
 
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/CollaborerProjet.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Collaborer avec un Projet");
             stage.setScene(new Scene(fxmlLoader.load()));
-            CollaborerProjetController collaborerProjetController = fxmlLoader.getController();
 
-            // Passer l'ID du projet sélectionné et le service de collaboration au contrôleur de collaboration
+            CollaborerProjetController collaborerProjetController = fxmlLoader.getController();
             collaborerProjetController.initData(idProjet, sc);
+            lvc.refresh();
 
             stage.show();
         } else {

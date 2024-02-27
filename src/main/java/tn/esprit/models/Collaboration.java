@@ -60,12 +60,10 @@ public class Collaboration {
 
     @Override
     public String toString() {
-        return "Collaboration{" +
-                "id=" + id_collaboration +
-                ", nomColl='" + nomColl + '\'' +
+        return
+                "nomColl='" + nomColl + '\'' +
                 ", TypeColl=" + TypeColl +
                 ", dateColl=" + dateColl +
-                ", id=" + id +
 
                 '}';
     }

@@ -24,21 +24,16 @@ public class ModifierCollaborationController {
     @FXML
     void validerModification(ActionEvent event) {
         if (collaboration != null) {
-            // Vérifier si les champs ne contiennent que des lettres
             boolean nomValid = InputValidator.containsOnlyLetters(nomC);
             boolean typeValid = InputValidator.containsOnlyLetters(typeC);
 
-            // Vérifier si tous les champs sont valides
             if (nomValid && typeValid) {
-                // Mettre à jour les données de la collaboration
                 collaboration.setNomColl(nomC.getText());
                 collaboration.setTypeColl(typeC.getText());
 
-                // Appeler la méthode update pour mettre à jour la collaboration
                 ServiceCollaboration sc = new ServiceCollaboration();
                 sc.update(collaboration);
 
-                // Fermer la fenêtre de modification
                 ((Node) (event.getSource())).getScene().getWindow().hide();
             } else {
                 System.out.println("Certains champs ne contiennent pas que des lettres.");

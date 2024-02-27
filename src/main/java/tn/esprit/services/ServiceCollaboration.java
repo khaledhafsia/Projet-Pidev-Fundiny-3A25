@@ -86,14 +86,14 @@ public class ServiceCollaboration implements IService<Collaboration> {
             int rowsAffected = stm.executeUpdate();
             if (rowsAffected == 0) {
                 System.out.println("Aucune ligne supprimée pour la collaboration avec l'ID : " + collaboration.getId_collaboration());
-                return false; // Aucune ligne supprimée
+                return false;
             } else {
                 System.out.println("Collaboration supprimée avec succès, ID : " + collaboration.getId_collaboration());
-                return true; // Suppression réussie
+                return true; //
             }
         } catch (SQLException e) {
             System.out.println("Erreur lors de la suppression de la collaboration : " + e.getMessage());
-            return false; // Erreur lors de la suppression
+            return false;
         }
     }
 }

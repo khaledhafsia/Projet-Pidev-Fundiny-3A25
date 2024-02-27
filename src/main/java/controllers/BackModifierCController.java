@@ -29,31 +29,25 @@ public class BackModifierCController {
     @FXML
     void validerModification(ActionEvent event) {
         if (collaboration != null) {
-            // Vérifier si les champs ne contiennent que des lettres
             boolean nomValid = InputValidator.containsOnlyLetters(nomC);
             boolean typeValid = InputValidator.containsOnlyLetters(typeC);
 
-            // Vérifier si tous les champs sont valides
             if (nomValid && typeValid) {
-                // Mettre à jour les données de la collaboration
                 collaboration.setNomColl(nomC.getText());
                 collaboration.setTypeColl(typeC.getText());
 
-                // Convertir la date du DatePicker en Date SQL
                 LocalDate localDate = dateC.getValue();
                 if (localDate != null) {
                     Date sqlDate = Date.valueOf(localDate);
                     collaboration.setDateColl(sqlDate);
                 } else {
                     System.out.println("Veuillez sélectionner une date valide.");
-                    return; // Sortir de la méthode si la date est null
+                    return;
                 }
 
-                // Appeler la méthode update pour mettre à jour la collaboration
                 ServiceCollaboration sc = new ServiceCollaboration();
                 sc.update(collaboration);
 
-                // Fermer la fenêtre de modification
                 ((Node) (event.getSource())).getScene().getWindow().hide();
             } else {
                 System.out.println("Certains champs ne contiennent pas que des lettres.");

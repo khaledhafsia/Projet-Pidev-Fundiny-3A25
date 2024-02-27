@@ -46,7 +46,7 @@ public class BackController implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ModifierProjet.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
                 ModifierProjetController modifierProjetController = fxmlLoader.getController();
-                modifierProjetController.initData(projetAModifier);// Passer le projet à modifier au contrôleur de la page de modification
+                modifierProjetController.initData(projetAModifier);
                 Stage stage = new Stage();
                 stage.setTitle("Modifier Projet");
                 stage.setScene(new Scene(root));
@@ -62,7 +62,7 @@ public class BackController implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/BackModifierC.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
                 BackModifierCController backModifierCController = fxmlLoader.getController();
-                backModifierCController.initData(collaborationAModifier);// Passer le projet à modifier au contrôleur de la page de modification
+                backModifierCController.initData(collaborationAModifier);
                 Stage stage = new Stage();
                 stage.setTitle("Modifier Collaboration");
                 stage.setScene(new Scene(root));

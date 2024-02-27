@@ -91,14 +91,14 @@ public class ServiceProjet implements IService<Projet> {
             int rowsAffected = stm.executeUpdate();
             if (rowsAffected == 0) {
                 System.out.println("Aucune ligne supprimée pour le projet avec l'ID : " + projet.getId());
-                return false; // Aucune ligne supprimée
+                return false;
             } else {
                 System.out.println("Projet supprimé avec succès, ID : " + projet.getId());
-                return true; // Suppression réussie
+                return true;
             }
         } catch (SQLException e) {
             System.out.println("Erreur lors de la suppression du projet : " + e.getMessage());
-            return false; // Erreur lors de la suppression
+            return false;
         }}
 
     }

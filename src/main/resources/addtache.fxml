@@ -16,17 +16,17 @@
             <Font name="System Bold Italic" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="162.0" layoutY="151.0" text="Investissement ID" />
-      <Label layoutX="164.0" layoutY="217.0" text="Titre" />
-      <Label layoutX="164.0" layoutY="284.0" text="Priorité" />
-      <Label layoutX="167.0" layoutY="355.0" text="Statut" />
-      <Label layoutX="164.0" layoutY="423.0" text="Date d'écheande" />
-      <TextField fx:id="invidtf" editable="false" layoutX="316.0" layoutY="147.0" prefHeight="26.0" prefWidth="175.0" />
-      <TextField fx:id="titretf" layoutX="317.0" layoutY="213.0" prefHeight="26.0" prefWidth="175.0" />
-      <DatePicker fx:id="datetf" layoutX="316.0" layoutY="419.0" />
+      <Label layoutX="162.0" layoutY="151.0" text="Investissement ID" visible="false" />
+      <Label layoutX="176.0" layoutY="173.0" text="Titre" />
+      <Label layoutX="176.0" layoutY="240.0" text="Priorité" />
+      <Label layoutX="179.0" layoutY="311.0" text="Statut" />
+      <Label layoutX="176.0" layoutY="379.0" text="Date d'écheande" />
+      <TextField fx:id="invidtf" editable="false" layoutX="316.0" layoutY="147.0" prefHeight="26.0" prefWidth="175.0" visible="false" />
+      <TextField fx:id="titretf" layoutX="329.0" layoutY="169.0" prefHeight="26.0" prefWidth="175.0" />
+      <DatePicker fx:id="datetf" layoutX="328.0" layoutY="375.0" />
       <Button layoutX="353.0" layoutY="500.0" mnemonicParsing="false" onAction="#addBtn" text="Ajouter" />
       <Button layoutX="455.0" layoutY="500.0" mnemonicParsing="false" onAction="#backBtn" text="Retour" />
-      <ChoiceBox fx:id="prioritetf" layoutX="317.0" layoutY="280.0" prefHeight="26.0" prefWidth="175.0" />
-      <ChoiceBox fx:id="statuttf" layoutX="317.0" layoutY="350.0" prefHeight="26.0" prefWidth="175.0" />
+      <ChoiceBox fx:id="prioritetf" layoutX="329.0" layoutY="236.0" prefHeight="26.0" prefWidth="175.0" />
+      <ChoiceBox fx:id="statuttf" layoutX="329.0" layoutY="306.0" prefHeight="26.0" prefWidth="175.0" />
    </children>
 </AnchorPane>

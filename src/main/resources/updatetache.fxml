@@ -16,12 +16,12 @@
             <Font name="System Bold Italic" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="171.0" layoutY="143.0" text="Investissement ID" />
+      <Label layoutX="171.0" layoutY="143.0" text="Investissement ID" visible="false" />
       <Label layoutX="170.0" layoutY="197.0" text="Titre" />
       <Label layoutX="170.0" layoutY="257.0" text="Priorité" />
       <Label layoutX="173.0" layoutY="327.0" text="Statut" />
       <Label layoutX="174.0" layoutY="387.0" text="Date d'écheance" />
-      <TextField fx:id="invtf" editable="false" layoutX="310.0" layoutY="139.0" prefHeight="26.0" prefWidth="175.0" />
+      <TextField fx:id="invtf" editable="false" layoutX="310.0" layoutY="139.0" prefHeight="26.0" prefWidth="175.0" visible="false" />
       <TextField fx:id="titretf" layoutX="311.0" layoutY="193.0" prefHeight="26.0" prefWidth="175.0" />
       <DatePicker fx:id="datetf" editable="false" layoutX="312.0" layoutY="383.0" />
       <Button layoutX="372.0" layoutY="477.0" mnemonicParsing="false" onAction="#modifBt" text="Modifier" />

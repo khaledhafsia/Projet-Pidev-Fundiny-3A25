@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.showarticleController">
+
+    <Label fx:id="postContentLabel" layoutX="36.0" layoutY="173.0" maxWidth="560.0" prefHeight="26.0" prefWidth="174.0" wrapText="true" />
+
+    <ImageView fx:id="postImageView" fitHeight="104.0" fitWidth="208.0" layoutX="45.0" layoutY="51.0" />
+   <ListView fx:id="listview" layoutX="310.0" layoutY="51.0" prefHeight="200.0" prefWidth="260.0" />
+
+
+
+</AnchorPane>

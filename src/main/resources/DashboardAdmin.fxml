@@ -13,27 +13,27 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="AdminController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="771.0" prefWidth="1030.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controller.AdminController">
+<AnchorPane fx:id="AdminController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="821.0" prefWidth="1091.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controller.AdminController">
    <children>
-      <ScrollPane layoutX="213.0" layoutY="143.0" prefHeight="558.0" prefWidth="758.0">
+      <ScrollPane layoutX="213.0" layoutY="143.0" prefHeight="675.0" prefWidth="876.0">
          <content>
-            <VBox fx:id="postCardContainer" prefHeight="571.0" prefWidth="1255.0" />
+            <VBox fx:id="postCardContainer" prefHeight="662.0" prefWidth="1255.0" />
 
          </content>
       </ScrollPane>
-      <Pane layoutY="149.0" prefHeight="930.0" prefWidth="171.0">
+      <Pane layoutX="7.0" layoutY="137.0" prefHeight="930.0" prefWidth="194.0">
          <children>
 
 
 
-            <Button fx:id="RefreshButton" layoutX="21.0" layoutY="465.0" mnemonicParsing="false" onAction="#handleRefresh" prefHeight="30.0" prefWidth="129.0" text="Refresh" />
-            <Button layoutX="-2.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="158.0" text="Gestionaire ultlisateur " onAction="#DashboardAdmin" />
+            <Button fx:id="RefreshButton" layoutX="33.0" layoutY="619.0" mnemonicParsing="false" onAction="#handleRefresh" prefHeight="30.0" prefWidth="129.0" text="Refresh" />
+            <Button layoutX="-2.0" layoutY="-1.0" mnemonicParsing="false" onAction="#DashboardAdmin" prefHeight="30.0" prefWidth="158.0" text="Gestionaire ultlisateur " />
             <Button layoutX="-2.0" layoutY="39.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="158.0" text="Gestionaire blog" />
             <Button layoutX="-2.0" layoutY="80.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="158.0" text="Gestionaire Evenement" />
 
          </children>
       </Pane>
-      <Pane layoutX="-2.0" layoutY="1.0" prefHeight="136.0" prefWidth="974.0">
+      <Pane layoutX="-2.0" layoutY="1.0" prefHeight="136.0" prefWidth="1091.0">
          <children>
             <TextField fx:id="search" layoutX="212.0" layoutY="19.0" prefHeight="49.0" prefWidth="563.0" promptText="search" style="-fx-background-color: lightblue; -fx-background-radius: 50;">
                <font>
@@ -45,13 +45,13 @@
                   <Image url="@logo.png" />
                </image>
             </ImageView>
-            <Circle fill="DODGERBLUE" layoutX="809.0" layoutY="25.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label layoutX="844.0" layoutY="9.0" text="Khaled hafsia">
+            <Circle fill="DODGERBLUE" layoutX="869.0" layoutY="26.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="907.0" layoutY="12.0" prefHeight="27.0" prefWidth="147.0" text="Interface Admin">
                <font>
                   <Font name="Bodoni MT" size="18.0" />
                </font>
             </Label>
-            <Button fx:id="SignOutButton" alignment="BASELINE_LEFT" graphicTextGap="8.0" layoutX="796.0" layoutY="68.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#SignOut" prefHeight="50.0" prefWidth="171.0" styleClass="passoublie-btn" stylesheets="@Style.css" text="Sign out">
+            <Button fx:id="SignOutButton" alignment="BASELINE_LEFT" graphicTextGap="8.0" layoutX="882.0" layoutY="68.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#SignOut" prefHeight="50.0" prefWidth="171.0" styleClass="passoublie-btn" stylesheets="@Style.css" text="Sign out">
                <padding>
                   <Insets left="15.0" />
                </padding>

@@ -142,5 +142,22 @@
                 System.out.println(rowsDeleted + " rows were deleted for ID " + id);
             }
         }
+
+
+            public String fetchUserPasswordByMail(String email) {
+                try {
+                    User user = verifyUser(email);
+                    if (user != null) {
+                        return user.getPassword();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                return null; // Handle case when user not found or SQL exception
+            }
+
+
+
     }
+
 

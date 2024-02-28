@@ -41,14 +41,11 @@ public class OwnerDashboardController {
     @FXML
     private void SignOut() {
         try {
-            // Load the new FXML file
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/SignIn.fxml"));
             Parent root = loader.load();
 
-            // Create a new scene with the loaded FXML content
             Scene scene = new Scene(root);
 
-            // Get the stage from the button and set the new scene
             Stage stage = (Stage) SignOutButton.getScene().getWindow();
             stage.setScene(scene);
         } catch (IOException e) {

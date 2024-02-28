@@ -63,12 +63,6 @@ public class PostCardController {
             default:
                 break;
         }
-
-
-
-
-
-
     }
 
     @FXML

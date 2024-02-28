@@ -60,6 +60,6 @@
          </yAxis>
       </StackedBarChart>
       <Label fx:id="titleLabel" layoutX="19.0" layoutY="29.0" prefHeight="18.0" prefWidth="167.0" text="Welcome to owner Interface" textFill="RED" />
-      <Label fx:id="nameLabel" layoutX="25.0" layoutY="79.0" prefHeight="18.0" prefWidth="154.0" text="Label" />
+      <Label fx:id="nameLabel" layoutX="25.0" layoutY="79.0" prefHeight="18.0" prefWidth="154.0" />
    </children>
 </AnchorPane>

@@ -16,7 +16,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
-
+import javafx.scene.control.Alert;
+import javax.mail.MessagingException;
 public class SignInController{
 
     @FXML
@@ -33,6 +34,28 @@ public class SignInController{
 
     @FXML
     private void MdpOublie(ActionEvent event) {
+        String email = tfEmail.getText();
+        ServiceUser serviceUser = new ServiceUser();
+        String password = serviceUser.fetchUserPasswordByMail(email);
+        String text="";
+        if (password != null) {
+            try {
+                EmailSending.sendEmail(email, password,text);
+                showAlert("Password recovery email sent successfully.");
+            } catch (RuntimeException e) {
+                e.printStackTrace();
+                showAlert("Failed to send password recovery email: " + e.getMessage());
+            }
+        } else {
+            showAlert("No user found with the provided email.");
+        }
+    }
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     @FXML
@@ -111,11 +134,13 @@ public class SignInController{
         stage.setScene(scene);
         stage.show();
     }
-
+/*
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR, message);
         alert.showAndWait();
     }
+
+ */
 
     @FXML
     private void AlreadySignedUp() {

@@ -72,14 +72,16 @@ public class SignUpMController implements Initializable {
         }
 
         if ((nom.isEmpty()) || (!Character.isUpperCase(nom.charAt(0)) && !nom.matches("^[a-zA-Z0-9]+$"))) {
-            showAlert("Name must start with an uppercase and contain only letters and digits.");
+            showAlert("Name must  contain only letters and digits.");
             return;
         }
 
-        if ((nom.isEmpty()) || (!Character.isUpperCase(prenom.charAt(0)) && !nom.matches("^[a-zA-Z0-9]+$"))) {
-            showAlert("Surname must start with an uppercase and contain only letters and digits.");
+        if ((prenom.isEmpty()) || (!Character.isUpperCase(prenom.charAt(0)) && !prenom.matches("^[a-zA-Z0-9]+$"))) {
+            showAlert("Surname  contain only letters and digits.");
             return;
         }
+
+
 
         ServiceUser serviceUser = new ServiceUser();
         try {
@@ -139,14 +141,11 @@ public class SignUpMController implements Initializable {
     @FXML
     private void AlreadySignedUp() {
         try {
-            // Load the new FXML file
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/SignIn.fxml"));
             Parent root = loader.load();
 
-            // Create a new scene with the loaded FXML content
             Scene scene = new Scene(root);
 
-            // Get the stage from the button and set the new scene
             Stage stage = (Stage) clickHereButton.getScene().getWindow();
             stage.setScene(scene);
         } catch (IOException e) {

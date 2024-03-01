@@ -4,8 +4,12 @@ import tn.esprit.interfaces.IService;
 import tn.esprit.models.article;
 import tn.esprit.utils.MyDataBase;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+
 public class servicearticle implements IService<article>{
 
     private Connection cnx;
@@ -25,32 +29,53 @@ public class servicearticle implements IService<article>{
             System.out.println("Error adding article: " + e.getMessage());
         }
     }
+
+
+
     @Override
-    public ArrayList<article> getAll() {  ArrayList<article> art = new ArrayList<>();
-        String qry ="SELECT * FROM `article`";
-        try {
-            Statement stm = cnx.createStatement();
-            ResultSet rs = stm.executeQuery(qry);
-            while (rs.next()){
-                article i = new article();
-
-                i.setId(rs.getInt(1));
-                i.setDescription(rs.getString(2));
-                i.setImage(rs.getString(3));
-
-                art.add(i);
-
-
+    public ArrayList<article> getAll() throws SQLException {
+        ArrayList<article> articles = new ArrayList<>();
+        String query = "SELECT * FROM article";
+        try (PreparedStatement statement = cnx.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                article article = new article();
+                article.setId(resultSet.getInt("id"));
+                article.setDescription(resultSet.getString("description"));
+                article.setImage(resultSet.getString("image"));
+                articles.add(article);
             }
-
         } catch (SQLException e) {
-            System.out.println("show error" +e.getMessage());
-
+            System.out.println("Error retrieving articles: " + e.getMessage());
         }
-
-        return art;
+        return articles;
     }
 
+
+
+
+
+
+
+    //    @Override
+//    public article getById(int id) throws SQLException{
+//        String query = "SELECT * FROM article WHERE id = ?";
+//        try (PreparedStatement statement = cnx.prepareStatement(query)) {
+//            statement.setInt(1, id);
+//            try (ResultSet resultSet = statement.executeQuery()) {
+//                if (resultSet.next()) {
+//                    article article = new article();
+//                    article.setId(resultSet.getInt("id"));
+//                    article.setDescription(resultSet.getString("description"));
+//                    article.setImage(resultSet.getString("image"));
+//                    return article;
+//                }
+//            }
+//        } catch (SQLException e) {
+//            System.out.println("Error retrieving article: " + e.getMessage());
+//        }
+//        return null;
+//    }
     @Override
     public void update(article article) {
 
@@ -60,4 +85,6 @@ public class servicearticle implements IService<article>{
     public boolean delete(article article) {
         return false;
     }
+
+
 }

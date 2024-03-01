@@ -1,6 +1,7 @@
 package tn.esprit.services;
 
 import tn.esprit.interfaces.IService;
+import tn.esprit.models.article;
 import tn.esprit.models.comment;
 import tn.esprit.utils.MyDataBase;
 
@@ -17,7 +18,14 @@ public class servicecomment implements IService<comment> {
             cnx = MyDataBase.getInstance().getCnx();
         }
 
-        @Override
+
+
+    @Override
+    public ArrayList<article> getAll() throws SQLException {
+        return null;
+    }
+
+    @Override
         public void add(comment comment) throws SQLException {
             String req = "INSERT INTO comment (comment) VALUES ( ?)";
 
@@ -30,10 +38,9 @@ public class servicecomment implements IService<comment> {
             }
         }
 
-    @Override
-    public ArrayList<comment> getAll() {
-        return null;
-    }
+
+
+
 
     @Override
     public void update(comment comment) {
@@ -44,4 +51,6 @@ public class servicecomment implements IService<comment> {
     public boolean delete(comment comment) {
         return false;
     }
+
+
 }

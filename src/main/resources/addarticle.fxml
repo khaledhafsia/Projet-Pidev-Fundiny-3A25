@@ -19,6 +19,7 @@
          </font>
       </TextField>
       <Button layoutX="296.0" layoutY="326.0" mnemonicParsing="false" onAction="#btnCREATEClicked" prefHeight="39.0" prefWidth="71.0" text="Create" />
-      <Button layoutX="407.0" layoutY="243.0" mnemonicParsing="false" onAction="#selectImageClicked" text="Image" textAlignment="CENTER" />
+      <Button layoutX="417.0" layoutY="288.0" mnemonicParsing="false" onAction="#selectImageClicked" text="Image" textAlignment="CENTER" />
+      <Button layoutX="274.0" layoutY="403.0" mnemonicParsing="false" onAction="#ShowpostClicked" prefHeight="39.0" prefWidth="116.0" text="Show posts" />
    </children>
 </AnchorPane>

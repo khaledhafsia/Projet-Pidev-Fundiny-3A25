@@ -156,7 +156,17 @@
                 return null; // Handle case when user not found or SQL exception
             }
 
-
+        public void banUser(int userId) {
+            try {
+                String query = "UPDATE `user` SET `ban_state` = ? WHERE id = ?";
+                PreparedStatement statement = cnx.prepareStatement(query);
+                statement.setBoolean(1, true);
+                statement.setInt(2, userId);
+                statement.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 

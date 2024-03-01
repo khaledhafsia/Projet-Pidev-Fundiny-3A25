@@ -11,12 +11,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="468.0" prefWidth="761.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controller.SignInController">
+<VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="468.0" prefWidth="761.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controller.SignInController">
    <children>
       <Label prefHeight="46.0" prefWidth="96.0" text="Se connecter ">
          <font>
             <Font size="16.0" />
-         </font></Label>
+         </font>
+      </Label>
       <ImageView fitHeight="125.0" fitWidth="200.0">
          <image>
             <Image url="@logo.png" />
@@ -27,7 +28,8 @@
             <TextField fx:id="tfEmail" prefHeight="26.0" prefWidth="765.0" promptText="Email">
                <HBox.margin>
                   <Insets top="20.0" />
-               </HBox.margin></TextField>
+               </HBox.margin>
+            </TextField>
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT" prefHeight="24.0" prefWidth="232.0">
@@ -64,6 +66,23 @@
             <Insets top="25.0" />
          </VBox.margin>
       </HBox>
+   <VBox fx:id="captchaVerificationForm" prefHeight="0.0" prefWidth="761.0" visible="false">
+    </VBox>
+      <!--
+
+       <VBox fx:id="captchaVerificationForm" prefHeight="70.0" prefWidth="232.0" spacing="10" visible="false">
+          <children>
+             <Label text="Please verify that you are human:" />
+             <HBox spacing="10">
+                <children>
+                   <TextField fx:id="captchaCodeField" HBox.hgrow="ALWAYS" />
+                   <Button fx:id="verifyButton" text="Verify" onAction="#verifyCaptcha" />
+                </children>
+             </HBox>
+             <Label fx:id="errorLabel" textFill="red" visible="false" />
+          </children>
+       </VBox>
+   -->
       <Button fx:id="clickHereButton" alignment="BASELINE_LEFT" graphicTextGap="8.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#AlreadySignedUp" opacity="0.68" prefHeight="31.0" prefWidth="525.0" styleClass="passoublie-btn" stylesheets="@Style.css" text="Don't have an account ?">
          <padding>
             <Insets left="15.0" />

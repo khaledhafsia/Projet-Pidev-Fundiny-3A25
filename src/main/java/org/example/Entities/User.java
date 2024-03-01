@@ -21,7 +21,7 @@
         protected String email;
         protected String password;
         protected role role ;
-
+        private boolean banState;
 
 
 
@@ -48,6 +48,15 @@
             this.email = email;
             this.password = password;
 
+
+        }
+        public User(int id, String nom, String prenom, String email, String password, User.role role, boolean banState) {
+            this.id = id;
+            this.nom = nom;
+            this.prenom = prenom;
+            this.email = email;
+            this.password = password;
+            this.banState = banState;
 
         }
 
@@ -83,7 +92,13 @@
             this.password = hashpwd;
             this.role = role;
         }
+        public boolean isBanState() {
+            return banState;
+        }
 
+        public void setBanState(boolean banState) {
+            this.banState = banState;
+        }
 
         public int getId() {
 

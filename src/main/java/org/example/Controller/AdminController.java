@@ -120,4 +120,9 @@ public class AdminController {
             e.printStackTrace();
         }
     }
+
+    public void banCurrentUser(int id) {
+        userService.banUser(id);
+        initialize(); // Refresh user list after banning
+    }
 }

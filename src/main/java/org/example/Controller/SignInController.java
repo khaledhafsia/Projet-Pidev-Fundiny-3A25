@@ -1,9 +1,11 @@
 package org.example.Controller;
 
+import javafx.event.ActionEvent;
+import javafx.scene.layout.VBox;
 import org.example.Entities.User;
 import org.example.Services.ServiceUser;
 
-import javafx.event.ActionEvent;
+import org.example.Controller.CaptchaVerificationController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -14,12 +16,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.util.Objects;
-import javafx.scene.control.Alert;
-import javax.mail.MessagingException;
-public class SignInController{
 
+import java.io.IOException;
+import java.net.URL;
+import java.util.Objects;
+import java.util.ResourceBundle;
+
+public class SignInController{
+    @FXML
+    private VBox captchaVerificationForm;
     @FXML
     private TextField tfEmail;
     @FXML
@@ -28,7 +33,10 @@ public class SignInController{
     private Button mdpoublie;
     @FXML
     private Button clickHereButton;
+    @FXML
+    private Button signInButton;
     private User currentUser;
+    private CaptchaVerificationController captchaVerificationController;
 
     private FXMLLoader loader;
 
@@ -77,12 +85,28 @@ public class SignInController{
         User user = serviceUser.validateUser(email, password);
 
         if (user != null) {
-            openInterfaceBasedOnRole(user.getRole(), event, user);
+            loadCaptchaVerification();
+            captchaVerificationForm.setVisible(true);
+
         } else {
             showAlert("Invalid email or password.");
         }
-    }
 
+    }
+    public User getUserForCaptchaVerification() {
+        return currentUser;
+    }
+    private void loadCaptchaVerification() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Captcha.fxml"));
+        Parent root = loader.load();
+        captchaVerificationController = loader.getController();
+        captchaVerificationController.setSignInController(this);
+        captchaVerificationForm.getChildren().add(root);
+    }
+    public void proceedAfterCaptchaVerification(User user) throws IOException {
+        captchaVerificationForm.setVisible(false);
+        openInterfaceBasedOnRole(user.getRole(), null, user);
+    }
     private void openInterfaceBasedOnRole(User.role role, ActionEvent event, User user) throws IOException {
         switch (role) {
             case Owner:
@@ -100,48 +124,91 @@ public class SignInController{
         }
     }
 
-    private void openOwnerInterface(ActionEvent event, User user) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/DashboardOwner.fxml"));
-        Parent parent = loader.load();
-        Scene scene = new Scene(parent);
 
-        OwnerDashboardController controller = loader.getController();
-        controller.initData(user);
 
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
-    }
 
-    private void openFunderInterface(ActionEvent event, User user) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/DashboardFunder.fxml"));
-        Parent parent = loader.load();
-        Scene scene = new Scene(parent);
-
-        FunderDashboardController controller = loader.getController();
-        controller.initData(user);
-
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    private void openDefaultInterface(ActionEvent event) throws IOException{
-        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/DashboardAdmin.fxml")));
-        Scene scene = new Scene(parent);
-
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
-    }
 /*
-    private void showAlert(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR, message);
-        alert.showAndWait();
+    @FXML
+    private void SignIn(ActionEvent event) throws IOException {
+        String email = tfEmail.getText();
+        String password = tfMdp.getText();
+
+        if (!email.matches("^\\S+@\\S+\\.\\S+$")){
+            showAlert("Email is not in a correct format.");
+            return;
+        }
+
+        if (password.isEmpty()) {
+            showAlert("Password is required.");
+            return;
+        }
+
+        ServiceUser serviceUser = new ServiceUser();
+        User user = serviceUser.validateUser(email, password);
+
+        if (currentUser != null && currentUser.isBanState()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("You are banned!");
+            alert.showAndWait();
+
+        }
+        if (user != null) {
+            openInterfaceBasedOnRole(user.getRole(), event, user);
+
+        } else {
+            showAlert("Invalid email or password.");
+        }
+
     }
+
 
  */
 
+
+
+   private void openOwnerInterface(ActionEvent event, User user) throws IOException {
+       FXMLLoader loader = new FXMLLoader(getClass().getResource("/DashboardOwner.fxml"));
+       Parent parent = loader.load();
+       Scene scene = new Scene(parent);
+
+       OwnerDashboardController controller = loader.getController();
+       controller.initData(user);
+
+       Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+       stage.setScene(scene);
+       stage.show();
+   }
+
+   private void openFunderInterface(ActionEvent event, User user) throws IOException {
+       FXMLLoader loader = new FXMLLoader(getClass().getResource("/DashboardFunder.fxml"));
+       Parent parent = loader.load();
+       Scene scene = new Scene(parent);
+
+       FunderDashboardController controller = loader.getController();
+       controller.initData(user);
+
+       Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+       stage.setScene(scene);
+       stage.show();
+   }
+
+   private void openDefaultInterface(ActionEvent event) throws IOException{
+       Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/DashboardAdmin.fxml")));
+       Scene scene = new Scene(parent);
+
+       Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+       stage.setScene(scene);
+       stage.show();
+   }
+/*
+   private void showAlert(String message) {
+       Alert alert = new Alert(Alert.AlertType.ERROR, message);
+       alert.showAndWait();
+   }
+
+*/
     @FXML
     private void AlreadySignedUp() {
         try {
@@ -156,4 +223,6 @@ public class SignInController{
             e.printStackTrace();
         }
     }
+
+
 }

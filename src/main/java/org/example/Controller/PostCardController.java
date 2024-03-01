@@ -116,7 +116,42 @@ public class PostCardController {
 
     @FXML
     private void handleBanAction(ActionEvent event) {
+        if (currentUser != null && currentUser.getRole() != User.role.ADMIN) {
+            adminController.banCurrentUser(currentUser.getId());
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText(null);
+            alert.setContentText("Cannot ban an admin user.");
+            alert.showAndWait();
+        }
     }
+/*
+    @FXML
+    private void handleBanAction(ActionEvent event) {
+        if (adminController != null && currentUser != null) {
+            int id = currentUser.getId();
+            logger.info("Banning user with ID: " + id);
+
+            if (id != 0) {
+                adminController.banCurrentUser(id);
+            } else {
+                logger.warning("Invalid user ID: " + id);
+                Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                errorAlert.setContentText("Invalid user ID. Unable to ban the user.");
+                errorAlert.showAndWait();
+            }
+        } else {
+            logger.warning("AdminController or currentUser is null");
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            errorAlert.setContentText("Unable to ban the user. An error occurred.");
+            errorAlert.showAndWait();
+        }
+        Refresh();
+    }
+
+
+ */
     private void Refresh() {
 
             adminController.Refresh();

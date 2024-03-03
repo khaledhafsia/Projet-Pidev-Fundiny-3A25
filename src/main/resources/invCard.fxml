@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="158.0" prefWidth="161.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.InvCard">
+   <children>
+      <Label layoutX="16.0" layoutY="36.0" text="Montant :" />
+      <Label layoutX="9.0" layoutY="76.0" text="Description :" />
+      <Label fx:id="mData" layoutX="77.0" layoutY="36.0" prefHeight="17.0" prefWidth="52.0" />
+      <Label fx:id="deData" layoutX="89.0" layoutY="76.0" prefHeight="17.0" prefWidth="58.0" />
+      <Label layoutX="14.0" layoutY="113.0" text="Date :" />
+      <Label fx:id="daData" layoutX="92.0" layoutY="113.0" prefHeight="17.0" prefWidth="52.0" />
+   </children>
+</Pane>

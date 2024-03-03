@@ -9,10 +9,13 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import tn.esprit.models.investissements;
+import tn.esprit.models.taches;
 import tn.esprit.services.serviceInvestissements;
+import tn.esprit.services.serviceTaches;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 public class InvCard {
     @FXML
@@ -25,6 +28,8 @@ public class InvCard {
     private Label mData;
 
     private investissements selectedInvestissement;
+    serviceInvestissements sp = new serviceInvestissements();
+    serviceTaches st =new serviceTaches();
 
     public void setinvCard(investissements selectedInvestissement){
         this.selectedInvestissement = selectedInvestissement;
@@ -42,7 +47,7 @@ public class InvCard {
     void delete(ActionEvent event) {
         if (selectedInvestissement != null) {
 
-            serviceInvestissements sp = new serviceInvestissements();
+
             boolean deleted = sp.delete(selectedInvestissement);
             if (deleted) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -129,6 +134,37 @@ public class InvCard {
 
     @FXML
     void showTache(ActionEvent event) {
+        if (selectedInvestissement != null) {
+            int selectedInvestissementID = selectedInvestissement.getInvID();
+
+            List<taches> tasks = st.getTasksByInvestissementID(selectedInvestissementID);
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/showtache.fxml"));
+
+            try {
+                Parent root = loader.load();
+                Showtache controller = loader.getController();
+
+                controller.setTasks(tasks);
+
+                Showtache controller2 = loader.getController();
+
+                controller2.initTask(selectedInvestissement);
+                Stage stage = (Stage) mData.getScene().getWindow();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } else {
+            System.out.println("Please select an investment first.");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur de selection");
+            alert.setHeaderText("Veuillez sélectionner un investissement.");
+            alert.showAndWait();
+        }
 
     }
 

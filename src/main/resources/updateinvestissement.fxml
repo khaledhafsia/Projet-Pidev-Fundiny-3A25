@@ -21,7 +21,7 @@
       <Label layoutX="158.0" layoutY="271.0" text="Description" />
       <TextField fx:id="usertf2" layoutX="286.0" layoutY="101.0" prefHeight="26.0" prefWidth="194.0" visible="false" />
       <TextField fx:id="projettf2" layoutX="286.0" layoutY="141.0" prefHeight="26.0" prefWidth="194.0" visible="false" />
-      <TextField fx:id="montanttf2" layoutX="287.0" layoutY="188.0" prefHeight="26.0" prefWidth="194.0" />
+      <TextField fx:id="montanttf2" editable="false" layoutX="287.0" layoutY="188.0" prefHeight="26.0" prefWidth="194.0" />
       <TextArea fx:id="descriptiontf2" layoutX="287.0" layoutY="271.0" prefHeight="90.0" prefWidth="193.0" />
       <Button layoutX="481.0" layoutY="466.0" mnemonicParsing="false" onAction="#backBtn" text="Retour" />
       <Button layoutX="395.0" layoutY="466.0" mnemonicParsing="false" onAction="#miseajour" text="Modifier" />

@@ -83,6 +83,42 @@ public class event {
         }
     }
 
+private void afficherCartes() {
+        ArrayList<Reservation> allReservations = getAll();
+        cardLyout.getChildren().clear(); // Effacer toutes les cartes précédemment affichées
+        try {
+            for (Reservation reservation : allReservations) {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/pidevjava/Card.fxml"));
+                AnchorPane cardBox = fxmlLoader.load();
+                CardController cardController = fxmlLoader.getController();
+                cardController.setReservation(reservation); // Associez la réservation à la carte
+                cardController.displayReservationDetails(reservation);
+                cardLyout.getChildren().add(cardBox);
+
+                // Ajoutez un événement de clic au bouton de suppression pour chaque carte
+                cardController.del_btn.setOnAction(event -> supprimerCarte(reservation)); // Utilisez la réservation associée à la carte correspondante
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        // Appliquer l'espace entre les cartes après avoir ajouté toutes les cartes au FlowPane
+        cardLyout.setHgap(20); // Espacement horizontal
+        cardLyout.setVgap(20); // Espacement vertical
+        cardLyout.setAlignment(Pos.TOP_LEFT);
+    }
+
+    // Méthode pour supprimer une carte
+    public void supprimerCarte(Reservation reservation) {
+        if (reservation != null) {
+            delete(reservation); // Supprimer la réservation de la base de données
+            afficherCartes(); // Rafraîchir l'affichage des cartes après suppression
+        } else {
+            System.out.println("Aucune réservation associée à cette carte.");
+        }
+    }
+
+
 */
 
 }

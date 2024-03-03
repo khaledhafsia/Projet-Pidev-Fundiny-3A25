@@ -5,7 +5,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import tn.esprit.models.investissements;
 import tn.esprit.services.serviceInvestissements;
 
@@ -21,32 +25,48 @@ public class Testcard implements Initializable {
     @FXML
     private FlowPane myFlowPane;
 
+    @FXML
+    private HBox cardContainer;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        loadCards();
+    }
+
+    public void loadCards() {
         ArrayList<investissements> allInvestissements = sp.getAll();
-        myFlowPane.getChildren().clear();
-        myFlowPane.setHgap(10);
-        myFlowPane.setVgap(10);
+        cardContainer.getChildren().clear();
 
-        for (investissements item : allInvestissements) {
+        for (investissements selectedInvestissement : allInvestissements) {
             try {
-
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("invCard.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/invCard.fxml"));
                 Node node = loader.load();
+
+                // Get the controller associated with the FXML file
                 InvCard controller = loader.getController();
 
-                controller.setinvCard(item);
+                // Assuming setinvCard method is correctly defined in InvCard controller
+                controller.setinvCard(selectedInvestissement);
+                controller.setTestcardController(this);
 
-                myFlowPane.getChildren().add(node);
+                // Add the card node to the VBox inside the ScrollPane
+                cardContainer.getChildren().add(node);
 
-                FlowPane.setMargin(node, new Insets(10));
-                System.out.println("congrats");
+                System.out.println("Card loaded successfully");
             } catch (IOException e) {
-                System.out.println("no");
+                // Handle FXML loading errors
+                System.err.println("Error loading card FXML: " + e.getMessage());
+                e.printStackTrace();
+            } catch (Exception e) {
+                // Handle other exceptions
+                System.err.println("Error: " + e.getMessage());
                 e.printStackTrace();
             }
         }
+    }
 
+    public void refreshDisplay() {
+        loadCards();
     }
 
 

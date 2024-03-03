@@ -84,7 +84,7 @@ public class Addinvestissement {
 
     @FXML
     void afficherBtn1(ActionEvent event) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/showinvestissement.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/testC.fxml"));
         try {
             Parent root = loader.load();
 

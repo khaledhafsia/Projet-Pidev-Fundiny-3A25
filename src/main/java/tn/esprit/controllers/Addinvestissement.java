@@ -1,4 +1,8 @@
 package tn.esprit.controllers;
+import com.stripe.Stripe;
+import com.stripe.exception.StripeException;
+import com.stripe.model.PaymentIntent;
+import com.stripe.param.PaymentIntentCreateParams;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -37,11 +41,32 @@ public class Addinvestissement {
         Timestamp currentTimestamp = Timestamp.valueOf(LocalDateTime.now());
         if (isInputValid())
         {
-            sp.add(new investissements(1,22, 23, Double.parseDouble(tfmontant.getText()), tfdescription.getText(),currentTimestamp));
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Success");
-            alert.setContentText("Investissement ajoutée");
-            alert.showAndWait();
+
+
+            try {
+                // Set your secret key here
+                Stripe.apiKey = "sk_test_51Opa2DF0Qy9fQwwPNstG4UlPkc5crZ7biWlPecNH2TWInFRlz987gMGbseHxQiRVHmk6V0b91UXQsJIONpwVPYtH00qCLoux1d";
+
+                // Create a PaymentIntent with other payment details
+                PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
+                        .setAmount(Long.parseLong(tfmontant.getText())*100) // Amount in cents (e.g., $10.00)
+                        .setCurrency("usd")
+                        .build();
+
+                PaymentIntent intent = PaymentIntent.create(params);
+
+                // If the payment was successful, display a success message
+                System.out.println("Payment successful. PaymentIntent ID: " + intent.getId());
+                sp.add(new investissements(1,22, 23, Double.parseDouble(tfmontant.getText()), tfdescription.getText(),currentTimestamp));
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Success");
+                alert.setContentText("Investissement ajoutée");
+                alert.showAndWait();
+            } catch (StripeException e) {
+                // If there was an error processing the payment, display the error message
+                System.out.println("Payment failed. Error: " + e.getMessage());
+            }
+
             tfuserid.clear();
             tfprojetid.clear();
             tfmontant.clear();

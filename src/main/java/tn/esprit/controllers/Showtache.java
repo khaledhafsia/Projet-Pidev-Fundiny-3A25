@@ -55,14 +55,9 @@ public class Showtache {
 
                 // Assuming setinvCard method is correctly defined in InvCard controller
                 controller.settchCard(selectedTasks);
-
                 controller.initTask(selectedInvestissement);
-
                 controller.setShowtacheController(this);
 
-
-                // Assuming setinvCard method is correctly defined in InvCard controller
-                controller.settchCard(selectedTasks);
 
 
                 // Add the card node to the VBox inside the ScrollPane

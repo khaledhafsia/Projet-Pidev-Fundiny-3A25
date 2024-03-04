@@ -97,8 +97,8 @@ public class Addinvestissement {
 
     private boolean isInputValid() {
         return /*!tfuserid.getText().isEmpty() && !tfprojetid.getText().isEmpty() &&*/ !tfmontant.getText().isEmpty() &&
-                !tfdescription.getText().isEmpty()/* && isInteger(tfuserid.getText()) && isInteger(tfprojetid.getText()) &&
-                isNumeric(tfmontant.getText())*/;
+                !tfdescription.getText().isEmpty() &&/* isInteger(tfuserid.getText()) && isInteger(tfprojetid.getText()) &&*/
+                isNumeric(tfmontant.getText());
     }
 
     private boolean isInteger(String str) {

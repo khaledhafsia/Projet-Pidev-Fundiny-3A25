@@ -1,10 +1,12 @@
 package tn.esprit.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -66,6 +68,19 @@ public class Testcard implements Initializable {
     public void refreshDisplay() {
 
         loadCards();
+    }
+
+    @FXML
+    void back(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/addinvestissement.fxml"));
+        try {
+            Parent root = loader.load();
+
+            cardContainer.getScene().setRoot(root);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
 

@@ -36,7 +36,7 @@ public class Updateinvestissement {
 
     @FXML
     void backBtn(ActionEvent event) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Showinvestissement.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/testC.fxml"));
         try {
             Parent root = loader.load();
 

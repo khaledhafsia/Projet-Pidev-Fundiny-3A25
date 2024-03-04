@@ -22,8 +22,6 @@ public class Testcard implements Initializable {
 
     serviceInvestissements sp =new serviceInvestissements();
 
-    @FXML
-    private FlowPane myFlowPane;
 
     @FXML
     private HBox cardContainer;
@@ -66,6 +64,7 @@ public class Testcard implements Initializable {
     }
 
     public void refreshDisplay() {
+
         loadCards();
     }
 

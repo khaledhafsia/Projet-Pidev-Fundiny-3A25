@@ -82,20 +82,10 @@ public class Updatetache implements Initializable {
 
     @FXML
     void retourBt(ActionEvent event) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/showtache.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/testC.fxml"));
 
-        int selectedInvestissementID = selectedInvestissement.getInvID();
-        List<taches> tasks = sp.getTasksByInvestissementID(selectedInvestissementID);
         try {
             Parent root = loader.load();
-
-            Showtache controller = loader.getController();
-
-            controller.setTasks(tasks);
-
-            Showtache controller2 = loader.getController();
-
-            controller2.initTask(selectedInvestissement);
 
 
 

@@ -41,6 +41,7 @@ public class InvCard {
     private Testcard testcardController;
 
     public void setTestcardController(Testcard testcardController) {
+
         this.testcardController = testcardController;
     }
     @FXML
@@ -144,12 +145,12 @@ public class InvCard {
             try {
                 Parent root = loader.load();
                 Showtache controller = loader.getController();
-
                 controller.setTasks(tasks);
 
                 Showtache controller2 = loader.getController();
-
                 controller2.initTask(selectedInvestissement);
+
+
                 Stage stage = (Stage) mData.getScene().getWindow();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);

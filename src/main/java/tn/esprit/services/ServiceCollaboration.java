@@ -7,6 +7,7 @@ import tn.esprit.utils.MyDataBase;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ServiceCollaboration implements IService<Collaboration> {
     private Connection cnx ;
@@ -95,5 +96,25 @@ public class ServiceCollaboration implements IService<Collaboration> {
             System.out.println("Erreur lors de la suppression de la collaboration : " + e.getMessage());
             return false;
         }
+    }
+
+    public List<Collaboration> afficherListe() throws SQLException {
+        String req = "SELECT * FROM collaboration";
+
+        Statement stm = cnx.createStatement();
+        ResultSet rs = stm.executeQuery(req);
+        List<Collaboration> users = new ArrayList<Collaboration>();
+        while (rs.next()) {
+            Collaboration p = new Collaboration(
+             rs.getInt("id_collaboration"),
+            rs.getString("nomColl"),
+            rs.getString("TypeColl"),
+           rs.getDate("dateColl"),
+              rs.getInt("id")
+            );
+            users.add(p);
+        }
+
+        return users;
     }
 }

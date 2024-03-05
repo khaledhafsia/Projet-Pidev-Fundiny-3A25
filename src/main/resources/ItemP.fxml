@@ -7,22 +7,23 @@
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox fx:id="itemC" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="555.0" spacing="30.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-background-insets: 0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ItemController">
+<HBox fx:id="itemC" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="630.0" spacing="30.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-background-insets: 0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ItemPController">
     <children>
-        <Label fx:id="nom" prefHeight="17.0" prefWidth="143.0">
+        <Label fx:id="nomPr" prefHeight="17.0" prefWidth="143.0">
          <HBox.margin>
             <Insets left="10.0" />
          </HBox.margin></Label>
-        <Label fx:id="type" prefHeight="17.0" prefWidth="137.0">
+        <Label fx:id="nomPo" prefHeight="17.0" prefWidth="137.0">
             <HBox.margin>
                 <Insets />
             </HBox.margin>
         </Label>
-        <Label fx:id="date" prefHeight="17.0" prefWidth="128.0">
+        <Label fx:id="dateD" prefHeight="17.0" prefWidth="128.0">
             <HBox.margin>
                 <Insets />
             </HBox.margin>
         </Label>
+      <Label fx:id="CA" prefHeight="17.0" prefWidth="137.0" />
       <Button fx:id="modifier" mnemonicParsing="false" onAction="#modifier" prefHeight="27.0" prefWidth="101.0" style="-fx-border-color: #2A73FF; -fx-border-radius: 20; -fx-background-color: transparent;" text="Modifier">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -31,6 +32,11 @@
             <Insets right="7.0" />
          </HBox.margin></Button>
       <Button fx:id="supprimer" mnemonicParsing="false" prefHeight="27.0" prefWidth="117.0" style="-fx-border-color: #2A73FF; -fx-border-radius: 20; -fx-background-color: transparent;" text="Supprimer">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="collaborer" mnemonicParsing="false" onAction="#collaborer" prefHeight="27.0" prefWidth="101.0" style="-fx-border-color: #2A73FF; -fx-border-radius: 20; -fx-background-color: transparent;" text="Collaborer">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

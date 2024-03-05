@@ -20,6 +20,11 @@ public class ModifierCollaborationController {
     @FXML
     private DatePicker dateC;
     private Collaboration collaboration;
+    private AfficherProjetController afficherProjetController;
+
+    public void setAfficherProjetController(AfficherProjetController afficherProjetController) {
+        this.afficherProjetController = afficherProjetController;
+    }
 
     @FXML
     void validerModification(ActionEvent event) {
@@ -33,6 +38,9 @@ public class ModifierCollaborationController {
 
                 ServiceCollaboration sc = new ServiceCollaboration();
                 sc.update(collaboration);
+                if (afficherProjetController != null) {
+                    afficherProjetController.affichage();
+                }
 
                 ((Node) (event.getSource())).getScene().getWindow().hide();
             } else {

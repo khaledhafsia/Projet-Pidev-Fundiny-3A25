@@ -1,8 +1,17 @@
 package tn.esprit.services;
 
+import tn.esprit.models.Collaboration;
 import tn.esprit.models.Projet;
 import tn.esprit.interfaces.IService;
 import tn.esprit.utils.MyDataBase;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 
 import javax.swing.*;
 import java.sql.*;
@@ -11,12 +20,32 @@ import java.sql.Date;
 
 
 
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class ServiceProjet implements IService<Projet> {
     private Connection cnx ;
     public ServiceProjet(){
         cnx = MyDataBase.getInstance().getCnx();
+    }
+    public void importProjetFromExcel(String filePath) {
+        try (FileInputStream excelFile = new FileInputStream(filePath);
+             Workbook workbook = new XSSFWorkbook(excelFile)) {
+
+            Sheet sheet = workbook.getSheetAt(0); // Suppose que vos données sont sur la première feuille
+            for (Row row : sheet) {
+                String nomPr = row.getCell(0).getStringCellValue(); // NomPr est dans la première colonne du fichier Excel
+                String nomPo = row.getCell(1).getStringCellValue(); // NomPo est dans la deuxième colonne du fichier Excel
+                Date dateD = (Date) row.getCell(2).getDateCellValue();
+                int CA = (int) row.getCell(3).getNumericCellValue();
+
+                // Insérer les données dans la table Projet uniquement
+                add(new Projet(nomPr,nomPo,dateD,CA)); // Vous devez implémenter cette méthode
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     @Override
     public void add(Projet projet) {
@@ -100,6 +129,25 @@ public class ServiceProjet implements IService<Projet> {
             System.out.println("Erreur lors de la suppression du projet : " + e.getMessage());
             return false;
         }}
+    public List<Projet> afficherListe() throws SQLException {
+        String req = "SELECT * FROM projet";
+
+        Statement stm = cnx.createStatement();
+        ResultSet rs = stm.executeQuery(req);
+        List<Projet> lv = new ArrayList<Projet>();
+        while (rs.next()) {
+            Projet p = new Projet(
+                    rs.getInt("id"),
+                    rs.getString("nomPr"),
+                    rs.getString("nomPo"),
+                    rs.getDate("dateD"),
+                    rs.getInt("CA")
+            );
+            lv.add(p);
+        }
+
+        return lv;
+    }
 
     }
 

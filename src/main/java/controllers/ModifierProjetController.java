@@ -23,6 +23,11 @@ public class ModifierProjetController {
     @FXML
     private TextField CAT;
     private Projet projet;
+    private AfficherProjetController afficherProjetController;
+
+    public void setAfficherProjetController(AfficherProjetController afficherProjetController) {
+        this.afficherProjetController = afficherProjetController;
+    }
 
     public void initData(Projet projet) {
         this.projet = projet;
@@ -49,6 +54,9 @@ public class ModifierProjetController {
 
                 ServiceProjet sp = new ServiceProjet();
                 sp.update(projet);
+                if (afficherProjetController != null) {
+                    afficherProjetController.affichage();
+                }
 
                 ((Node) (event.getSource())).getScene().getWindow().hide();
             } else {

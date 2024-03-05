@@ -1,4 +1,4 @@
-package controllers;
+package tn.esprit.services;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -6,8 +6,6 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 import tn.esprit.models.Collaboration;
 import tn.esprit.models.Projet;
-import tn.esprit.services.ServiceCollaboration;
-import tn.esprit.services.ServiceProjet;
 
 import javax.swing.*;
 import java.awt.*;
@@ -63,6 +61,36 @@ public class StatistiqueCollaboration {
         frame.add(chartPanel, BorderLayout.CENTER);
         frame.setSize(800, 600);
         frame.setVisible(true);
+    }
+    public HashMap<Integer, Double> generateData() {
+        // Récupérer les données sur les collaborations
+        ArrayList<Collaboration> collaborations = serviceCollaboration.getAll();
+
+        // Récupérer les données sur les projets
+        ArrayList<Projet> projets = serviceProjet.getAll();
+
+        // Initialiser un compteur de collaborations par projet
+        HashMap<Integer, Integer> collaborationsParProjet = new HashMap<>();
+
+        // Compter le nombre de collaborations par projet
+        for (Collaboration collaboration : collaborations) {
+            int idProjet = collaboration.getId();
+            collaborationsParProjet.put(idProjet, collaborationsParProjet.getOrDefault(idProjet, 0) + 1);
+        }
+
+        // Calculer le nombre total de collaborations
+        int totalCollaborations = collaborations.size();
+
+        // Créer un ensemble de données pour le diagramme circulaire
+        HashMap<Integer, Double> data = new HashMap<>();
+        for (Projet projet : projets) {
+            int idProjet = projet.getId();
+            int nbCollaborations = collaborationsParProjet.getOrDefault(idProjet, 0);
+            double pourcentage = (double) nbCollaborations / totalCollaborations * 100;
+            data.put(idProjet, pourcentage);
+        }
+
+        return data;
     }
 
     public static void main(String[] args) {

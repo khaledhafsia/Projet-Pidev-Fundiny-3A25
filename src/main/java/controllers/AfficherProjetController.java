@@ -11,10 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -29,6 +26,8 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import controllers.ExcelExporter;
+
 
 
 public class AfficherProjetController implements Initializable {
@@ -47,10 +46,16 @@ public class AfficherProjetController implements Initializable {
     private VBox pnItems;
     @FXML
     private VBox pnItems1;
+    @FXML
+    private TextField filterField;
+
     ArrayList<Projet> projets = sp.getAll();
     ArrayList<Collaboration> collaborations = sc.getAll();
+
     private AfficherProjetController afficherProjetController;
     ItemPController itemPController = new ItemPController();
+    List<Collaboration> lvpc = sc.getAll();
+    List<Projet> lvp = sp.getAll();
 
     public void setAjouterProjetController(AjouterProjetController ajouterProjetController) {
         this.ajouterProjetController = ajouterProjetController;
@@ -60,8 +65,32 @@ public class AfficherProjetController implements Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) {
         affichage();
         itemPController.setAfficherProjetController(this);
+        filterField.textProperty().addListener((observable, oldValue, newValue) -> {
+            String searchText = newValue.toLowerCase(); // Convertir le texte de recherche en minuscules
+            handleSearch(searchText);
+        });
     }
 
+
+    private void handleSearch(String searchText) {
+         searchText = filterField.getText().toLowerCase(); // Récupérer le texte de recherche
+
+        // Parcourir les enfants du VBox pour rechercher et afficher les projets correspondants
+        for (Node node : pnItems1.getChildren()) {
+            // Vérifier si le nœud est un projet
+            if (node instanceof VBox) {
+                Projet projet = (Projet) node.getUserData(); // Récupérer le projet associé au nœud
+                if (projet != null) {
+                    // Vérifier si le nom du projet ou son chiffre d'affaires contient le texte de recherche
+                    boolean matchNom = projet.getNomPr().toLowerCase().contains(searchText);
+                    boolean matchCA = String.valueOf(projet.getCA()).toLowerCase().contains(searchText);
+
+                    // Afficher le projet s'il correspond au critère de recherche, sinon le cacher
+                    node.setVisible(matchNom || matchCA);
+                }
+            }
+        }
+    }
     @FXML
     void Stat(MouseEvent event) {
         try {
@@ -203,15 +232,33 @@ public class AfficherProjetController implements Initializable {
 
     @FXML
     void ExporterExcel(ActionEvent event) {
-        try {
-            ExcelExporter.exportToExcel(lv, lvc, "data.xlsx");
-            System.out.println("exporter avec succés");
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("echec");
-        }
+        // Récupérer les listes de projets et de collaborations depuis la base de données
+        List<Projet> projetsList = sp.getAll();
+        List<Collaboration> collaborationsList = sc.getAll();
 
+        // Vérifier si les listes ont été récupérées avec succès
+        if (projetsList != null && collaborationsList != null) {
+            // Créer des ListView pour les projets et les collaborations
+            ListView<Projet> projetListView = new ListView<>();
+            ListView<Collaboration> collaborationListView = new ListView<>();
+
+            // Ajouter les éléments des listes aux ListView correspondantes
+            projetListView.getItems().addAll(projetsList);
+            collaborationListView.getItems().addAll(collaborationsList);
+
+            // Appeler la méthode exportToExcel avec les ListView créées
+            try {
+                ExcelExporter.exportToExcel(projetListView, collaborationListView, "data.xlsx");
+                System.out.println("Exportation réussie vers data.xlsx");
+            } catch (IOException e) {
+                System.out.println("Échec de l'exportation : " + e.getMessage());
+            }
+        } else {
+            System.out.println("Échec de récupération des données depuis la base de données.");
+        }
     }
+
+
 
     public void affichage() {
         pnItems.getChildren().clear();
@@ -276,7 +323,8 @@ public class AfficherProjetController implements Initializable {
                 }
             }
             // Affichage des projets
-            for (Projet projet : projets) {
+            // Remplacer la boucle des projets par celle-ci
+            for (Projet projet : lv) {
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/ItemP.fxml"));
                     Node node = loader.load();
@@ -322,12 +370,13 @@ public class AfficherProjetController implements Initializable {
                             e.printStackTrace();
                         }
                     });
+
                     collaborer.setOnAction(event -> {
                         try {
                             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/CollaborerProjet.fxml"));
                             Parent root = (Parent) fxmlLoader.load();
                             CollaborerProjetController collaborerProjetController = fxmlLoader.getController();
-                            collaborerProjetController.initData(projet.getId(),sc);
+                            collaborerProjetController.initData(projet.getId(), sc);
 
                             collaborerProjetController.setAfficherProjetController(this);
 
@@ -353,10 +402,9 @@ public class AfficherProjetController implements Initializable {
                 }
             }
 
+
         } catch (SQLException ex) {
             Logger.getLogger(AfficherProjetController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-
 }

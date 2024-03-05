@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,14 +22,17 @@ import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
 import java.lang.Float;
+import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
+
 import javafx.stage.Stage;
 import tn.esprit.test.MainFX;
 
-public class AjouterProjetController {
+public class AjouterProjetController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -45,9 +49,7 @@ public class AjouterProjetController {
 
     @FXML
     private TextField CAT;
-
-
-
+    private AfficherProjetController afficherProjetController;
 
     @FXML
     void Ajouter(ActionEvent event) throws SQLException {
@@ -55,6 +57,8 @@ public class AjouterProjetController {
             LocalDate localDate = dateDT.getValue();
             Date sqlDate = Date.valueOf(localDate);
             sp.add(new Projet(1, nomPrT.getText(), nomPoT.getText(), sqlDate, Integer.parseInt(CAT.getText())));
+
+                if(afficherProjetController!=null){afficherProjetController.affichage();}
         } else {
             System.out.println("Veuillez remplir tous les champs correctement.");
         }
@@ -119,6 +123,11 @@ public class AjouterProjetController {
             System.out.println("Le champ " + textField.getId() + " doit contenir un entier valide.");
             return false;
         }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
     }
 }
 

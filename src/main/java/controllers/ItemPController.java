@@ -47,6 +47,13 @@ public class ItemPController {
     public void setAfficherProjetController(AfficherProjetController afficherProjetController) {
         this.afficherProjetController = afficherProjetController;
     }
+    public void initializeProjet(Projet projet) {
+        nomPr.setText(projet.getNomPr());
+        nomPo.setText(projet.getNomPo());
+        dateD.setText(String.valueOf(projet.getDateD()));
+        CA.setText(String.valueOf(projet.getCA()));
+        // Initialiser d'autres éléments graphiques avec les données du projet
+    }
     @FXML
     void collaborer(ActionEvent event) {
         // Récupérer l'élément VBox sur lequel le bouton a été cliqué

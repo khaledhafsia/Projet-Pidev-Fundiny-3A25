@@ -64,33 +64,114 @@ public class AfficherProjetController implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         affichage();
-        itemPController.setAfficherProjetController(this);
+        projets = sp.getAll(); // Récupérer tous les projets
         filterField.textProperty().addListener((observable, oldValue, newValue) -> {
-            String searchText = newValue.toLowerCase(); // Convertir le texte de recherche en minuscules
-            handleSearch(searchText);
+            try {
+                handleSearch(newValue); // Appeler handleSearch avec le nouveau texte de recherche
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         });
     }
 
+    private void handleSearch(String searchText) throws IOException {
+        searchText = searchText.toLowerCase(); // Convertir le texte de recherche en minuscules
 
-    private void handleSearch(String searchText) {
-         searchText = filterField.getText().toLowerCase(); // Récupérer le texte de recherche
+        // Effacer les éléments existants dans pnItems1
+        pnItems1.getChildren().clear();
 
-        // Parcourir les enfants du VBox pour rechercher et afficher les projets correspondants
-        for (Node node : pnItems1.getChildren()) {
-            // Vérifier si le nœud est un projet
-            if (node instanceof VBox) {
-                Projet projet = (Projet) node.getUserData(); // Récupérer le projet associé au nœud
-                if (projet != null) {
-                    // Vérifier si le nom du projet ou son chiffre d'affaires contient le texte de recherche
-                    boolean matchNom = projet.getNomPr().toLowerCase().contains(searchText);
-                    boolean matchCA = String.valueOf(projet.getCA()).toLowerCase().contains(searchText);
-
-                    // Afficher le projet s'il correspond au critère de recherche, sinon le cacher
-                    node.setVisible(matchNom || matchCA);
-                }
+        // Parcourir tous les projets
+        for (Projet projet : projets) {
+            if (projet.getNomPr().toLowerCase().contains(searchText)) {
+                // Créer un VBox représentant le projet et l'ajouter à pnItems1
+                VBox projetNode = createProjetNode(projet);
+                pnItems1.getChildren().add(projetNode);
+                projetNode.setUserData(projet);
             }
         }
     }
+
+    // Méthode pour créer un nœud représentant un projet
+    private VBox createProjetNode(Projet projet) throws IOException {
+        // Créer un VBox pour afficher les détails du projet
+        VBox vbox = new VBox();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ItemP.fxml"));
+        Node node = loader.load();
+
+        Label nlabel = (Label) node.lookup("#nomPr");
+        Label elabel = (Label) node.lookup("#nomPo");
+        Label rlabel = (Label) node.lookup("#dateD");
+        Label dlabel = (Label) node.lookup("#CA");
+        Button supprimer = (Button) node.lookup("#supprimer");
+        Button modifier = (Button) node.lookup("#modifier");
+        Button collaborer = (Button) node.lookup("#collaborer");
+
+        nlabel.setText(projet.getNomPr());
+        elabel.setText(projet.getNomPo());
+        rlabel.setText(String.valueOf(projet.getDateD()));
+        dlabel.setText(String.valueOf(projet.getCA()));
+
+        // Ajouter les actions aux boutons
+        supprimer.setOnAction(event -> {
+            boolean suppressionReussie = sp.delete(projet);
+            if (suppressionReussie) {
+                affichage();
+                System.out.println("Projet supprimé avec succès.");
+            } else {
+                System.out.println("Erreur lors de la suppression du projet.");
+            }
+        });
+
+        modifier.setOnAction(event -> {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ModifierProjet.fxml"));
+                Parent root = (Parent) fxmlLoader.load();
+                ModifierProjetController modifierProjetController = fxmlLoader.getController();
+                modifierProjetController.initData(projet);
+
+                modifierProjetController.setAfficherProjetController(this);
+
+                Stage stage = new Stage();
+                stage.setTitle("Modifier Projet");
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException e) {
+                System.out.println("Erreur lors du chargement du fichier FXML de la modification du projet.");
+                e.printStackTrace();
+            }
+        });
+
+        collaborer.setOnAction(event -> {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/CollaborerProjet.fxml"));
+                Parent root = (Parent) fxmlLoader.load();
+                CollaborerProjetController collaborerProjetController = fxmlLoader.getController();
+                collaborerProjetController.initData(projet.getId(), sc);
+
+                collaborerProjetController.setAfficherProjetController(this);
+
+                Stage stage = new Stage();
+                stage.setTitle("Collaborer Projet");
+                stage.setScene(new Scene(root));
+                stage.show();
+                Collaboration nouvelleCollaboration = collaborerProjetController.getNouvelleCollaboration();
+                if (nouvelleCollaboration != null) {
+                    lvc.getItems().add(nouvelleCollaboration);
+                }
+            } catch (IOException e) {
+                System.out.println("Erreur lors du chargement du fichier FXML de la modification du projet.");
+                e.printStackTrace();
+            }
+        });
+        // Ajouter les labels et boutons au VBox
+        vbox.getChildren().add(node);
+        node.setUserData(projet);
+
+        return vbox;
+    }
+
+
     @FXML
     void Stat(MouseEvent event) {
         try {

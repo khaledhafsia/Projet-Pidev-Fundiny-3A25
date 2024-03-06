@@ -7,7 +7,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<?import java.net.URL?>
 <AnchorPane prefHeight="287.0" prefWidth="635.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AjouterProjetController">
+   <stylesheets>
+      <URL value="@stylesAjout.css" />
+   </stylesheets>
    <children>
       <Button layoutX="461.0" layoutY="136.0" mnemonicParsing="false" onAction="#Ajouter" prefHeight="32.0" prefWidth="131.0" text="Ajouter" />
       <Label alignment="TOP_RIGHT" contentDisplay="RIGHT" layoutX="184.0" layoutY="104.0" prefHeight="17.0" prefWidth="84.0" text="Nom de projet">

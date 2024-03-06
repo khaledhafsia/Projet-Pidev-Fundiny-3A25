@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -7,36 +8,39 @@
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox fx:id="itemC" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="630.0" spacing="30.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-background-insets: 0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ItemPController">
+<HBox fx:id="itemC" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="803.0" spacing="30.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-background-insets: 0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ItemPController">
+    <stylesheets>
+        <URL value="@stylesItem.css" />
+    </stylesheets>
     <children>
-        <Label fx:id="nomPr" prefHeight="17.0" prefWidth="143.0">
+        <Label fx:id="nomPr" prefHeight="20.0" prefWidth="201.0">
          <HBox.margin>
             <Insets left="10.0" />
          </HBox.margin></Label>
-        <Label fx:id="nomPo" prefHeight="17.0" prefWidth="137.0">
+        <Label fx:id="nomPo" prefHeight="20.0" prefWidth="215.0">
             <HBox.margin>
                 <Insets />
             </HBox.margin>
         </Label>
-        <Label fx:id="dateD" prefHeight="17.0" prefWidth="128.0">
+        <Label fx:id="dateD" prefHeight="20.0" prefWidth="204.0">
             <HBox.margin>
                 <Insets />
             </HBox.margin>
         </Label>
-      <Label fx:id="CA" prefHeight="17.0" prefWidth="137.0" />
-      <Button fx:id="modifier" mnemonicParsing="false" onAction="#modifier" prefHeight="27.0" prefWidth="101.0" style="-fx-border-color: #2A73FF; -fx-border-radius: 20; -fx-background-color: transparent;" text="Modifier">
+      <Label fx:id="CA" prefHeight="20.0" prefWidth="203.0" />
+      <Button fx:id="modifier" mnemonicParsing="false" onAction="#modifier" prefHeight="29.0" prefWidth="210.0" styleClass="button" text="Modifier">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
          <HBox.margin>
             <Insets right="7.0" />
          </HBox.margin></Button>
-      <Button fx:id="supprimer" mnemonicParsing="false" prefHeight="27.0" prefWidth="117.0" style="-fx-border-color: #2A73FF; -fx-border-radius: 20; -fx-background-color: transparent;" text="Supprimer">
+      <Button fx:id="supprimer" mnemonicParsing="false" prefHeight="29.0" prefWidth="207.0" styleClass="button" text="Supprimer">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="collaborer" mnemonicParsing="false" onAction="#collaborer" prefHeight="27.0" prefWidth="101.0" style="-fx-border-color: #2A73FF; -fx-border-radius: 20; -fx-background-color: transparent;" text="Collaborer">
+      <Button fx:id="collaborer" mnemonicParsing="false" onAction="#collaborer" prefHeight="29.0" prefWidth="218.0" styleClass="button" text="Collaborer">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

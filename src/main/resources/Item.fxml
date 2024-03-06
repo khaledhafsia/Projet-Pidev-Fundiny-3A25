@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -7,13 +8,16 @@
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox fx:id="itemC" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="630.0" spacing="30.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-background-insets: 0;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ItemController">
+<HBox fx:id="itemC" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="678.0" spacing="30.0" styleClass="itemC" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ItemController">
+    <stylesheets>
+        <URL value="@stylesItem.css" />
+    </stylesheets>
     <children>
-        <Label fx:id="nom" prefHeight="17.0" prefWidth="155.0">
-         <HBox.margin>
-            <Insets left="10.0" />
-         </HBox.margin></Label>
-        <Label fx:id="type" prefHeight="17.0" prefWidth="151.0">
+        <Label fx:id="nom" prefHeight="20.0" prefWidth="164.0">
+            <HBox.margin>
+                <Insets left="10.0" />
+            </HBox.margin></Label>
+        <Label fx:id="type" prefHeight="20.0" prefWidth="178.0">
             <HBox.margin>
                 <Insets />
             </HBox.margin>
@@ -23,18 +27,18 @@
                 <Insets />
             </HBox.margin>
         </Label>
-      <Button fx:id="modifier" mnemonicParsing="false" onAction="#modifier" prefHeight="27.0" prefWidth="101.0" style="-fx-border-color: #2A73FF; -fx-border-radius: 20; -fx-background-color: transparent;" text="Modifier">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <HBox.margin>
-            <Insets right="7.0" />
-         </HBox.margin></Button>
-      <Button fx:id="supprimer" mnemonicParsing="false" prefHeight="27.0" prefWidth="117.0" style="-fx-border-color: #2A73FF; -fx-border-radius: 20; -fx-background-color: transparent;" text="Supprimer">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
+        <Button fx:id="modifier" mnemonicParsing="false" onAction="#modifier" prefHeight="29.0" prefWidth="119.0" styleClass="button" text="Modifier">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+            <HBox.margin>
+                <Insets right="7.0" />
+            </HBox.margin></Button>
+        <Button fx:id="supprimer" mnemonicParsing="false" prefHeight="29.0" prefWidth="121.0" styleClass="button" text="Supprimer">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
     </children>
     <effect>
         <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />

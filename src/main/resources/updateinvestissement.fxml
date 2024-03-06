@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="550.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controller.Updateinvestissement">
+   <children>
+      <AnchorPane prefHeight="550.0" prefWidth="110.0" style="-fx-background-color: #ad1328;" />
+      <Label layoutX="204.0" layoutY="40.0" text="Modifier un investissement">
+         <font>
+            <Font name="System Bold Italic" size="23.0" />
+         </font>
+      </Label>
+      <Label layoutX="161.0" layoutY="105.0" text="User ID" visible="false" />
+      <Label layoutX="158.0" layoutY="146.0" text="Projet ID" visible="false" />
+      <Label layoutX="158.0" layoutY="192.0" text="Montant" />
+      <Label layoutX="158.0" layoutY="271.0" text="Description" />
+      <TextField fx:id="usertf2" layoutX="286.0" layoutY="101.0" prefHeight="26.0" prefWidth="194.0" visible="false" />
+      <TextField fx:id="projettf2" layoutX="286.0" layoutY="141.0" prefHeight="26.0" prefWidth="194.0" visible="false" />
+      <TextField fx:id="montanttf2" editable="false" layoutX="287.0" layoutY="188.0" prefHeight="26.0" prefWidth="194.0" />
+      <TextArea fx:id="descriptiontf2" layoutX="287.0" layoutY="271.0" prefHeight="90.0" prefWidth="193.0" />
+      <Button layoutX="481.0" layoutY="466.0" mnemonicParsing="false" onAction="#backBtn" text="Retour" />
+      <Button layoutX="395.0" layoutY="466.0" mnemonicParsing="false" onAction="#miseajour" text="Modifier" />
+   </children>
+</AnchorPane>

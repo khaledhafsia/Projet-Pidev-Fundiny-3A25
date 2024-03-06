@@ -30,9 +30,25 @@ public class FunderDashboardController {
     private User currentUser;
     private AdminController adminController;
 
-    public void initialize(User user,AdminController adminController) {
+
+    private SignInController signInController;
+
+    public void setSignInController(SignInController signInController) {
+        this.signInController = signInController;
+    }
+
+
+    public void setCurrentUser(User user) {
         this.currentUser = user;
-        this.adminController = adminController;
+    }
+
+    private User getCurrentUser() {
+        return currentUser;
+    }
+
+    public void initialize(User user,SignInController signInController) {
+        this.currentUser = user;
+        this.signInController = signInController;
         titleLabel.setText("Welcome to your Porject  Funder Interface");
         nameLabel.setText(user.getNom() + " " + user.getPrenom());
 
@@ -51,6 +67,58 @@ public class FunderDashboardController {
 
             Stage stage = (Stage) SignOutButton.getScene().getWindow();
             stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void AllProjects(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AllProjects.fxml"));
+            Parent root = loader.load();
+
+            AllProjectsForFunder controller = loader.getController();
+            //controller.initData(currentUser);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    private void InvestmentInterface() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/addinvestissement.fxml"));
+            Parent root = loader.load();
+
+
+            Addinvestissement controller = loader.getController();
+            controller.initData(currentUser);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @FXML
+    private void TacheInterface() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/addtache.fxml"));
+            Parent root = loader.load();
+
+            Addtache controller = loader.getController();
+            //controller.initData(currentUser);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

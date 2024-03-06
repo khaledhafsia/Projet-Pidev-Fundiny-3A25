@@ -33,9 +33,9 @@ public class UpdateUserController {
             ServiceUser serviceUser = new ServiceUser();
             // Check user role to determine which attribute to update
             if (currentUser.getRole() == User.role.Funder) {
-                serviceUser.updateUserAttribute(currentUser.getId(), "participation", attributeValue);
+                serviceUser.updateUserAttribute(currentUser.getId(), "password", attributeValue);
             } else if (currentUser.getRole() == User.role.Owner) {
-                serviceUser.updateUserAttribute(currentUser.getId(), "capital", attributeValue);
+                serviceUser.updateUserAttribute(currentUser.getId(), "password", attributeValue);
             }
 
         }

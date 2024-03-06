@@ -1,12 +1,5 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 28 avr. 2023, 21:56:57
-    Author     : gille
-*/
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Koulen&family=Lato&family=Nunito&family=Playfair+Display:ital@1&family=Prata&family=Raleway:ital,wght@1,100&family=Roboto&family=Roboto+Condensed&family=Teko&display=swap');
+
 
 .parent{
     -fx-background-color: transparent;
@@ -46,6 +39,42 @@ and open the template in the editor.
   font-size: 6px;
 }
 
+.btn_search:hover{
+
+  transition : 1000ms;
+  padding: 10px 50px;
+  transform : translateY(-0px);
+  //background: linear-gradient(90deg, #000000 0%, #cc0000 100%);
+  color: #0066cc;
+  border: solid 2px #0066cc;
+}
+.button_search {
+  border-top: 1px solid #000000;
+  background: #000000;
+  background: -webkit-gradient(linear, left top, left bottom, from(#e62b2b), to(#000000));
+  background: -webkit-linear-gradient(top, #e62b2b, #000000);
+  background: -moz-linear-gradient(top, #e62b2b, #000000);
+  background: -ms-linear-gradient(top, #e62b2b, #000000);
+  background: -o-linear-gradient(top, #e62b2b, #000000);
+  padding: 17px 34px;
+  -webkit-border-radius: 40px;
+  -moz-border-radius: 40px;
+  border-radius: 40px;
+  -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+  -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+  box-shadow: rgba(0,0,0,1) 0 1px 0;
+  text-shadow: rgba(0,0,0,.4) 0 1px 0;
+  color: white;
+  font-size: 24px;
+  font-family: Georgia, serif;
+  text-decoration: none;
+  vertical-align: middle;
+}
+.button_search:hover {
+  border-top-color: #bf3737;
+  background: #bf3737;
+  color: #301130;
+}
 
 
 .text-sign {

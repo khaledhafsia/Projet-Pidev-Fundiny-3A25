@@ -92,11 +92,13 @@ public class SignUpMController implements Initializable {
             }
 
             if (rbowner.isSelected()) {
-                Owner owner = new Owner(nom, prenom, email, hashpwd, User.role.Owner, "1000.0");
-                ServiceUser.insertUser(owner, String.valueOf(owner.getCapital()), "capital");
+                Owner owner = new Owner(nom, prenom, email, hashpwd, User.role.Owner);
+                ServiceUser.insertUser(owner);
+                //ServiceUser.insertUser(owner, String.valueOf(owner.getCapital()), "capital");
             } else if (rbfunder.isSelected()) {
-                Funder funder = new Funder(nom, prenom, email, hashpwd, User.role.Funder, "500.0");
-                ServiceUser.insertUser(funder, String.valueOf(funder.getParticipation()), "participation");
+                Funder funder = new Funder(nom, prenom, email, hashpwd, User.role.Funder);
+                ServiceUser.insertUser(funder);
+               // ServiceUser.insertUser(funder, String.valueOf(funder.getInvestmentsList()), "montant");
             } else if (rbadmin.isSelected()) {
                 User user = new User( nom, prenom, email, hashpwd, User.role.ADMIN);
 

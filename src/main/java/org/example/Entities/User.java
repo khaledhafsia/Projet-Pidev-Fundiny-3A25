@@ -1,10 +1,11 @@
-    package org.example.Entities;
+package org.example.Entities;
+
+import java.util.ArrayList;
+import java.util.List;
 
     public class User {
 
-        public User(int id, String nom, String prenom, String telephone, String adresse, String email, String password, User.role role) {
 
-        }
 
 
 
@@ -16,31 +17,36 @@
 
         protected int id;
         protected String nom;
-        //  protected StringProperty nom;
         protected String prenom;
         protected String email;
         protected String password;
-        protected role role ;
+        protected static role role ;
         private boolean banState;
 
+        private List<investissements> investissementsList;
+
+        private List<Projet> projetsList;
 
 
+        public User(int id, String nom, String prenom, String telephone, String adresse, String email, String password, User.role role) {
 
-         /*public User(String nom) {
-            this.nom = new SimpleStringProperty(nom);
         }
 
-          public StringProperty nomProperty() {
-            return nom;
-        }*/
          public User(int id) {
+
              this.id = id;
          }
 
+        public User(int id ,boolean banState){
+            this.id = id;
+            this.banState = banState;
+
+        }
         public User(int id, String nom) {
             this.id = id;
             this.nom = nom;
         }
+
         public User(int id, String nom, String prenom,String email, String password) {
             this.id = id;
             this.nom = nom;
@@ -50,19 +56,22 @@
 
 
         }
+
         public User(int id, String nom, String prenom, String email, String password, User.role role, boolean banState) {
             this.id = id;
             this.nom = nom;
             this.prenom = prenom;
             this.email = email;
             this.password = password;
+            this.role = role;
             this.banState = banState;
 
         }
 
+
+
         public User(String nom, String prenom, String email, String password) {
             this.nom = nom;
-            // this.nom.set(nom);
             this.prenom = prenom;
             this.email = email;
             this.password = password;
@@ -92,10 +101,76 @@
             this.password = hashpwd;
             this.role = role;
         }
+        /*
+        public User(String nom, String prenom, String email, String hashpwd, User.role role, List<investissements> investments) {
+            this.nom = nom;
+            this.prenom = prenom;
+            this.email = email;
+            this.password = hashpwd;
+            this.role = role;
+            this.investissementsList =investments;
+        }
+
+         */
+        public User(String nom, String prenom, String email, String hashpwd, User.role role, List<Projet> projects) {
+            this.nom = nom;
+            this.prenom = prenom;
+            this.email = email;
+            this.password = hashpwd;
+            this.role = role;
+            this.projetsList =projects;
+        }
+
+        public User(int id, String nom, String prenom, String email, String password, User.role role, boolean banState , List<investissements> investments) {
+            this.id = id;
+            this.nom = nom;
+            this.prenom = prenom;
+            this.email = email;
+            this.password = password;
+            this.role = role;
+            this.banState = banState;
+            this.investissementsList =investments;
+
+
+        }
+/*
+        public User(int id, String nom, String prenom, String email, String password, User.role role,List<investissements> investments) {
+            this.id = id;
+            this.nom = nom;
+            this.prenom = prenom;
+            this.email = email;
+            this.password = password;
+            this.role = role;
+            this.investissementsList =investments;
+        }
+
+ */
+        public User(int id, String nom, String prenom, String email, String password, User.role role,List<Projet> projects) {
+            this.id = id;
+            this.nom = nom;
+            this.prenom = prenom;
+            this.email = email;
+            this.password = password;
+            this.role = role;
+            this.projetsList = projects;
+        }
+        public User(int id, String nom, String prenom, String email, String password, User.role role, List<investissements> investments ,List<Projet> projects) {
+            this.id = id;
+            this.nom = nom;
+            this.prenom = prenom;
+            this.email = email;
+            this.password = password;
+            this.role = role;
+            this.investissementsList = investments;
+            this.projetsList = projects;
+
+        }
+
+
+
         public boolean isBanState() {
             return banState;
         }
-
         public void setBanState(boolean banState) {
             this.banState = banState;
         }

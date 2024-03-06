@@ -9,11 +9,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
-import org.example.Entities.Funder;
-import org.example.Entities.Owner;
-import org.example.Entities.User;
+import org.example.Entities.*;
+
 
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Logger;
 import javafx.scene.control.Label;
 public class PostCardController {
@@ -34,7 +34,7 @@ public class PostCardController {
     @FXML
     private Label capitalLabel;
     @FXML
-    private Label participationlabel;
+    private Label montantlabel;
     private User currentUser;
 
     private AdminController adminController;
@@ -46,30 +46,53 @@ public class PostCardController {
         nameLabel.setText(user.getNom() + " " + user.getPrenom());
         emailLabel.setText(user.getEmail());
         roleLabel.setText(String.valueOf(user.getRole()));
-
+/*
         switch (user.getRole()) {
-        case Owner:
-            capitalLabel.setText(String.valueOf(((Owner) user).getCapital()));
-            participationlabel.setText("");
-            break;
-        case Funder:
-            participationlabel.setText(String.valueOf(((Funder) user).getParticipation()));
-            capitalLabel.setText("");
-            break;
+            case Owner:
+                List<Projet> Projet =  ((Owner) user).getProjetsList();
+                StringBuilder sb = new StringBuilder();
+                for (Projet projects : Projet) {
+                    sb.append(projects.getId()).append(", ");
+                }
+                String projectsIds = sb.toString();
+                if (!projectsIds.isEmpty()) {
+                    projectsIds = projectsIds.substring(0, projectsIds.length() - 2);
+                    capitalLabel.setText(projectsIds);
+                } else {
+                    capitalLabel.setText("");
+                }
+                break;
+            case Funder:
+                List<investissements> investments =  ((Funder) user).getInvestmentsList();
+                StringBuilder sb2 = new StringBuilder();
+                for (investissements investment : investments) {
+                    sb2.append(investment.getInvID()).append(", ");
+                }
+                String investmentIds = sb2.toString();
+                if (!investmentIds.isEmpty()) {
+                    investmentIds = investmentIds.substring(0, investmentIds.length() - 2);
+                    montantlabel.setText(investmentIds);
+                } else {
+                    montantlabel.setText("");
+                }
+                break;
             case ADMIN:
-            participationlabel.setText("");
-            capitalLabel.setText("");
+                montantlabel.setText("");
+                capitalLabel.setText("");
                 break;
             default:
-                break;
+                break; // Add a break statement for the default case
         }
+
+
+ */
+
     }
 
     @FXML
     private void handleDeleteAction(ActionEvent event) {
         if (adminController != null && currentUser != null) {
             int id = currentUser.getId();
-            logger.info("Deleting user with ID: " + id);
 
             if (id != 0) {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -83,7 +106,6 @@ public class PostCardController {
                     }
                 });
             } else {
-                logger.warning("Invalid user ID: " + id);
                 Alert errorAlert = new Alert(Alert.AlertType.ERROR);
                 errorAlert.setContentText("Invalid user ID. Unable to delete the user.");
                 errorAlert.showAndWait();
@@ -126,32 +148,19 @@ public class PostCardController {
             alert.showAndWait();
         }
     }
-/*
     @FXML
-    private void handleBanAction(ActionEvent event) {
-        if (adminController != null && currentUser != null) {
-            int id = currentUser.getId();
-            logger.info("Banning user with ID: " + id);
-
-            if (id != 0) {
-                adminController.banCurrentUser(id);
-            } else {
-                logger.warning("Invalid user ID: " + id);
-                Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-                errorAlert.setContentText("Invalid user ID. Unable to ban the user.");
-                errorAlert.showAndWait();
-            }
+    private void handleUnBanAction(ActionEvent event) {
+        if (currentUser != null && currentUser.getRole() != User.role.ADMIN) {
+            adminController.banCurrentUser(currentUser.getId());
         } else {
-            logger.warning("AdminController or currentUser is null");
-            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-            errorAlert.setContentText("Unable to ban the user. An error occurred.");
-            errorAlert.showAndWait();
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText(null);
+            alert.setContentText("Cannot ban an admin user.");
+            alert.showAndWait();
         }
-        Refresh();
     }
 
-
- */
     private void Refresh() {
 
             adminController.Refresh();

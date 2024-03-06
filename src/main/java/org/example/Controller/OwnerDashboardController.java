@@ -28,11 +28,28 @@ public class OwnerDashboardController {
     private User currentUser;
     private AdminController adminController;
 
-    public void initialize(User user,AdminController adminController) {
+
+    private SignInController signInController;
+
+    public void setSignInController(SignInController signInController) {
+        this.signInController = signInController;
+    }
+
+
+    public void setCurrentUser(User user) {
         this.currentUser = user;
-        this.adminController = adminController;
-        titleLabel.setText("Welcome to your Porject  Owner Interface");
-        nameLabel.setText(user.getNom() + " " + user.getPrenom());
+    }
+
+    private User getCurrentUser() {
+        return currentUser;
+    }
+
+
+
+
+    public void initialize(User user,SignInController signInController) {
+        this.currentUser = user;
+        this.signInController = signInController;
 
 
 
@@ -54,6 +71,21 @@ public class OwnerDashboardController {
     }
 
 
+    @FXML
+    private void ProjetInterface(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterProjet.fxml"));
+            Parent root = loader.load();
 
+            AjouterProjetController controller = loader.getController();
+            controller.initData(currentUser);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

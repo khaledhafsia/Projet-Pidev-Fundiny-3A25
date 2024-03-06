@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="194.0" prefWidth="396.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controller.ItemController">
+   <children>
+      <ImageView fitHeight="97.0" fitWidth="399.0">
+         <image>
+            <Image url="@images/28%20Super%20Weird%20But%20Undeniably%20Fun%20Things%20You%20Can%20Buy%20For%20Less%20Than%20$20.jpg" />
+         </image>
+      </ImageView>
+       <Label fx:id="dateD" prefHeight="18.0" prefWidth="170.0" text="Label" />
+       <Label fx:id="CA" prefHeight="18.0" prefWidth="191.0" text="Label" />
+      <Label fx:id="nomPr" prefHeight="18.0" prefWidth="222.0" text="Label" />
+      <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="396.0" text="Invest now !" />
+   </children>
+</VBox>

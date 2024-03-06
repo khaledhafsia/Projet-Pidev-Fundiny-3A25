@@ -78,7 +78,7 @@ public class CaptchaVerificationController {
     }
     @FXML
     private void verifyCaptchaAndProceed(ActionEvent event) throws IOException {
-        if (verifyCaptcha()) {
+        if (!verifyCaptcha()) {
         User user = signInController.getUserForCaptchaVerification();
         signInController.proceedAfterCaptchaVerification(user);
     } else {

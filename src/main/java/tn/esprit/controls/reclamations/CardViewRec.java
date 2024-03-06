@@ -1,4 +1,4 @@
-package tn.esprit.controls;
+package tn.esprit.controls.reclamations;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

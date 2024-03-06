@@ -1,17 +1,15 @@
-package tn.esprit.controls;
+package tn.esprit.controls.reponses;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import tn.esprit.models.Reponse;
 import tn.esprit.utils.MyDataBase;
 
@@ -108,7 +106,7 @@ public class reponseViewController implements javafx.fxml.Initializable {
 
     private void showCardView(Reponse selectedReponse) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/CardViewRep.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/reponses/CardViewRep.fxml"));
             Parent root = loader.load();
 
             // Create a new scene with the content loaded from the FXML
@@ -135,7 +133,7 @@ public class reponseViewController implements javafx.fxml.Initializable {
     private void getAddReponse(MouseEvent event) {
         System.out.println("Add button clicked!");
         try {
-            Parent parent = FXMLLoader.load(getClass().getResource("/addReponse.fxml"));
+            Parent parent = FXMLLoader.load(getClass().getResource("/reponses/addReponse.fxml"));
             Scene scene = new Scene(parent);
             Stage stage = new Stage();
             stage.setScene(scene);

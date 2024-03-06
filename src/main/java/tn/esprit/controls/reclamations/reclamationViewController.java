@@ -1,4 +1,4 @@
-package tn.esprit.controls;
+package tn.esprit.controls.reclamations;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -106,7 +106,7 @@ public class reclamationViewController implements javafx.fxml.Initializable {
     // reclamationViewController.java
     private void showCardView(Reclamation selectedReclamation) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/CardViewRec.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/reclamations/CardViewRec.fxml"));
             Parent root = loader.load();
 
             // Créez une nouvelle scène avec le contenu chargé depuis le FXML
@@ -135,7 +135,7 @@ public class reclamationViewController implements javafx.fxml.Initializable {
     private void getAddReclamation(MouseEvent event) {
         System.out.println("Add button clicked!");
         try {
-            Parent parent = FXMLLoader.load(getClass().getResource("/addReclamation.fxml"));
+            Parent parent = FXMLLoader.load(getClass().getResource("/reclamations/addReclamation.fxml"));
             Scene scene = new Scene(parent);
             Stage stage = new Stage();
             stage.setScene(scene);

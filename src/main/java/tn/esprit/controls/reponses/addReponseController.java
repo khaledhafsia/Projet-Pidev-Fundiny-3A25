@@ -1,18 +1,18 @@
-package tn.esprit.controls;
+package tn.esprit.controls.reponses;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.stage.Stage;
-
-import tn.esprit.models.Reclamation;
-import tn.esprit.services.serviceReclamation;
-import tn.esprit.utils.MyDataBase;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import tn.esprit.controls.reclamations.AddReclamationControllers;
+import tn.esprit.utils.MyDataBase;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class AddReclamationControllers implements Initializable {
+public class addReponseController implements javafx.fxml.Initializable{
 
     @FXML
     private TextField objetFld;
@@ -34,11 +34,7 @@ public class AddReclamationControllers implements Initializable {
     private TextField emailFld; // Replace with appropriate element type
 
     @FXML
-    private ComboBox<String> projetComboBox;
-    @FXML
-    private ComboBox<String> typeReclamationComboBox;
-    @FXML
-    private ComboBox<String> adminComboBox;
+    private ComboBox<String> userComboBox;
 
     private boolean update;
     String query = null;
@@ -46,14 +42,16 @@ public class AddReclamationControllers implements Initializable {
     ResultSet resultSet = null;
     PreparedStatement preparedStatement;
     private MyDataBase cnx;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         cnx = MyDataBase.getInstance(); // Initialize the MyDataBase instance
         connection = cnx.getCnx();
         populateAdminComboBox();
-        populateProjetComboBox();
-        populateProblemComboBox();
+    }
+
+    private void populateAdminComboBox() {
+        MyDataBase myDataBase = MyDataBase.getInstance(); // Use getInstance to get the instance
+        userComboBox.getItems().addAll(myDataBase.getAllusersNames());
     }
 
     @FXML
@@ -80,26 +78,14 @@ public class AddReclamationControllers implements Initializable {
             System.out.println("champs Texte saisie : " + Texte);
         }
 
-        String nomAdmin = adminComboBox.getValue();
+        String nomAdmin = userComboBox.getValue();
         if (nomAdmin.isEmpty()) {
             showAlert("Champ nomAdmin obligatoire!");
         } else {
             System.out.println("champs nomAdmin saisie : " + nomAdmin);
         }
-        String nomProjet = projetComboBox.getValue();
-        if (nomProjet.isEmpty()) {
-            showAlert("Champ nomProjet obligatoire!");
-        } else {
-            System.out.println("Adresse nomProjet saisie : " + nomProjet);
-        }
-        String nomTypeReclamation = typeReclamationComboBox.getValue();
-        if (nomTypeReclamation.isEmpty()) {
-            showAlert("Champ nomTypeReclamation obligatoire!");
-        } else {
-            System.out.println("Adresse nomTypeReclamation saisie : " + nomTypeReclamation);
-        }
 
-        if (email.isEmpty() || objet.isEmpty() || texte.isWrapText() || nomAdmin.isEmpty() || nomProjet.isEmpty() || nomTypeReclamation.isEmpty()) {
+        if (email.isEmpty() || objet.isEmpty() || texte.isWrapText() || nomAdmin.isEmpty()) {
             System.out.println("Please Fill All DATA");
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
@@ -124,28 +110,26 @@ public class AddReclamationControllers implements Initializable {
         }
     }
 
-    private void getQuery() {
-        if (update == false) {
-            query = "INSERT INTO `reclamations`(`email`, `ID_Projet`, `ID_Type_Reclamation`, `ID_Admin`, `objet`, `texte`) VALUES (?, ?, ?, ?, ?, ?)";
-        } else {
-            query = "UPDATE reclamations SET email=?, ID_Projet=?, ID_Type_Reclamation=?, ID_Admin=?, objet=?, texte=? WHERE id ID_Reclamation=?";
-        }
-    }
 
     private void insert() throws SQLException {
         preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, emailFld.getText());
 // Assuming you have a method like getProjectIDByName in MyDataBase class
-        preparedStatement.setInt(2, cnx.getProjectIDByName(projetComboBox.getValue()));
-        preparedStatement.setInt(3, cnx.getreclamationIDByName(typeReclamationComboBox.getValue()));
-        preparedStatement.setInt(4, cnx.getadminIDByName(adminComboBox.getValue()));
-        preparedStatement.setString(5, objetFld.getText());
-        preparedStatement.setString(6, texte.getText());
- // Assuming texte is the Description_Reclamation field
+        preparedStatement.setInt(2, cnx.getAllusersNames(userComboBox.getValue()));
+        preparedStatement.setString(3, objetFld.getText());
+        preparedStatement.setString(4, texte.getText());
+        // Assuming texte is the Description_Reclamation field
 
         preparedStatement.executeUpdate();
     }
 
+    private void getQuery() {
+        if (!update) {
+            query = "INSERT INTO `reponses`( `email`, `ID_utilisateur`, `Objet`, `texte`) VALUES (?, ?, ?, ?)";
+        } else {
+            query = "UPDATE reponses SET  email=?, ID_utilisateur=?, objet=?, texte=? WHERE ID_Reponse=?";
+        }
+    }
 
 
     private void showAlert(String message) {
@@ -156,25 +140,10 @@ public class AddReclamationControllers implements Initializable {
         alert.showAndWait();
     }
 
-    private void populateAdminComboBox() {
-        MyDataBase myDataBase = MyDataBase.getInstance(); // Use getInstance to get the instance
-        adminComboBox.getItems().addAll(myDataBase.getAllAdminNames());
-    }
-
-    private void populateProjetComboBox() {
-        MyDataBase myDataBase = MyDataBase.getInstance(); // Use getInstance to get the instance
-        projetComboBox.getItems().addAll(myDataBase.getAllProjectsNames());
-    }
-
-    private void populateProblemComboBox() {
-        MyDataBase myDataBase = MyDataBase.getInstance(); // Use getInstance to get the instance
-        typeReclamationComboBox.getItems().addAll(myDataBase.getAllProblemsNames());
-    }
-
     @FXML
     private void cancel(MouseEvent event) throws IOException {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/reclamamtionView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/reponses/reponseView.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
 
@@ -186,5 +155,4 @@ public class AddReclamationControllers implements Initializable {
             e.printStackTrace();
         }
     }
-
 }

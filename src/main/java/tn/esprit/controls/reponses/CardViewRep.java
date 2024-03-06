@@ -1,8 +1,10 @@
-package tn.esprit.controls;
+package tn.esprit.controls.reponses;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import tn.esprit.models.Reponse;
 import tn.esprit.services.serviceReponse;
 
@@ -51,14 +53,24 @@ public class CardViewRep implements javafx.fxml.Initializable {
             // Remove the card from the main display (card layout)
 
             // Remove the response from the database
-            servicesReponse.delete(reponse);
+            if (servicesReponse.delete(reponse)) {
+                // Display a confirmation message
+                Alert confirmationAlert = new Alert(Alert.AlertType.INFORMATION);
+                confirmationAlert.setTitle("Deletion Successful");
+                confirmationAlert.setHeaderText(null);
+                confirmationAlert.setContentText("The response has been deleted successfully.");
+                confirmationAlert.showAndWait();
 
-            // Display a confirmation message
-            Alert confirmationAlert = new Alert(Alert.AlertType.INFORMATION);
-            confirmationAlert.setTitle("Deletion Successful");
-            confirmationAlert.setHeaderText(null);
-            confirmationAlert.setContentText("The response has been deleted successfully.");
-            confirmationAlert.showAndWait();
+                // Close the dialog or the current view after successful deletion
+                Stage stage = (Stage) reponse_Vbox.getScene().getWindow();
+                stage.close();
+            } else {
+                // Handle deletion failure
+                Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                errorAlert.setTitle("Deletion Error");
+                errorAlert.setHeaderText("Error deleting response");
+                errorAlert.showAndWait();
+            }
         }
     }
 
@@ -124,7 +136,7 @@ public class CardViewRep implements javafx.fxml.Initializable {
         email_card.setText(reponse.getemail());
         user_id_card.setText(String.valueOf(reponse.getID_Utilisateur()));
         object_card.setText(reponse.getobjet());
-        text_card.setText(reponse.getobjet());
+        text_card.setText(reponse.gettexte());
     }
 
     @Override

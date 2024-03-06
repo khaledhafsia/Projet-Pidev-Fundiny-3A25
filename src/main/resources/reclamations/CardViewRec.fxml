@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 
-<VBox fx:id="reclamation_Vbox" xmlns:fx="http://javafx.com/fxml" fx:controller="tn.esprit.controls.CardViewRec" stylesheets="RecCard.css" >
+<VBox fx:id="reclamation_Vbox" xmlns:fx="http://javafx.com/fxml" fx:controller="tn.esprit.controls.reclamations.CardViewRec" stylesheets="RecCard.css" >
     <children>
         <Label layoutX="29.0" layoutY="50.0" text="Details reclamation:" textFill="DARKTURQUOISE" style="-fx-font-family: 'Verdana Bold'; -fx-font-size: 31.0;" />
 

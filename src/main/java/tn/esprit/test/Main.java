@@ -3,7 +3,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -17,7 +16,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
        try {
-           FXMLLoader loader = new FXMLLoader(getClass().getResource("/reponseView.fxml"));
+           FXMLLoader loader = new FXMLLoader(getClass().getResource("/reclamations/reclamamtionView.fxml"));
            Parent root = loader.load();
            Scene sc = new Scene(root);
            primaryStage.setScene(sc);

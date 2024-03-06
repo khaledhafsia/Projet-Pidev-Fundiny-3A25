@@ -83,9 +83,10 @@ public class AddarticleController {
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+           System.out.println("error");
             // Handle exception
         }
     }
+
 }
 

@@ -54,9 +54,6 @@ public class servicearticle implements IService<article>{
 
 
 
-
-
-
     //    @Override
 //    public article getById(int id) throws SQLException{
 //        String query = "SELECT * FROM article WHERE id = ?";

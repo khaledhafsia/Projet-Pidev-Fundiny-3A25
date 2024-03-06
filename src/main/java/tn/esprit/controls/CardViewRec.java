@@ -58,7 +58,6 @@ public class CardViewRec implements javafx.fxml.Initializable {
     @FXML
     void delete_card(javafx.event.ActionEvent event) {
         // Ask for confirmation before deleting the card
-
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Delete Confirmation");
         alert.setHeaderText("Are you sure you want to delete this reclamation?");
@@ -69,21 +68,31 @@ public class CardViewRec implements javafx.fxml.Initializable {
             // Remove the card from the main display (card layout)
 
             // Remove the reclamation from the database
-            servicesReclamation.delete(reclamation);
+            if (servicesReclamation.delete(reclamation)) {
+                // Display a confirmation message
+                Alert confirmationAlert = new Alert(Alert.AlertType.INFORMATION);
+                confirmationAlert.setTitle("Deletion Successful");
+                confirmationAlert.setHeaderText(null);
+                confirmationAlert.setContentText("The reclamation has been deleted successfully.");
+                confirmationAlert.showAndWait();
 
-            // Display a confirmation message
-            Alert confirmationAlert = new Alert(Alert.AlertType.INFORMATION);
-            confirmationAlert.setTitle("Deletion Successful");
-            confirmationAlert.setHeaderText(null);
-            confirmationAlert.setContentText("The reclamation has been deleted successfully.");
-            confirmationAlert.showAndWait();
+                // Close the dialog or the current view after successful deletion
+                Stage stage = (Stage) reclamation_Vbox.getScene().getWindow();
+                stage.close();
+            } else {
+                // Handle deletion failure
+                Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                errorAlert.setTitle("Deletion Error");
+                errorAlert.setHeaderText("Error deleting reclamation");
+                errorAlert.showAndWait();
+            }
         }
     }
+
     @FXML
     void update_card(javafx.event.ActionEvent event) {
-
         // Retrieve the reference of the reclamation from the card
-        //int ID_Reclamation = this.ID_Reclamation;
+        int ID_Reclamation = this.ID_Reclamation;
 
         // Create a dialog
         Dialog<ButtonType> dialog = new Dialog<>();
@@ -126,10 +135,23 @@ public class CardViewRec implements javafx.fxml.Initializable {
             object_card.setText(objectField.getText());
             text_card.setText(textField.getText());
 
+            // Update the reclamation data in the database
+            Reclamation updatedReclamation = new Reclamation(
+                    ID_Reclamation,
+                    emailField.getText(),
+                    Integer.parseInt(userIDField.getText()),
+                    Integer.parseInt(projectIDField.getText()),
+                    Integer.parseInt(typeIDField.getText()),
+                    Integer.parseInt(adminIDField.getText()),
+                    objectField.getText(),
+                    textField.getText()
+            );
 
-            //
+            // Call the service method to update the reclamation in the database
+            servicesReclamation.update(updatedReclamation);
         }
     }
+
 
 
     public void setData(Reclamation reclamation) {

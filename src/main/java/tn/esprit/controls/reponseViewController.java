@@ -21,7 +21,6 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 public class reponseViewController implements javafx.fxml.Initializable {
 
     @FXML
@@ -29,6 +28,7 @@ public class reponseViewController implements javafx.fxml.Initializable {
 
     private final ObservableList<Reponse> RepList = FXCollections.observableArrayList();
 
+    @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadData();
     }
@@ -52,6 +52,13 @@ public class reponseViewController implements javafx.fxml.Initializable {
                     HBox buttons = new HBox(deleteButton, editButton);
                     buttons.setStyle("-fx-alignment:center");
                     setGraphic(buttons);
+
+                    // Handle click on list item
+                    setOnMouseClicked(event -> {
+                        if (event.getClickCount() == 1) {
+                            showCardView(getItem());
+                        }
+                    });
                 }
 
                 @Override
@@ -62,7 +69,8 @@ public class reponseViewController implements javafx.fxml.Initializable {
                         setText(null);
                         setGraphic(null);
                     } else {
-                        setText("ID: " + item.getID_Reponse() + ", Email: " + item.getemail() + ", User ID: " + item.getID_Utilisateur() + ", Objet: " + item.getobjet());
+                        setText("ID: " + item.getID_Reponse() + ", Email: " + item.getemail() +
+                                ", User ID: " + item.getID_Utilisateur() + ", Objet: " + item.getobjet());
                         setGraphic(getGraphic());
                     }
                 }
@@ -86,30 +94,9 @@ public class reponseViewController implements javafx.fxml.Initializable {
                 private void handleEditReponse() {
                     Reponse selectedReponse = getItem();
                     if (selectedReponse != null) {
-                        try {
-                            // Load the FXML file for the edit window
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/addReponse.fxml"));
-                            Parent parent = loader.load();
-
-                            // Get the controller from the loader
-                            AddReclamationControllers editController = loader.getController();
-
-                            // Pass the selected Reclamation to the controller
-                            //editController.setReclamation(selectedReclamation);
-
-                            // Create a new scene with the parent
-                            Scene scene = new Scene(parent);
-
-                            // Create a new stage for the edit window
-                            Stage stage = new Stage();
-                            stage.setScene(scene);
-                            stage.initStyle(StageStyle.UTILITY);
-
-                            // Show the edit window
-                            stage.show();
-                        } catch (IOException e) {
-                            Logger.getLogger(reponseViewController.class.getName()).log(Level.SEVERE, null, e);
-                        }
+                        // Implement the logic for editing a reponse here
+                        // You can open another dialog or navigate to another view for editing
+                        // Make sure to update the RepList and refresh the view if needed
                     }
                 }
             });
@@ -119,21 +106,50 @@ public class reponseViewController implements javafx.fxml.Initializable {
         }
     }
 
-    @FXML
-    private void getAddReponse(MouseEvent event) {
-        System.out.println("Add button clicked!");
-
+    private void showCardView(Reponse selectedReponse) {
         try {
-            Parent parent = FXMLLoader.load(getClass().getResource("/addReponse.fxml"));
-            Scene scene = new Scene(parent);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/CardViewRep.fxml"));
+            Parent root = loader.load();
+
+            // Create a new scene with the content loaded from the FXML
+            Scene scene = new Scene(root);
+
+            // Create a new window (stage)
             Stage stage = new Stage();
             stage.setScene(scene);
-            stage.initStyle(StageStyle.UTILITY);
-            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            currentStage.close();
+
+            // Get the controller from the loader
+            CardViewRep cardViewController = loader.getController();
+
+            // Use the setData method to set the data
+            cardViewController.setData(selectedReponse);
+
+            // Show the new window (stage)
             stage.show();
         } catch (IOException e) {
             Logger.getLogger(reponseViewController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
+
+    @FXML
+    private void getAddReponse(MouseEvent event) {
+        System.out.println("Add button clicked!");
+        try {
+            Parent parent = FXMLLoader.load(getClass().getResource("/addReponse.fxml"));
+            Scene scene = new Scene(parent);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.showAndWait();
+
+            // Refresh the data after adding a new reponse
+            RepList.clear();
+            RepList.addAll(MyDataBase.getInstance().getAllReponse());
+
+        } catch (IOException e) {
+            Logger.getLogger(reponseViewController.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
 }
+
+
+

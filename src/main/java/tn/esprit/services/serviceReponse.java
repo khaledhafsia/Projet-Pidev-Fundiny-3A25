@@ -2,6 +2,7 @@ package tn.esprit.services;
 
 import tn.esprit.interfaces.IServices;
 import tn.esprit.models.Reponse;
+import tn.esprit.utils.MyDataBase;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 
 public class serviceReponse implements IServices<Reponse> {
     private Connection cnx;
+    public serviceReponse(){cnx= MyDataBase.getInstance().getCnx();}
 
     @Override
     public void add(Reponse reponse) {

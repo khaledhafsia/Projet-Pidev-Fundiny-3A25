@@ -8,7 +8,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -26,41 +25,20 @@ import java.util.logging.Logger;
 public class reponseViewController implements javafx.fxml.Initializable {
 
     @FXML
-    private TableView<Reponse> ReponseTables;
-
-    @FXML
-    private TableColumn<Reponse, Integer> ColIdReponse;
-
-    @FXML
-    private TableColumn<Reponse, String> Colemail;
-
-    @FXML
-    private TableColumn<Reponse, String> Coluser;
-
-    @FXML
-    private TableColumn<Reponse, String> Colobjet;
-
-    @FXML
-    private TableColumn<Reponse, Void> Colaction;
+    private ListView<Reponse> ReponseListView;
 
     private final ObservableList<Reponse> RepList = FXCollections.observableArrayList();
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        loadDate();
+        loadData();
     }
 
-    private void loadDate() {
-        ReponseTables.setItems(RepList);
+    private void loadData() {
+        ReponseListView.setItems(RepList);
         try {
             RepList.addAll(MyDataBase.getInstance().getAllReponse());
 
-            ColIdReponse.setCellValueFactory(new PropertyValueFactory<>("ID_Reponse"));
-            Colemail.setCellValueFactory(new PropertyValueFactory<>("email"));
-            Coluser.setCellValueFactory(new PropertyValueFactory<>("ID_Utilisateur"));
-            Colobjet.setCellValueFactory(new PropertyValueFactory<>("objet"));
-
-            // Use a Callback to create custom cells with delete and edit buttons
-            Colaction.setCellFactory(param -> new TableCell<>() {
+            ReponseListView.setCellFactory(param -> new ListCell<>() {
                 private final Button deleteButton = new Button("Delete");
                 private final Button editButton = new Button("Edit");
 
@@ -76,8 +54,21 @@ public class reponseViewController implements javafx.fxml.Initializable {
                     setGraphic(buttons);
                 }
 
+                @Override
+                protected void updateItem(Reponse item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    if (empty || item == null) {
+                        setText(null);
+                        setGraphic(null);
+                    } else {
+                        setText("ID: " + item.getID_Reponse() + ", Email: " + item.getemail() + ", User ID: " + item.getID_Utilisateur() + ", Objet: " + item.getobjet());
+                        setGraphic(getGraphic());
+                    }
+                }
+
                 private void handleDeleteReponse() {
-                    Reponse selectedReponse = getTableView().getItems().get(getIndex());
+                    Reponse selectedReponse = getItem();
                     if (selectedReponse != null) {
                         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                         alert.setTitle("Delete Confirmation");
@@ -88,13 +79,12 @@ public class reponseViewController implements javafx.fxml.Initializable {
                         if (result.isPresent() && result.get() == ButtonType.OK) {
                             MyDataBase.getInstance().deleteReponse(selectedReponse);
                             RepList.remove(selectedReponse);
-                            ReponseTables.refresh(); // Refresh the TableView
                         }
                     }
                 }
 
                 private void handleEditReponse() {
-                    Reponse selectedReponse = getTableView().getItems().get(getIndex());
+                    Reponse selectedReponse = getItem();
                     if (selectedReponse != null) {
                         try {
                             // Load the FXML file for the edit window
@@ -123,8 +113,6 @@ public class reponseViewController implements javafx.fxml.Initializable {
                     }
                 }
             });
-
-            ReponseTables.setItems(RepList);
 
         } catch (Exception e) {
             Logger.getLogger(reponseViewController.class.getName()).log(Level.SEVERE, null, e);

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11"
+      fx:controller="tn.esprit.controls.CardViewRep" stylesheets="@RepCard.css">
+    <children>
+        <VBox fx:id="reponse_Vbox" alignment="CENTER" prefHeight="200.0" prefWidth="300.0" spacing="10.0">
+            <children>
+                <Label fx:id="email_card" text="Email"/>
+                <Label fx:id="user_id_card" text="User ID"/>
+                <Label fx:id="object_card" text="Object"/>
+                <Label fx:id="text_card" text="Text"/>
+                <HBox spacing="10.0">
+                    <Button fx:id="delete_button" onMouseClicked="#delete_card" text="Delete"/>
+                    <Button fx:id="update_button" onMouseClicked="#update_card" text="Update"/>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</VBox>

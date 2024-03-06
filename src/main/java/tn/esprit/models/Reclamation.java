@@ -24,6 +24,17 @@ public class Reclamation {
         this.texte = texte;
     }
 
+    public Reclamation(int ID_Reclamation, String email, int ID_Utilisateur, int ID_Projet, int ID_Type_Reclamation, int ID_Admin, String objet, String texte) {
+        this.ID_Reclamation = ID_Reclamation;
+        this.email = email;
+        this.ID_Utilisateur = ID_Utilisateur;
+        this.ID_Projet = ID_Projet;
+        this.ID_Type_Reclamation = ID_Type_Reclamation;
+        this.ID_Admin = ID_Admin;
+        this.objet = objet;
+        this.texte = texte;
+    }
+
     public int getID_Reclamation() {
         return ID_Reclamation;
     }

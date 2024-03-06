@@ -1,0 +1,39 @@
+#reclamation_Vbox {
+    -fx-border-color: #FF0000;
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-padding: 20px;
+}
+
+#reclamation_Hbox {
+    -fx-background-color: #f0f0f0;
+    -fx-spacing: 20;
+}
+
+#VBox, Label {
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+}
+
+#Button {
+    -fx-text-fill: white;
+}
+
+#delete_button {
+    -fx-background-color: #FF0000;
+    -fx-margin-bottom: 20px; /* Ajout d'une marge inférieure */
+}
+
+#update_button {
+    -fx-background-color: #0000FF;
+    -fx-margin-top: 20px; /* Ajout d'une marge supérieure */
+}
+
+#Button:hover {
+    -fx-background-color: #45a049;
+}
+
+/* Ajout d'un espacement entre les VBox */
+#VBox + VBox {
+    -fx-margin: 20 20 50 20;
+}

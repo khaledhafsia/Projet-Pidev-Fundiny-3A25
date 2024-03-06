@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 public class MyDataBase {
     private static MyDataBase instance;
-    private final String URL = "jdbc:mysql://127.0.0.1:3306/reclamation";
+    private static final String URL = "jdbc:mysql://127.0.0.1:3306/reclamation";
     private final String USERNAME = "root";
     private final String PASSWORD = "";
 
@@ -127,6 +127,25 @@ public class MyDataBase {
         return projectID;
     }
 
+    public int getAllusersNames(String userName) {
+        int userID = -1;  // Default value if not found
+
+        try {
+            String query = "SELECT ID_utilisateur FROM utilisateur WHERE Nom = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, userName);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                userID = resultSet.getInt("ID_utilisateur");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();  // Handle the exception based on your application's needs
+        }
+
+        return userID;
+    }
+
     public int getreclamationIDByName(String Nom_Type_Reclamation) {
         int ID_Type_Reclamation = -1;  // Default value if not found
 
@@ -193,24 +212,24 @@ public class MyDataBase {
         return reclamationsList;
     }
 
-        public void deleteReclamation(Reclamation reclamation) {
-            try {
-                connection = getInstance().getCnx();
-                String query = "DELETE FROM reclamations WHERE ID_Reclamation = ?";
-                PreparedStatement preparedStatement = connection.prepareStatement(query);
-                preparedStatement.setString(1, String.valueOf(reclamation.getID_Reclamation()));
+    public void deleteReclamation(Reclamation reclamation) {
+        try {
+            connection = getInstance().getCnx();
+            String query = "DELETE FROM reclamations WHERE ID_Reclamation = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, String.valueOf(reclamation.getID_Reclamation()));
 
-                int affectedRows = preparedStatement.executeUpdate();
-                if (affectedRows > 0) {
-                    System.out.println("Reclamation deleted successfully from the database.");
-                } else {
-                    System.out.println("Failed to delete reclamation from the database.");
-                }
-
-            } catch (SQLException ex) {
-                Logger.getLogger(MyDataBase.class.getName()).log(Level.SEVERE, null, ex);
+            int affectedRows = preparedStatement.executeUpdate();
+            if (affectedRows > 0) {
+                System.out.println("Reclamation deleted successfully from the database.");
+            } else {
+                System.out.println("Failed to delete reclamation from the database.");
             }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(MyDataBase.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
 
     public List<Reponse> getAllReponse() {
         List<Reponse> reponsesList = new ArrayList<>();
@@ -222,8 +241,13 @@ public class MyDataBase {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                Reponse reponse = new Reponse();
-                reponse.setID_Reponse(Integer.parseInt(resultSet.getString("ID_Reponse")));
+                Reponse reponse = new Reponse(
+                        resultSet.getInt("ID_Reponse"),
+                        resultSet.getInt("ID_Utilisateur"),
+                        resultSet.getString("email"),
+                        resultSet.getString("objet"),
+                        resultSet.getString("texte")
+                );                reponse.setID_Reponse(Integer.parseInt(resultSet.getString("ID_Reponse")));
                 reponse.setemail(resultSet.getString("email"));
                 reponse.setID_Utilisateur(Integer.parseInt(resultSet.getString("ID_Utilisateur")));
                 reponse.setobjet(resultSet.getString("objet"));
@@ -256,6 +280,6 @@ public class MyDataBase {
             Logger.getLogger(MyDataBase.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-        // ... (existing code)
-}
 
+
+}

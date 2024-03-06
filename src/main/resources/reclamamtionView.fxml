@@ -2,36 +2,28 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="652.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controls.reclamationViewController">
-   <children>
-      <Label layoutX="30.0" layoutY="40.0" text="Reclamation : " textFill="DARKTURQUOISE">
-         <font>
-            <Font name="Verdana Bold" size="31.0" />
-         </font>
-      </Label>
-      <Separator layoutX="1.0" layoutY="91.0" prefHeight="6.0" prefWidth="652.0" />
-      <Button layoutX="29.0" layoutY="111.0" mnemonicParsing="false" onMouseClicked="#getAddReclamation" prefHeight="30.0" prefWidth="60.0" text="Add" />
-      <Button layoutX="111.0" layoutY="108.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Print" />
-      <Button layoutX="190.0" layoutY="108.0" mnemonicParsing="false" onMouseClicked="#handleRefresh" prefHeight="30.0" prefWidth="60.0" text="Refresh" />
-      <TextField fx:id="SearchFld" layoutX="395.0" layoutY="109.0" prefHeight="30.0" prefWidth="166.0" />
-      <Button layoutX="579.0" layoutY="107.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Search" />
-      <TableView fx:id="reclamationTables" layoutX="29.0" layoutY="154.0" prefHeight="200.0" prefWidth="609.0">
-        <columns>
-          <TableColumn fx:id="ColIdReclamation" prefWidth="100.80005264282227" text="Id reclamation" />
-          <TableColumn fx:id="Colemail" prefWidth="78.4000244140625" text="email" />
-            <TableColumn fx:id="Coladmin" prefWidth="78.4000244140625" text="admin" />
-            <TableColumn fx:id="Colprojet" prefWidth="78.4000244140625" text="projet" />
-            <TableColumn fx:id="Colprobleme" prefWidth="78.4000244140625" text="probleme" />
-            <TableColumn fx:id="Colobjet" prefWidth="78.4000244140625" text="objet" />
-            <TableColumn fx:id="Colaction" prefWidth="111.199951171875" text="actions" />
-        </columns>
-      </TableView>
-   </children>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controls.reclamationViewController">
+    <children>
+        <Label layoutX="29.0" layoutY="50.0" text="Reclamation: " textFill="DARKTURQUOISE">
+            <font>
+                <Font name="Verdana Bold" size="31.0" />
+            </font>
+        </Label>
+        <Separator layoutY="101.0" prefHeight="6.0" prefWidth="652.0" />
+        <Button layoutX="28.0" layoutY="121.0" mnemonicParsing="false" onMouseClicked="#getAddReclamation" prefHeight="30.0" prefWidth="60.0" text="Add" />
+        <Button layoutX="110.0" layoutY="118.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Print" />
+        <Button layoutX="189.0" layoutY="118.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Refresh" />
+        <TextField fx:id="searchField" layoutX="394.0" layoutY="119.0" prefHeight="30.0" prefWidth="166.0" />
+        <Button layoutX="578.0" layoutY="117.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Search" />
+        <!-- Change TableView to ListView -->
+        <ListView fx:id="ReclamationListView" layoutX="28.0" layoutY="160.0" prefHeight="200.0" prefWidth="607.0">
+            <!-- ... your existing ListView content ... -->
+        </ListView>
+    </children>
 </AnchorPane>

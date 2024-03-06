@@ -15,11 +15,10 @@ public class serviceReponse implements IServices<Reponse> {
 
     @Override
     public void add(Reponse reponse) {
-        String qry = "INSERT INTO `reponses`(`ID_Utilisateur`, `emailUser`, `objet`, `texte`) VALUES (?, ?, ?, ?)";
+        String qry = "INSERT INTO `reponses`(`ID_Utilisateur`, `Objet`, `tete`) VALUES (?, ?, ?, ?)";
         try {
             PreparedStatement stm = cnx.prepareStatement(qry);
-            stm.setInt(1, reponse.getID_Utilisateur());
-            stm.setString(2, reponse.getemail());
+            stm.setInt(2, reponse.getID_Utilisateur());
             stm.setString(3, reponse.getobjet());
             stm.setString(4, reponse.gettexte());
 
@@ -38,9 +37,9 @@ public class serviceReponse implements IServices<Reponse> {
             ResultSet rs = stm.executeQuery(qry);
             while (rs.next()) {
                 Reponse reponse = new Reponse();
-                reponse.setID_Reponse(rs.getInt("ID_Reponse"));
-                reponse.setID_Utilisateur(rs.getInt("ID_Utilisateur"));
+                reponse.setID_Reponse(Integer.parseInt(rs.getString("ID_Reponse")));
                 reponse.setemail(rs.getString("email"));
+                reponse.setID_Utilisateur(Integer.parseInt(rs.getString("ID_Utilisateur")));
                 reponse.setobjet(rs.getString("objet"));
                 reponse.settexte(rs.getString("texte"));
                 reponses.add(reponse);
@@ -54,18 +53,19 @@ public class serviceReponse implements IServices<Reponse> {
     @Override
     public void update(Reponse reponse) {
         String qry = "UPDATE `reponses` SET " +
-                "`ID_Reclamation`=?, " +
-                "`ID_Administrateur`=?, " +
-                "`Contenu_Reponse`=?, " +
-                "`Date_Reponse`=? " +
+                "`email`=?, " +
+                "`ID_Utilisateur`=?, " +
+                "`Objet`=?, " +
+                "`texte`=? " +
                 "WHERE `ID_Reponse`=?";
 
         try {
             PreparedStatement stm = cnx.prepareStatement(qry);
             stm.setString(1, reponse.getemail());
-            stm.setString(2, reponse.getemail());
+            stm.setInt(2, reponse.getID_Utilisateur());
             stm.setString(3, reponse.getobjet());
             stm.setString(4, reponse.gettexte());
+            stm.setInt(5, reponse.getID_Reponse());
 
             stm.executeUpdate();
         } catch (SQLException e) {

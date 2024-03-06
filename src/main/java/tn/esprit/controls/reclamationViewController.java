@@ -4,68 +4,40 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import tn.esprit.models.Reclamation;
 import tn.esprit.utils.MyDataBase;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Optional;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class reclamationViewController implements javafx.fxml.Initializable {
 
     @FXML
-    private TableView<Reclamation> reclamationTables;
+    private ListView<Reclamation> ReclamationListView;
+
+    private final ObservableList<Reclamation> RecList = FXCollections.observableArrayList();
 
     @FXML
-    private TableColumn<Reclamation, Integer> ColIdReclamation;
-
-    @FXML
-    private TableColumn<Reclamation, String> Colemail;
-
-    @FXML
-    private TableColumn<Reclamation, String> Coladmin;
-
-    @FXML
-    private TableColumn<Reclamation, String> Colprojet;
-
-    @FXML
-    private TableColumn<Reclamation, String> Colprobleme;
-
-    @FXML
-    private TableColumn<Reclamation, String> Colobjet;
-
-    @FXML
-    private TableColumn<Reclamation, Void> Colaction;  // Change TableColumn type to Void
-
-    private final ObservableList<Reclamation> ReclamList = FXCollections.observableArrayList();
-
-    public void initialize(java.net.URL url, java.util.ResourceBundle resourceBundle) {
-        loadDate();
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        loadData();
     }
 
-    private void loadDate() {
+    private void loadData() {
+        ReclamationListView.setItems(RecList);
         try {
-            ReclamList.addAll(MyDataBase.getInstance().getAllReclamations());
+            RecList.addAll(MyDataBase.getInstance().getAllReclamations());
 
-            ColIdReclamation.setCellValueFactory(new PropertyValueFactory<>("ID_Reclamation"));
-            Colemail.setCellValueFactory(new PropertyValueFactory<>("email"));
-            Coladmin.setCellValueFactory(new PropertyValueFactory<>("ID_Admin"));
-            Colprojet.setCellValueFactory(new PropertyValueFactory<>("ID_Projet"));
-            Colprobleme.setCellValueFactory(new PropertyValueFactory<>("ID_Type_Reclamation"));
-            Colobjet.setCellValueFactory(new PropertyValueFactory<>("objet"));
-
-            // Use a Callback to create custom cells with delete and edit buttons
-            Colaction.setCellFactory(param -> new TableCell<>() {
+            ReclamationListView.setCellFactory(param -> new ListCell<>() {
                 private final Button deleteButton = new Button("Delete");
                 private final Button editButton = new Button("Edit");
 
@@ -79,21 +51,32 @@ public class reclamationViewController implements javafx.fxml.Initializable {
                     HBox buttons = new HBox(deleteButton, editButton);
                     buttons.setStyle("-fx-alignment:center");
                     setGraphic(buttons);
+
+                    // Handle click on list item
+                    setOnMouseClicked(event -> {
+                        if (event.getClickCount() == 1) {
+                            showCardView(getItem());
+                        }
+                    });
                 }
 
                 @Override
-                protected void updateItem(Void item, boolean empty) {
+                protected void updateItem(Reclamation item, boolean empty) {
                     super.updateItem(item, empty);
 
-                    if (empty) {
-                        setGraphic(null); // Set the graphic to null when the cell is empty
+                    if (empty || item == null) {
+                        setText(null);
+                        setGraphic(null);
                     } else {
-                        // Your existing code for setting graphics
+                        setText("ID: " + item.getID_Reclamation() + ", Email: " + item.getEmail() +
+                                ", Admin: " + item.getID_Admin() + ", Projet: " + item.getID_Projet() +
+                                ", Probleme: " + item.getID_Type_Reclamation() + ", Objet: " + item.getObjet());
+                        setGraphic(getGraphic());
                     }
                 }
 
                 private void handleDeleteReclamation() {
-                    Reclamation selectedReclamation = getTableView().getItems().get(getIndex());
+                    Reclamation selectedReclamation = getItem();
                     if (selectedReclamation != null) {
                         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                         alert.setTitle("Delete Confirmation");
@@ -103,77 +86,67 @@ public class reclamationViewController implements javafx.fxml.Initializable {
                         Optional<ButtonType> result = alert.showAndWait();
                         if (result.isPresent() && result.get() == ButtonType.OK) {
                             MyDataBase.getInstance().deleteReclamation(selectedReclamation);
-                            ReclamList.remove(selectedReclamation);
-                            reclamationTables.refresh(); // Refresh the TableView
+                            RecList.remove(selectedReclamation);
                         }
                     }
                 }
 
                 private void handleEditReclamation() {
-                    Reclamation selectedReclamation = getTableView().getItems().get(getIndex());
-                    if (selectedReclamation != null) {
-                        try {
-                            // Load the FXML file for the edit window
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/editReclamation.fxml"));
-                            Parent parent = loader.load();
-
-                            // Get the controller from the loader
-                            EditReclamationController editController = loader.getController();
-
-                            // Pass the selected Reclamation to the controller
-                            //editController.setReclamation(selectedReclamation);
-
-                            // Create a new scene with the parent
-                            Scene scene = new Scene(parent);
-
-                            // Create a new stage for the edit window
-                            Stage stage = new Stage();
-                            stage.setScene(scene);
-                            stage.initStyle(StageStyle.UTILITY);
-
-                            // Show the edit window
-                            stage.show();
-                        } catch (IOException e) {
-                            Logger.getLogger(reclamationViewController.class.getName()).log(Level.SEVERE, null, e);
-                        }
-                    }
+                    // Implement the logic for editing a reclamation here
+                    // You can open another dialog or navigate to another view for editing
+                    // Make sure to update the RecList and refresh the view if needed
                 }
-
             });
-
-            reclamationTables.setItems(ReclamList);
 
         } catch (Exception e) {
             Logger.getLogger(reclamationViewController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
-    @FXML
-    private void close(MouseEvent event) {
-        // Handle close event
-    }
-
-    @FXML
-    private void getAddReclamation(MouseEvent event) {
-        System.out.println("Add button clicked!");
-
+    // reclamationViewController.java
+    private void showCardView(Reclamation selectedReclamation) {
         try {
-            Parent parent = FXMLLoader.load(getClass().getResource("/addReclamation.fxml"));
-            Scene scene = new Scene(parent);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/CardViewRec.fxml"));
+            Parent root = loader.load();
+
+            // Créez une nouvelle scène avec le contenu chargé depuis le FXML
+            Scene scene = new Scene(root);
+
+            // Créez une nouvelle fenêtre (stage)
             Stage stage = new Stage();
             stage.setScene(scene);
-            stage.initStyle(StageStyle.UTILITY);
-            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            currentStage.close();
+
+            // Obtenez le contrôleur du chargeur
+            CardViewRec cardViewController = loader.getController();
+
+            // Utilisez la méthode setData pour définir les données
+            cardViewController.setData(selectedReclamation);
+
+            // Affichez la nouvelle fenêtre (stage)
             stage.show();
         } catch (IOException e) {
             Logger.getLogger(reclamationViewController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
+
+
     @FXML
-    private void handleRefresh() {
-        ReclamList.clear(); // Clear the current data
-        loadDate(); // Reload data from the database
+    private void getAddReclamation(MouseEvent event) {
+        System.out.println("Add button clicked!");
+        try {
+            Parent parent = FXMLLoader.load(getClass().getResource("/addReclamation.fxml"));
+            Scene scene = new Scene(parent);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.showAndWait();
+
+            // Refresh the data after adding a new reclamation
+            RecList.clear();
+            RecList.addAll(MyDataBase.getInstance().getAllReclamations());
+
+        } catch (IOException e) {
+            Logger.getLogger(reclamationViewController.class.getName()).log(Level.SEVERE, null, e);
+        }
     }
 }

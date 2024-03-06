@@ -1,5 +1,4 @@
 package tn.esprit.models;
-import java.util.Date;
 
 public class Reponse {
     private int ID_Reponse;
@@ -10,7 +9,9 @@ public class Reponse {
 
     // Constructors (you can create more if needed)
 
-    public Reponse() {
+    public Reponse(){}
+
+    public Reponse(int ID_Reponse, String text, int i, String objectFieldText, String textFieldText) {
     }
 
     public Reponse(int ID_Reponse, int ID_Utilisateur, String email, String objet, String texte) {

@@ -114,7 +114,7 @@ public class addReponseController implements javafx.fxml.Initializable{
         preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, emailFld.getText());
 // Assuming you have a method like getProjectIDByName in MyDataBase class
-        preparedStatement.setInt(2, cnx.getProjectIDByName(userComboBox.getValue()));
+        preparedStatement.setInt(2, cnx.getAllusersNames(userComboBox.getValue()));
         preparedStatement.setString(3, objetFld.getText());
         preparedStatement.setString(4, texte.getText());
         // Assuming texte is the Description_Reclamation field
@@ -124,9 +124,9 @@ public class addReponseController implements javafx.fxml.Initializable{
 
     private void getQuery() {
         if (!update) {
-            query = "INSERT INTO `reponses`(`email`, `ID_utilisateur`, `Objet`, `texte`) VALUES (?, ?, ?, ?)";
+            query = "INSERT INTO `reponses`( `email`, `ID_utilisateur`, `Objet`, `texte`) VALUES (?, ?, ?, ?)";
         } else {
-            query = "UPDATE reclamations SET email=?, ID_utilisateur=?, objet=?, texte=? WHERE ID_Reponse=?";
+            query = "UPDATE reponses SET  email=?, ID_utilisateur=?, objet=?, texte=? WHERE ID_Reponse=?";
         }
     }
 

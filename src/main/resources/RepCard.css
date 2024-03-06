@@ -1,0 +1,37 @@
+#reponse_Vbox {
+    -fx-border-color: #FF0000; /* Couleur de la bordure */
+    -fx-border-width: 2px; /* Largeur de la bordure */
+    -fx-border-radius: 10px; /* Rayon des coins */
+    -fx-padding: 20px; /* Espacement intérieur */
+}
+
+#reponse_Hbox {
+    -fx-background-color: #f0f0f0; /* Couleur de fond pour HBox */
+    -fx-spacing: 20; /* Espace entre les éléments */
+}
+
+#VBox, Label {
+    -fx-font-family: "Arial"; /* Police de caractères */
+    -fx-font-size: 14px; /* Taille de police */
+}
+
+#Button {
+    -fx-text-fill: white; /* Couleur du texte des boutons */
+}
+
+#delete_button {
+    -fx-background-color: #FF0000; /* Rouge pour le bouton Delete */
+}
+
+#update_button {
+    -fx-background-color: #0000FF; /* Bleu pour le bouton Update */
+}
+
+#Button:hover {
+    -fx-background-color: #45a049; /* Couleur de fond lors du survol pour les autres boutons */
+}
+
+/* Ajout d'un espacement entre les VBox */
+#VBox + VBox {
+    -fx-margin: 20 20 50 20; /* Espacement entre les VBox (haut, droite, bas, gauche) */
+}

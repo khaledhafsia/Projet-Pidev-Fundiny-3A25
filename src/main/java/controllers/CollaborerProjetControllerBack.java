@@ -20,7 +20,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 
 
-public class CollaborerProjetController {
+public class CollaborerProjetControllerBack {
 
     @FXML
     private DatePicker dateColl;
@@ -36,7 +36,7 @@ public class CollaborerProjetController {
     private AfficherProjetController afficherProjetController;
 
 
-    public void setAfficherProjetController(AfficherProjetController afficherProjetController) {
+    public void setAfficherProjetControllerBack(AfficherProjetControllerBack afficherProjetControllerBack) {
         this.afficherProjetController = afficherProjetController;
     }
 
@@ -71,6 +71,7 @@ public class CollaborerProjetController {
     public Collaboration getNouvelleCollaboration() {
         return nouvelleCollaboration;
     }
+
 }
 
 

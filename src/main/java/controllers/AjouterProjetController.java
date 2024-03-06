@@ -49,16 +49,12 @@ public class AjouterProjetController implements Initializable {
 
     @FXML
     private TextField CAT;
-    private AfficherProjetController afficherProjetController;
-
     @FXML
     void Ajouter(ActionEvent event) throws SQLException {
         if (InputValidator.validateFields(nomPrT, nomPoT, dateDT, CAT)) {
             LocalDate localDate = dateDT.getValue();
             Date sqlDate = Date.valueOf(localDate);
             sp.add(new Projet(1, nomPrT.getText(), nomPoT.getText(), sqlDate, Integer.parseInt(CAT.getText())));
-
-                if(afficherProjetController!=null){afficherProjetController.affichage();}
         } else {
             System.out.println("Veuillez remplir tous les champs correctement.");
         }

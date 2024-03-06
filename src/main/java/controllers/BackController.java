@@ -59,7 +59,7 @@ public class BackController implements Initializable {
         }
         if (collaborationAModifier != null) {
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/BackModifierC.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ModifierCollaborationBack.fxml"));
                 Parent root = (Parent) fxmlLoader.load();
                 BackModifierCController backModifierCController = fxmlLoader.getController();
                 backModifierCController.initData(collaborationAModifier);
@@ -69,7 +69,7 @@ public class BackController implements Initializable {
                 stage.show();
 
             } catch (IOException e) {
-                System.out.println("FXML file path: " + getClass().getResource("/BackModifierC.fxml"));
+                System.out.println("FXML file path: " + getClass().getResource("/ModifierCollaborationBack.fxml"));
                 e.printStackTrace();
             }
         } else {

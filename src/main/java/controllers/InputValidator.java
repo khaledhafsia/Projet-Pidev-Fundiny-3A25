@@ -15,6 +15,13 @@ public class InputValidator {
                 isValidDate(dateDT) &&
                 isInteger(CAT);
     }
+    public static boolean validateFieldsC(TextField nomColl, TextField TypeColl, DatePicker dateColl) {
+        return isNotEmpty(nomColl) &&
+                isNotEmpty(TypeColl) &&
+                containsOnlyLetters(nomColl) &&
+                containsOnlyLetters(TypeColl) &&
+                isValidDate(dateColl) ;
+    }
 
     public static boolean isNotEmpty(TextField textField) {
         if (textField.getText().isEmpty()) {

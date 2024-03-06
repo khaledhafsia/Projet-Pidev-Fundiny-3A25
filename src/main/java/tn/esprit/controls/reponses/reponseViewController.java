@@ -15,10 +15,10 @@ import tn.esprit.utils.MyDataBase;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 public class reponseViewController implements javafx.fxml.Initializable {
 
     @FXML
@@ -31,23 +31,31 @@ public class reponseViewController implements javafx.fxml.Initializable {
         loadData();
     }
 
+    @FXML
+    private TextField searchField;
+
+    @FXML
+    private Button refreshBtn;
+
+    @FXML
+    private Button printBtn;
+
+    @FXML
+    private Button pdfBtn;
     private void loadData() {
         ReponseListView.setItems(RepList);
         try {
             RepList.addAll(MyDataBase.getInstance().getAllReponse());
 
             ReponseListView.setCellFactory(param -> new ListCell<>() {
-                private final Button deleteButton = new Button("Delete");
                 private final Button editButton = new Button("Edit");
 
                 {
-                    deleteButton.setStyle("-fx-cursor: hand; -fx-base: #ff1744;");
                     editButton.setStyle("-fx-cursor: hand; -fx-base: #00E676;");
 
-                    deleteButton.setOnAction(event -> handleDeleteReponse());
                     editButton.setOnAction(event -> handleEditReponse());
 
-                    HBox buttons = new HBox(deleteButton, editButton);
+                    HBox buttons = new HBox(editButton);
                     buttons.setStyle("-fx-alignment:center");
                     setGraphic(buttons);
 
@@ -70,22 +78,6 @@ public class reponseViewController implements javafx.fxml.Initializable {
                         setText("ID: " + item.getID_Reponse() + ", Email: " + item.getemail() +
                                 ", User ID: " + item.getID_Utilisateur() + ", Objet: " + item.getobjet());
                         setGraphic(getGraphic());
-                    }
-                }
-
-                private void handleDeleteReponse() {
-                    Reponse selectedReponse = getItem();
-                    if (selectedReponse != null) {
-                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                        alert.setTitle("Delete Confirmation");
-                        alert.setHeaderText("Are you sure you want to delete this reclamation?");
-                        alert.setContentText("This action cannot be undone.");
-
-                        Optional<ButtonType> result = alert.showAndWait();
-                        if (result.isPresent() && result.get() == ButtonType.OK) {
-                            MyDataBase.getInstance().deleteReponse(selectedReponse);
-                            RepList.remove(selectedReponse);
-                        }
                     }
                 }
 
@@ -147,7 +139,15 @@ public class reponseViewController implements javafx.fxml.Initializable {
             Logger.getLogger(reponseViewController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
+
+    private void handleRefresh(MouseEvent event) {
+        // Refresh the data
+        refreshData();
+
+    }
+
+    private void refreshData() {
+        RepList.clear();
+        RepList.addAll(MyDataBase.getInstance().getAllReponse());
+    }
 }
-
-
-

@@ -17,13 +17,13 @@
         </Label>
         <Separator layoutY="101.0" prefHeight="6.0" prefWidth="652.0" />
         <Button layoutX="28.0" layoutY="121.0" mnemonicParsing="false" onMouseClicked="#getAddReclamation" prefHeight="30.0" prefWidth="60.0" text="Add" />
-        <Button layoutX="110.0" layoutY="118.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Print" />
-        <Button layoutX="189.0" layoutY="118.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Refresh" />
+        <Button fx:id="printBtn" layoutX="112.0" layoutY="121.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Print" />
+        <Button fx:id="refreshBtn" layoutX="189.0" layoutY="121.0" mnemonicParsing="false" onMouseClicked="#handleRefresh" prefHeight="30.0" prefWidth="60.0" text="Refresh" />
         <TextField fx:id="searchField" layoutX="394.0" layoutY="119.0" prefHeight="30.0" prefWidth="166.0" />
-        <Button layoutX="578.0" layoutY="117.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Search" />
-        <!-- Change TableView to ListView -->
+        <Button layoutX="578.0" layoutY="117.0" mnemonicParsing="false" onMouseClicked="#handleSearch" prefHeight="30.0" prefWidth="60.0" text="Search" />
         <ListView fx:id="ReclamationListView" layoutX="28.0" layoutY="160.0" prefHeight="200.0" prefWidth="607.0">
             <!-- ... your existing ListView content ... -->
         </ListView>
+        <Button fx:id="pdfBtn" layoutX="268.0" layoutY="121.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="PDF" />
     </children>
 </AnchorPane>

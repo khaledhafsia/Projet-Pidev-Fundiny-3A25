@@ -17,7 +17,12 @@ import tn.esprit.services.servicecomment;
 import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
-public class combinedController {private servicearticle sa = new servicearticle();
+
+
+
+public class combinedController {
+
+    private servicearticle sa = new servicearticle();
     private servicecomment sc = new servicecomment();
     private String image;
 
@@ -27,18 +32,17 @@ public class combinedController {private servicearticle sa = new servicearticle(
     @FXML
     private TextField tfdescription2;
 
-
+    @FXML
+    private TextField searchField;
 
     @FXML
     void btnCREATEClicked(ActionEvent event) throws SQLException {
-
         String description = tfdescription2.getText();
         if (!description.isEmpty()) {
             sa.add(new article(1, description, image));
             System.out.println("Article added successfully.");
             postContainer.getChildren().clear();
             initialize();
-
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Validation Error");
@@ -72,24 +76,48 @@ public class combinedController {private servicearticle sa = new servicearticle(
     }
 
 
-
     @FXML
     public void initialize() {
         try {
-            List<article> articles = sa.getAll();
-            System.out.println("Articles retrieved: " + articles.size());
-            for (article article : articles) {
-                // Create a new card for each article
-                VBox postCard = createPostCard(article);
-                // Add the card to the post container
-                postContainer.getChildren().add(postCard);
-            }
+            filterAndDisplayArticles(""); // Display all articles initially
         } catch (SQLException e) {
             e.printStackTrace();
             // Handle exception
         }
+
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            try {
+                filterAndDisplayArticles(newValue);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                // Handle exception
+            }
+        });
     }
 
+    private void filterAndDisplayArticles(String searchQuery) throws SQLException {
+        // Clear existing articles
+        postContainer.getChildren().clear();
+
+        // Retrieve all articles
+        List<article> articles = sa.getAll();
+        System.out.println("Articles retrieved: " + articles.size());
+
+        // Filter articles based on the search query
+        for (article article : articles) {
+            if (articleMatchesSearch(article, searchQuery)) {
+                // Create a new card for each matching article
+                VBox postCard = createPostCard(article);
+                // Add the card to the post container
+                postContainer.getChildren().add(postCard);
+            }
+        }
+    }
+
+    private boolean articleMatchesSearch(article article, String searchQuery) {
+        // Check if the article's description contains the search query
+        return article.getDescription().toLowerCase().contains(searchQuery.toLowerCase());
+    }
     private VBox createPostCard(article article) throws SQLException {
         // Create a VBox to hold the post content
         VBox postCard = new VBox();
@@ -159,6 +187,5 @@ public class combinedController {private servicearticle sa = new servicearticle(
 
         return postCard;
     }
-
 
 }

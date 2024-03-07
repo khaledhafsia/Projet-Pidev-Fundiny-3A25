@@ -25,7 +25,7 @@
         </TextField>
         <Button layoutX="760.0" layoutY="136.0" mnemonicParsing="false" onAction="#btnCREATEClicked" text="Create" />
         <Button layoutX="761.0" layoutY="95.0" mnemonicParsing="false" onAction="#selectImageClicked" text="Image" textAlignment="CENTER" />
-
+        <TextField fx:id="searchField" promptText="Search by description" />
         <!-- Posts section -->
         <ScrollPane fitToHeight="true" fitToWidth="true" layoutY="188.8" prefHeight="504.0" prefWidth="840.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="189.0">
             <content>

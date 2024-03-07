@@ -78,9 +78,30 @@ public class servicearticle implements IService<article>{
 
     }
 
+
+
+
+
     @Override
     public boolean delete(article article) {
-        return false;
+        String qry = "DELETE FROM article WHERE `id`=?";
+        try {
+            PreparedStatement stm = cnx.prepareStatement(qry);
+            stm.setInt(1, article.getId());
+
+            int rowsAffected = stm.executeUpdate();
+            if (rowsAffected == 0) {
+                System.out.println("Aucune ligne supprimée pour l'artile' id: " + article.getId());
+                return false; // Aucune ligne supprimée
+            } else {
+                System.out.println("article supprimé avec succès, id: " + article.getId());
+                return true; // Suppression réussie
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la suppression d'article' : " + e.getMessage());
+            return false; // Erreur lors de la suppression
+        }
+
     }
 
 

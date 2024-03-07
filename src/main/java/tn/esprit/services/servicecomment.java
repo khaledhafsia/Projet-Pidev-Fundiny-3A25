@@ -80,7 +80,26 @@ public class servicecomment implements IService<comment> {
 
     @Override
     public boolean delete(comment comment) {
-        return false;
+            String qry = "DELETE FROM comment WHERE `commentid`=?";
+            try {
+                PreparedStatement stm = cnx.prepareStatement(qry);
+                stm.setInt(1, comment.getCommentid());
+
+                int rowsAffected = stm.executeUpdate();
+                if (rowsAffected == 0) {
+                    System.out.println("Aucune ligne supprimée pour le commentaire' commentid: " + comment.getCommentid());
+                    return false; // Aucune ligne supprimée
+                } else {
+                    System.out.println("commentaire supprimé avec succès, commentid: " + comment.getCommentid());
+                    return true; // Suppression réussie
+                }
+            } catch (SQLException e) {
+                System.out.println("Erreur lors de la suppression deu commentaire : " + e.getMessage());
+                return false; // Erreur lors de la suppression
+            }
+
+
+
     }
 
 

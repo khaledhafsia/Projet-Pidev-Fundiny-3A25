@@ -1,33 +1,80 @@
 package controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import tn.esprit.models.article;
 import tn.esprit.models.comment;
 import tn.esprit.services.servicearticle;
 import tn.esprit.services.servicecomment;
 
-import java.net.URL;
+import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.ResourceBundle;
-
-public class showarticleController implements Initializable {
-
-    private servicearticle sa = new servicearticle();
+public class combinedController {private servicearticle sa = new servicearticle();
     private servicecomment sc = new servicecomment();
+    private String image;
 
     @FXML
     private VBox postContainer;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    @FXML
+    private TextField tfdescription2;
+
+
+
+    @FXML
+    void btnCREATEClicked(ActionEvent event) throws SQLException {
+
+        String description = tfdescription2.getText();
+        if (!description.isEmpty()) {
+            sa.add(new article(1, description, image));
+            System.out.println("Article added successfully.");
+            postContainer.getChildren().clear();
+            initialize();
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Validation Error");
+            alert.setHeaderText("Please correct invalid fields.");
+            alert.setContentText("All fields are required.");
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    void selectImageClicked(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Image");
+
+        // Set initial directory (optional)
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+
+        // Filter for image files
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif")
+        );
+
+        // Show open file dialog
+        File selectedFile = fileChooser.showOpenDialog(((Node) event.getSource()).getScene().getWindow());
+
+        // Load and display the selected image
+        if (selectedFile != null) {
+            image = selectedFile.toURI().toString();
+            System.out.println("Image path: " + image);
+        }
+    }
+
+
+
+    @FXML
+    public void initialize() {
         try {
             List<article> articles = sa.getAll();
             System.out.println("Articles retrieved: " + articles.size());
@@ -48,20 +95,28 @@ public class showarticleController implements Initializable {
         VBox postCard = new VBox();
         postCard.getStyleClass().add("post-card");
 
-        // Create and set the image view for the post image
-        ImageView postImageView = new ImageView(new Image(article.getImage()));
-        postImageView.setFitHeight(200);
-        postImageView.setFitWidth(200);
-        postCard.getChildren().add(postImageView);
-
-        // Create and set the label for the post content
+        // Create and set the label for the post content (description)
         Label postContentLabel = new Label(article.getDescription());
         postContentLabel.getStyleClass().add("post-content");
         postCard.getChildren().add(postContentLabel);
 
+        // Create and set the image view for the post image
+        ImageView postImageView = new ImageView(new Image(article.getImage()));
+        postImageView.setFitHeight(200);
+        postImageView.setFitWidth(200);
+
+        // Create a HBox to hold the image and description
+        HBox imageDescBox = new HBox();
+        imageDescBox.getChildren().addAll(postImageView, postContentLabel);
+
+        // Add the image and description HBox to the post card
+        postCard.getChildren().add(imageDescBox);
+
+        // Create a container for comments
+        VBox commentContainer = new VBox();
+
         // Display comments for the current article
         List<comment> comments = sc.getCommentsBypostid(article.getId());
-        VBox commentContainer = new VBox();
         for (comment c : comments) {
             // Create and set the label for each comment
             Label commentLabel = new Label(c.getComment());
@@ -96,9 +151,14 @@ public class showarticleController implements Initializable {
             }
         });
 
-        // Add the text area, button, and comments to the post card
-        postCard.getChildren().addAll(commentContainer, commentTextArea, addCommentButton);
+        // Add the text area and button for adding comments to the post card
+        postCard.getChildren().addAll(commentTextArea, addCommentButton);
+
+        // Add the comment container to the post card
+        postCard.getChildren().add(commentContainer);
 
         return postCard;
     }
+
+
 }

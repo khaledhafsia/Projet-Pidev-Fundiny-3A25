@@ -23,8 +23,8 @@
             <HBox fx:id="cardContainer" prefHeight="245.0" prefWidth="443.0" />
          </content>
       </ScrollPane>
-      <RadioButton layoutX="152.0" layoutY="495.0" mnemonicParsing="false" onAction="#sortBtn" text="Tri par priorité" />
-      <RadioButton layoutX="275.0" layoutY="495.0" mnemonicParsing="false" onAction="#sortSBtn" text="Tri par statut" />
+      <RadioButton layoutX="154.0" layoutY="472.0" mnemonicParsing="false" onAction="#sortBtn" prefHeight="18.0" prefWidth="220.0" text="Tri par priorité (élevée -&gt; faible)" />
+      <RadioButton layoutX="154.0" layoutY="495.0" mnemonicParsing="false" onAction="#sortSBtn" prefHeight="18.0" prefWidth="234.0" text="Tri par statut (en attente -&gt; terminée)" />
       <TextField fx:id="searchField" layoutX="138.0" layoutY="100.0" prefHeight="26.0" prefWidth="234.0" promptText="chercher des taches selon le titre" />
    </children>
 </AnchorPane>

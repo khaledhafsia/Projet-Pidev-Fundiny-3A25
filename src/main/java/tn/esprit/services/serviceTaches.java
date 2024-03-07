@@ -134,6 +134,11 @@ public class serviceTaches implements Iservice<taches>, IserviceINV, IserviceTac
     }
 
     @Override
+    public List<investissements> getInvestissementByUserId(int t) {
+        return null;
+    }
+
+    @Override
     public List<taches> getTasksByInvestissementID(int invID) {
         List<taches> tasks = new ArrayList<>();
         String qry = "SELECT * FROM taches WHERE invID = ?";

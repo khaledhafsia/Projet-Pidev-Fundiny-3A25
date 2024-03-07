@@ -1,6 +1,7 @@
 package tn.esprit.services;
 
 import tn.esprit.interfaces.IserviceINV;
+import tn.esprit.models.taches;
 import tn.esprit.utils.MyDataBase;
 import tn.esprit.interfaces.Iservice;
 import tn.esprit.models.investissements;
@@ -8,6 +9,7 @@ import tn.esprit.models.investissements;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 public class serviceInvestissements implements Iservice<investissements>, IserviceINV {
     private Connection cnx;
@@ -131,6 +133,32 @@ public class serviceInvestissements implements Iservice<investissements>, Iservi
         }
         return null; // Return null if no investissement with the given ID is found
     }
+
+    @Override
+    public List<investissements> getInvestissementByUserId(int id) {
+        List<investissements> invs = new ArrayList<>();
+        String qry = "SELECT * FROM investissements WHERE userID = ?";
+        try {
+            PreparedStatement stm = cnx.prepareStatement(qry);
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                investissements inv = new investissements();
+                inv.setInvID(rs.getInt("invID"));
+                inv.setUserID(rs.getInt("userID"));
+                inv.setProjetID(rs.getInt("projetID"));
+                inv.setMontant(rs.getDouble("montant"));
+                inv.setDescription(rs.getString("description"));
+                inv.setDate(rs.getTimestamp("date")); // Convert SQL Date to LocalDate
+                // Add more properties as needed
+                invs.add(inv);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error getting tasks by investment ID: " + e.getMessage());
+        }
+        return invs;
+    }
+
 
 
 

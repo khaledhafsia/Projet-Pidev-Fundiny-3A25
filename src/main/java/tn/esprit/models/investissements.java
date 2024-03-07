@@ -1,6 +1,7 @@
 package tn.esprit.models;
 
 import java.sql.Timestamp;
+import java.util.Comparator;
 
 public class investissements {
     private int invID,userID,projetID;
@@ -79,4 +80,19 @@ public class investissements {
                 ", date='" + date + '\'' +
                 "}\n";
     }
+    public static Comparator<investissements> montantComparatorAsc = new Comparator<investissements>() {
+        @Override
+        public int compare(investissements inv1, investissements inv2) {
+            return Double.compare(inv1.getMontant(), inv2.getMontant());
+        }
+    };
+
+    // Comparator for descending order
+    public static Comparator<investissements> montantComparatorDesc = new Comparator<investissements>() {
+        @Override
+        public int compare(investissements inv1, investissements inv2) {
+            return Double.compare(inv2.getMontant(), inv1.getMontant()); // Reversed order
+        }
+    };
+
 }

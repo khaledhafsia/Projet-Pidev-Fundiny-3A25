@@ -87,5 +87,37 @@ public class OwnerDashboardController {
             e.printStackTrace();
         }
     }
+    @FXML
+    private void ShowProjects(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ProjectForOwner.fxml"));
+            Parent root = loader.load();
+
+            ProjectOfOwnerController controller = loader.getController();
+            controller.initData(currentUser);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    private void Reclamation (ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/addReclamation.fxml"));
+            Parent root = loader.load();
+
+            AddReclamationControllers controller = loader.getController();
+            //controller.initData(currentUser);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.layout.HBox;
+import org.example.Entities.User;
 import org.example.Entities.investissements;
 
 import java.io.IOException;
@@ -77,7 +78,12 @@ public class Testcard implements Initializable {
         }
 
     }
+    public void initData(User user) {
 
+        this.currentUser = user;
+    }
+
+    private User currentUser;
 
 }
 

@@ -18,11 +18,11 @@
                   <Image url="@images/empty-white-grey-studio-backdrop-background.jpg" />
                </image>
             </ImageView>
-            <Button layoutX="27.0" layoutY="60.0" mnemonicParsing="false" onAction="#InvestmentInterface" prefHeight="58.0" prefWidth="155.0" text="Follow your Investments !" />
-            <Button layoutX="25.0" layoutY="144.0" mnemonicParsing="false" onAction="#AllProjects" prefHeight="58.0" prefWidth="155.0" text="Looking to invest ?" />
-            <Button layoutX="25.0" layoutY="404.0" mnemonicParsing="false"  prefHeight="58.0" prefWidth="155.0" text="Having Problems ?" />
+            <Button layoutX="27.0" layoutY="60.0" mnemonicParsing="false" onAction="#AllProjects" prefHeight="58.0" prefWidth="155.0" text="Looking to invest ?" />
+            <Button layoutX="25.0" layoutY="144.0" mnemonicParsing="false" onAction="#ShowInvestments" prefHeight="58.0" prefWidth="155.0" text="Follow your Investments !" />
             <Button layoutX="25.0" layoutY="229.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="155.0" text="Read a blog !" />
             <Button layoutX="25.0" layoutY="321.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="155.0" text="Participate in an Event !" />
+            <Button layoutX="25.0" layoutY="404.0" mnemonicParsing="false" onAction="#Reclamation" prefHeight="58.0" prefWidth="155.0" text="Having Problems ?" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="1.0" prefHeight="156.0" prefWidth="927.0">

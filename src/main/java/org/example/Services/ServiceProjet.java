@@ -175,6 +175,28 @@ public class ServiceProjet   {
             return false;
         }}
 
+    public ArrayList<Projet> getProjectsByUserId(int userId) {
+        ArrayList<Projet> projects = new ArrayList<>();
+        String query = "SELECT * FROM projet WHERE user_id = ?";
+
+        try (PreparedStatement statement = cnx.prepareStatement(query)) {
+            statement.setInt(1, userId);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String nomPr = resultSet.getString("nom_pr");
+                Date dateD = resultSet.getDate("date_d");
+                int CA = resultSet.getInt("ca");
+
+                Projet projet = new Projet(id, userId, nomPr, dateD, CA);
+                projects.add(projet);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return projects;
+    }
 
     }
 

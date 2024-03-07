@@ -8,6 +8,7 @@
     import java.sql.*;
     import java.time.LocalDateTime;
     import java.util.ArrayList;
+    import java.util.List;
 
     public  class serviceInvestissements {
         private static Connection cnx;
@@ -130,7 +131,54 @@
             }
             return null; // Return null if no investissement with the given ID is found
         }
+        public ArrayList<investissements> getInvestmentsByUserId(int userId) {
+            ArrayList<investissements> userInvestments = new ArrayList<>();
+            String query = "SELECT * FROM investissements WHERE user_id = ?";
+            try {
+                PreparedStatement statement = cnx.prepareStatement(query);
+                statement.setInt(1, userId);
+                ResultSet resultSet = statement.executeQuery();
+                while (resultSet.next()) {
+                    investissements investment = new investissements(
+                            resultSet.getInt("id"),
+                            resultSet.getInt("user_id"),
+                            //resultSet.getInt("project_id"),
+                            resultSet.getDouble("montant"),
+                            resultSet.getString("description"),
+                            resultSet.getTimestamp("date")
+                    );
+                    userInvestments.add(investment);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return userInvestments;
+        }
 
+        public List<investissements> FetchInvestmentsByUserId(int userId) {
+            List<investissements> investments = new ArrayList<>();
+            String query = "SELECT * FROM `investissements` WHERE `user_id` = ?";
+
+            try (PreparedStatement statement = cnx.prepareStatement(query)) {
+                statement.setInt(1, userId);
+                ResultSet resultSet = statement.executeQuery();
+
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("id");
+                    int projectId = resultSet.getInt("project_id");
+                    double montant = resultSet.getDouble("montant");
+                    String description = resultSet.getString("description");
+                    Timestamp date = resultSet.getTimestamp("date");
+
+                    investissements investment = new investissements(id, userId, projectId, montant, description, date);
+                    investments.add(investment);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            return investments;
+        }
 
 
     }

@@ -56,18 +56,6 @@ import java.time.LocalDateTime;
             Timestamp currentTimestamp = Timestamp.valueOf(LocalDateTime.now());
             if (isInputValid() && currentUser != null) {
                 try {
-
-
-/*
-                    sp.add(new investissements(currentUser.getId(),
-                            Integer.parseInt(tfprojetid.getText()),
-                            Double.parseDouble(tfmontant.getText()),
-                            tfdescription.getText(),
-                            currentTimestamp));
-
-                    int
-
- */
                     Double montant = Double.parseDouble(tfmontant.getText());
                     String description = tfdescription.getText();
                     Timestamp date= currentTimestamp;
@@ -78,10 +66,6 @@ import java.time.LocalDateTime;
 
                     //investissements invesment = new investissements(user_id, project_id, montant, description, date);
                     //serviceInvestissements.add(invesment,currrentproejct.getId(),currentUser.getId());
-
-
-
-
 
 
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

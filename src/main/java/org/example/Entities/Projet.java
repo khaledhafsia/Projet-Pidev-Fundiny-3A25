@@ -76,6 +76,15 @@ public class Projet {
         this.id = id;
     }
 
+    public Projet(int id, int userId, String nomPr, Date dateD, int ca) {
+
+        this.id = id;
+        this.user_id = user_id;
+        this.	nom_pr = 	nom_pr;
+        this.dateD = dateD.toLocalDate();
+        this.CA = CA;
+    }
+
 
     public int getId() {
         return id;

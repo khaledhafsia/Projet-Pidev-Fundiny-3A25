@@ -24,6 +24,7 @@ public class FunderDashboardController {
     @FXML
     private Button SignOutButton;
     public void initData(User user) {
+
         this.currentUser = user;
     }
 
@@ -79,6 +80,39 @@ public class FunderDashboardController {
             Parent root = loader.load();
 
             AllProjectsForFunder controller = loader.getController();
+            controller.initData(currentUser);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void ShowInvestments(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/testC.fxml"));
+            Parent root = loader.load();
+
+            Testcard controller = loader.getController();
+            controller.initData(currentUser);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    private void Reclamation (ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/addReclamation.fxml"));
+            Parent root = loader.load();
+
+            AddReclamationControllers controller = loader.getController();
             //controller.initData(currentUser);
 
             Stage stage = new Stage();
@@ -88,6 +122,7 @@ public class FunderDashboardController {
             e.printStackTrace();
         }
     }
+    /*
     @FXML
     private void InvestmentInterface() {
         try {
@@ -107,6 +142,8 @@ public class FunderDashboardController {
         }
     }
 
+
+     */
 
     @FXML
     private void TacheInterface() {

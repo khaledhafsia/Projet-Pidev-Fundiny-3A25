@@ -39,10 +39,14 @@ import java.util.logging.Logger;
 
 
 public class AllProjectsForFunder {
-
+    private User currentUser;
     @FXML
     private VBox postcardProjet;
     private ServiceProjet serviceProjet;
+    public void initData(User user) {
+
+        this.currentUser = user;
+    }
 
     public AllProjectsForFunder() {
         serviceProjet = new ServiceProjet();
@@ -74,5 +78,6 @@ public class AllProjectsForFunder {
             ex.printStackTrace();
         }
     }
+
 
 }

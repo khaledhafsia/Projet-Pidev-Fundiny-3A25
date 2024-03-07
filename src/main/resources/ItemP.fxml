@@ -16,6 +16,6 @@
        <Label fx:id="dateD" prefHeight="18.0" prefWidth="170.0" text="Label" />
        <Label fx:id="CA" prefHeight="18.0" prefWidth="191.0" text="Label" />
       <Label fx:id="nomPr" prefHeight="18.0" prefWidth="222.0" text="Label" />
-      <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="396.0" text="Invest now !" />
+      <Button mnemonicParsing="false" onAction="#InvestmentInterface" prefHeight="42.0" prefWidth="396.0" text="Invest now !" />
    </children>
 </VBox>

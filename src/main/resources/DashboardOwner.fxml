@@ -50,10 +50,11 @@
                   <Image url="@images/empty-white-grey-studio-backdrop-background.jpg" />
                </image>
             </ImageView>
-            <Button layoutX="19.0" layoutY="118.0" mnemonicParsing="false" onAction="#ProjetInterface" prefHeight="58.0" prefWidth="154.0" text="Got a Project ?" />
-            <Button layoutX="20.0" layoutY="209.0" mnemonicParsing="false" onAction="#ProjetInterface" prefHeight="58.0" prefWidth="155.0" text="Read a blog !" />
-            <Button layoutX="22.0" layoutY="383.0" mnemonicParsing="false" onAction="#ProjetInterface" prefHeight="58.0" prefWidth="155.0" text="Having Problems ?" />
-            <Button layoutX="23.0" layoutY="300.0" mnemonicParsing="false" onAction="#ProjetInterface" prefHeight="58.0" prefWidth="154.0" text="Participate in an Event !" />
+            <Button layoutX="21.0" layoutY="41.0" mnemonicParsing="false" onAction="#ProjetInterface" prefHeight="58.0" prefWidth="154.0" text="Got a Project ?" />
+            <Button layoutX="17.0" layoutY="133.0" mnemonicParsing="false" onAction="#ShowProjects" prefHeight="58.0" prefWidth="155.0" text="Your Projects !" />
+            <Button layoutX="18.0" layoutY="238.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="155.0" text="Read a blog !" />
+            <Button layoutX="17.0" layoutY="324.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="154.0" text="Participate in an Event !" />
+            <Button layoutX="18.0" layoutY="416.0" mnemonicParsing="false" onAction="#Reclamation" prefHeight="58.0" prefWidth="155.0" text="Having Problems ?" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="38.0" layoutY="1.0" prefHeight="156.0" prefWidth="927.0">

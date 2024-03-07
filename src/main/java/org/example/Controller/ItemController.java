@@ -23,8 +23,14 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
-public class ItemController {
+import org.example.Entities.User;
 
+public class ItemController {
+    private User currentUser;
+    public void initData(User user) {
+
+        this.currentUser = user;
+    }
     @FXML
     private HBox itemC;
 
@@ -47,5 +53,24 @@ public class ItemController {
         nomPr.setText(projet.getNomPr());
         dateD.setText(String.valueOf(projet.getDateD()));
         CA.setText(String.valueOf(projet.getCA()));
+    }
+
+    @FXML
+    private void InvestmentInterface() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/addinvestissement.fxml"));
+            Parent root = loader.load();
+
+
+            Addinvestissement controller = loader.getController();
+            controller.initData(currentUser);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

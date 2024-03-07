@@ -57,6 +57,14 @@ public class AfficherProjetController implements Initializable {
     List<Collaboration> lvpc = sc.getAll();
     List<Projet> lvp = sp.getAll();
     @FXML
+    void Retour(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/AjouterProjet.fxml"));
+        Parent my_root = fxmlLoader.load();
+        filterField.getScene().setRoot(my_root);
+
+    }
+
+    @FXML
     void Refresh(ActionEvent event) {
         affichage();
     }

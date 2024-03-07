@@ -63,11 +63,8 @@ public class AjouterProjetController implements Initializable {
     void Afficher(MouseEvent event)throws IOException {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/AfficherProjet.fxml"));
-            Parent my_root = (Parent)fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setTitle("Liste des Projets");
-            stage.setScene(new Scene(my_root));
-            stage.show();
+            Parent my_root = fxmlLoader.load();
+            nomPrT.getScene().setRoot(my_root);
         }
         catch (Exception e){
             System.out.println("FXML file path: " + getClass().getResource("/AfficherProjet.fxml"));

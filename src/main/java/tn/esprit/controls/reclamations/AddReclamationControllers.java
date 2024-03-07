@@ -21,7 +21,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import tn.esprit.services.*;
 public class AddReclamationControllers implements Initializable {
 
     @FXML
@@ -133,13 +133,15 @@ public class AddReclamationControllers implements Initializable {
     private void insert() throws SQLException {
         preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, emailFld.getText());
-// Assuming you have a method like getProjectIDByName in MyDataBase class
-        preparedStatement.setInt(2, cnx.getProjectIDByName(projetComboBox.getValue()));
-        preparedStatement.setInt(3, cnx.getreclamationIDByName(typeReclamationComboBox.getValue()));
-        preparedStatement.setInt(4, cnx.getadminIDByName(adminComboBox.getValue()));
+
+        // Create an instance of the serviceReclamation class
+        serviceReclamation serviceReclamation = new serviceReclamation();
+
+        preparedStatement.setInt(2, serviceReclamation.getProjectIDByName(projetComboBox.getValue()));
+        preparedStatement.setInt(3, serviceReclamation.getreclamationIDByName(typeReclamationComboBox.getValue()));
+        preparedStatement.setInt(4, serviceReclamation.getadminIDByName(adminComboBox.getValue()));
         preparedStatement.setString(5, objetFld.getText());
         preparedStatement.setString(6, texte.getText());
- // Assuming texte is the Description_Reclamation field
 
         preparedStatement.executeUpdate();
     }
@@ -155,18 +157,44 @@ public class AddReclamationControllers implements Initializable {
     }
 
     private void populateAdminComboBox() {
-        MyDataBase myDataBase = MyDataBase.getInstance(); // Use getInstance to get the instance
-        adminComboBox.getItems().addAll(myDataBase.getAllAdminNames());
+        try {
+            MyDataBase cnx = MyDataBase.getInstance(); // Assurez-vous que la classe MyDataBase et sa méthode getInstance sont correctement implémentées
+
+            // Create an instance of the serviceReclamation class
+            serviceReclamation serviceReclamation = new serviceReclamation();
+
+            // Assurez-vous que sT.getAllAdminNames() renvoie une liste valide de noms d'administrateurs
+            adminComboBox.getItems().addAll(serviceReclamation.getAllAdminNames());
+        } catch (Exception e) {
+            e.printStackTrace(); // Gérez les exceptions de manière appropriée dans votre application
+        }
     }
 
+
     private void populateProjetComboBox() {
-        MyDataBase myDataBase = MyDataBase.getInstance(); // Use getInstance to get the instance
-        projetComboBox.getItems().addAll(myDataBase.getAllProjectsNames());
+        try {
+            MyDataBase cnx = MyDataBase.getInstance(); // Use getInstance to get the instance
+
+            // Create an instance of the serviceReclamation class
+            serviceReclamation serviceReclamation = new serviceReclamation();
+
+            projetComboBox.getItems().addAll(serviceReclamation.getAllProjectsNames());
+        } catch (Exception e) {
+            e.printStackTrace(); // Handle exceptions appropriately in your application
+        }
     }
 
     private void populateProblemComboBox() {
-        MyDataBase myDataBase = MyDataBase.getInstance(); // Use getInstance to get the instance
-        typeReclamationComboBox.getItems().addAll(myDataBase.getAllProblemsNames());
+        try {
+            MyDataBase cnx = MyDataBase.getInstance(); // Use getInstance to get the instance
+
+            // Create an instance of the serviceReclamation class
+            serviceReclamation serviceReclamation = new serviceReclamation();
+
+            typeReclamationComboBox.getItems().addAll(serviceReclamation.getAllProblemsNames());
+        } catch (Exception e) {
+            e.printStackTrace(); // Handle exceptions appropriately in your application
+        }
     }
 
     @FXML

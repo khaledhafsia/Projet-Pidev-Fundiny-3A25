@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import tn.esprit.controls.reclamations.AddReclamationControllers;
+import tn.esprit.services.serviceReclamation;
 import tn.esprit.utils.MyDataBase;
 
 import java.io.IOException;
@@ -23,6 +24,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import tn.esprit.services.*;
 
 public class addReponseController implements javafx.fxml.Initializable{
 
@@ -42,6 +44,8 @@ public class addReponseController implements javafx.fxml.Initializable{
     ResultSet resultSet = null;
     PreparedStatement preparedStatement;
     private MyDataBase cnx;
+    private serviceTools sT;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         cnx = MyDataBase.getInstance(); // Initialize the MyDataBase instance
@@ -50,8 +54,15 @@ public class addReponseController implements javafx.fxml.Initializable{
     }
 
     private void populateAdminComboBox() {
-        MyDataBase myDataBase = MyDataBase.getInstance(); // Use getInstance to get the instance
-        userComboBox.getItems().addAll(myDataBase.getAllusersNames());
+        try {
+            MyDataBase myDataBase = MyDataBase.getInstance(); // Use getInstance to get the instance
+            serviceReponse serviceReponse = new serviceReponse();
+
+            userComboBox.getItems().addAll(serviceReponse.getAllUsersNames());
+        }catch (Exception e) {
+            e.printStackTrace(); // Gérez les exceptions de manière appropriée dans votre application
+        }
+
     }
 
     @FXML
@@ -114,13 +125,20 @@ public class addReponseController implements javafx.fxml.Initializable{
     private void insert() throws SQLException {
         preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, emailFld.getText());
-// Assuming you have a method like getProjectIDByName in MyDataBase class
-        preparedStatement.setInt(2, cnx.getAllusersNames(userComboBox.getValue()));
-        preparedStatement.setString(3, objetFld.getText());
-        preparedStatement.setString(4, texte.getText());
-        // Assuming texte is the Description_Reclamation field
 
-        preparedStatement.executeUpdate();
+        // Assuming you have a method like getProjectIDByName in MyDataBase class
+        try {
+            // Create an instance of the serviceReponse class
+            serviceReponse serviceReponse = new serviceReponse();
+            preparedStatement.setInt(2, serviceReponse.getUserIDByName(userComboBox.getValue()));
+            preparedStatement.setString(3, objetFld.getText());
+            preparedStatement.setString(4, texte.getText());
+            // Assuming texte is the Description_Reclamation field
+
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace(); // Handle exceptions appropriately in your application
+        }
     }
 
     private void getQuery() {

@@ -20,6 +20,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import tn.esprit.services.*;
 
 public class reponseViewController implements javafx.fxml.Initializable {
 
@@ -44,10 +45,16 @@ public class reponseViewController implements javafx.fxml.Initializable {
 
     @FXML
     private Button pdfBtn;
+    private serviceTools sT;
+
+
+
     private void loadData() {
         ReponseListView.setItems(RepList);
         try {
-            RepList.addAll(MyDataBase.getInstance().getAllReponse());
+            serviceReponse serviceReponse = new serviceReponse();
+
+            RepList.addAll(serviceReponse.getAllReponses());
 
             ReponseListView.setCellFactory(param -> new ListCell<>() {
                 private final Button editButton = new Button("Edit");
@@ -133,8 +140,9 @@ public class reponseViewController implements javafx.fxml.Initializable {
             stage.showAndWait();
 
             // Refresh the data after adding a new reponse
+            serviceReponse serviceReponse = new serviceReponse();
             RepList.clear();
-            RepList.addAll(MyDataBase.getInstance().getAllReponse());
+            RepList.addAll(serviceReponse.getAllReponses());
 
         } catch (IOException e) {
             Logger.getLogger(reponseViewController.class.getName()).log(Level.SEVERE, null, e);
@@ -148,16 +156,19 @@ public class reponseViewController implements javafx.fxml.Initializable {
     }
 
     private void refreshData() {
+        serviceReponse serviceReponse = new serviceReponse();
+
         RepList.clear();
-        RepList.addAll(MyDataBase.getInstance().getAllReponse());
+        RepList.addAll(serviceReponse.getAllReponses());
     }
 
     @FXML
     private void handleSearch(MouseEvent event) {
         String searchText = searchField.getText().toLowerCase().trim();
+        serviceReponse serviceReponse = new serviceReponse();
 
         // You can add more criteria as needed
-        RepList.setAll(MyDataBase.getInstance().searchResponses(searchText));
+        RepList.setAll(serviceReponse.searchReponses(searchText));
     }
 
     @FXML

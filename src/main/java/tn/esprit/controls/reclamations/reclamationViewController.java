@@ -9,27 +9,18 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import tn.esprit.models.Reclamation;
-import tn.esprit.utils.MyDataBase;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Comparator;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.print.PrinterJob;
-import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
 
-import javax.swing.text.Document;
-
+import tn.esprit.services.*;
 public class reclamationViewController implements javafx.fxml.Initializable {
 
     @FXML
@@ -69,7 +60,10 @@ public class reclamationViewController implements javafx.fxml.Initializable {
     private void loadData() {
         ReclamationListView.setItems(RecList);
         try {
-            RecList.addAll(MyDataBase.getInstance().getAllReclamations());
+            // Create an instance of the serviceReclamation class
+            serviceReclamation serviceReclamation = new serviceReclamation();
+
+            RecList.addAll(serviceReclamation.getAllReclamations());
 
             ReclamationListView.setCellFactory(param -> new ListCell<>() {
                 private final Button editButton = new Button("Edit");
@@ -144,7 +138,10 @@ public class reclamationViewController implements javafx.fxml.Initializable {
     private void getAddReclamation(MouseEvent event) {
         System.out.println("Add button clicked!");
         try {
-            Parent parent = FXMLLoader.load(getClass().getResource("/reclamations/addReclamation.fxml"));
+            // Create an instance of the serviceReclamation class
+            serviceReclamation serviceReclamation = new serviceReclamation();
+
+            Parent parent = FXMLLoader.load(getClass().getResource("/reclamations/addReclamation1.fxml"));
             Scene scene = new Scene(parent);
             Stage stage = new Stage();
             stage.setScene(scene);
@@ -152,7 +149,7 @@ public class reclamationViewController implements javafx.fxml.Initializable {
 
             // Refresh the data after adding a new reclamation
             RecList.clear();
-            RecList.addAll(MyDataBase.getInstance().getAllReclamations());
+            RecList.addAll(serviceReclamation.getAllReclamations());
 
         } catch (IOException e) {
             Logger.getLogger(reclamationViewController.class.getName()).log(Level.SEVERE, null, e);
@@ -167,17 +164,32 @@ public class reclamationViewController implements javafx.fxml.Initializable {
     }
 
     private void refreshData() {
-        RecList.clear();
-        RecList.addAll(MyDataBase.getInstance().getAllReclamations());
+        try {
+            // Create an instance of the serviceReclamation class
+            serviceReclamation serviceReclamation = new serviceReclamation();
+
+            RecList.clear();
+            RecList.addAll(serviceReclamation.getAllReclamations());
+        } catch (Exception e) {
+            Logger.getLogger(reclamationViewController.class.getName()).log(Level.SEVERE, null, e);
+        }
     }
 
     @FXML
     private void handleSearch(MouseEvent event) {
-        String searchText = searchField.getText().toLowerCase().trim();
+        try {
+            // Create an instance of the serviceReclamation class
+            serviceReclamation serviceReclamation = new serviceReclamation();
 
-        // You can add more criteria as needed
-        RecList.setAll(MyDataBase.getInstance().searchReclamations(searchText));
+            String searchText = searchField.getText().toLowerCase().trim();
+
+            // You can add more criteria as needed
+            RecList.setAll(serviceReclamation.searchReclamations(searchText));
+        } catch (Exception e) {
+            Logger.getLogger(reclamationViewController.class.getName()).log(Level.SEVERE, null, e);
+        }
     }
+
 
     @FXML
     private void handlePDF(MouseEvent event) {

@@ -224,5 +224,36 @@ public class AdminController {
         } else {
             System.out.println("userService is null. Cannot fetch users.");
         }}
+    @FXML
+    private void BlogInterface(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/adminView.fxml"));
+            Parent root = loader.load();
 
+            adminControllerBlog controller = loader.getController();
+         //   controller.initData(currentUser);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    private void Reclamation(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/addReponse.fxml"));
+            Parent root = loader.load();
+
+            addReponseController controller = loader.getController();
+            //   controller.initData(currentUser);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

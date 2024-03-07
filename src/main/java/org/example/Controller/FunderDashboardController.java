@@ -160,5 +160,20 @@ public class FunderDashboardController {
             e.printStackTrace();
         }
     }
+    @FXML
+    private void Blog (ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/combined.fxml"));
+            Parent root = loader.load();
 
+            combinedController controller = loader.getController();
+            //controller.initData(currentUser);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

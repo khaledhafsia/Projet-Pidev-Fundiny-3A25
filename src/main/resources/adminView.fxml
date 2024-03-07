@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controller.adminControllerBlog">
+    <content>
+        <VBox fx:id="postContainer" prefHeight="806.0" prefWidth="771.0" spacing="20.0" style="-fx-padding: 20px;">
+            <!-- Add post cards dynamically -->
+        </VBox>
+    </content>
+</ScrollPane>

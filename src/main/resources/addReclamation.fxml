@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="505.0" prefWidth="716.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controls.AddReclamationControllers">
+<AnchorPane prefHeight="505.0" prefWidth="716.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controller.AddReclamationControllers">
    <children>
        <Label layoutX="30.0" layoutY="40.0" text="Envoyer reclamation : " textFill="DARKTURQUOISE">
            <font>

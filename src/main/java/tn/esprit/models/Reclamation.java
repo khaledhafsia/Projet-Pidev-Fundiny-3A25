@@ -4,7 +4,7 @@ public class Reclamation {
 
     private int ID_Reclamation;
     private String email;
-    private int ID_Utilisateur;
+    //private int ID_Utilisateur;
     private int ID_Projet;
     private int ID_Type_Reclamation;
     private int ID_Admin;
@@ -14,9 +14,8 @@ public class Reclamation {
     public Reclamation() {
     }
 
-    public Reclamation(String email, int ID_Utilisateur, int ID_Projet, int ID_Type_Reclamation, int ID_Admin, String objet, String texte) {
+    public Reclamation(String email, int ID_Projet, int ID_Type_Reclamation, int ID_Admin, String objet, String texte) {
         this.email = email;
-        this.ID_Utilisateur = ID_Utilisateur;
         this.ID_Projet = ID_Projet;
         this.ID_Type_Reclamation = ID_Type_Reclamation;
         this.ID_Admin = ID_Admin;
@@ -24,10 +23,9 @@ public class Reclamation {
         this.texte = texte;
     }
 
-    public Reclamation(int ID_Reclamation, String email, int ID_Utilisateur, int ID_Projet, int ID_Type_Reclamation, int ID_Admin, String objet, String texte) {
+    public Reclamation(int ID_Reclamation, String email, int ID_Projet, int ID_Type_Reclamation, int ID_Admin, String objet, String texte) {
         this.ID_Reclamation = ID_Reclamation;
         this.email = email;
-        this.ID_Utilisateur = ID_Utilisateur;
         this.ID_Projet = ID_Projet;
         this.ID_Type_Reclamation = ID_Type_Reclamation;
         this.ID_Admin = ID_Admin;
@@ -49,14 +47,6 @@ public class Reclamation {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public int getID_Utilisateur() {
-        return ID_Utilisateur;
-    }
-
-    public void setID_Utilisateur(int ID_Utilisateur) {
-        this.ID_Utilisateur = ID_Utilisateur;
     }
 
     public int getID_Projet() {

@@ -17,10 +17,11 @@
       </Label>
       <Separator layoutY="101.0" prefHeight="6.0" prefWidth="652.0" />
       <Button layoutX="28.0" layoutY="121.0" mnemonicParsing="false" onMouseClicked="#getAddReponse" prefHeight="30.0" prefWidth="60.0" text="Add" />
-      <Button layoutX="110.0" layoutY="118.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Print" />
-      <Button layoutX="189.0" layoutY="118.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Refresh" />
-      <TextField fx:id="SearchFld" layoutX="394.0" layoutY="119.0" prefHeight="30.0" prefWidth="166.0" />
-      <Button layoutX="578.0" layoutY="117.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Search" />
+      <Button fx:id="printBtn" layoutX="108.0" layoutY="121.0" mnemonicParsing="false" onMouseClicked="#handlePrint" prefHeight="30.0" prefWidth="60.0" text="Print" />
+      <Button fx:id="refreshBtn" layoutX="187.0" layoutY="121.0" mnemonicParsing="false" onMouseClicked="#handleRefresh" prefHeight="30.0" prefWidth="60.0" text="Refresh" />
+      <TextField fx:id="searchField" layoutX="394.0" layoutY="119.0"  prefHeight="30.0" prefWidth="166.0" />
+      <Button layoutX="578.0" layoutY="117.0" mnemonicParsing="false" onMouseClicked="#handleSearch" prefHeight="30.0" prefWidth="60.0" text="Search" />
       <ListView fx:id="ReponseListView" layoutX="28.0" layoutY="180.0" prefHeight="200.0" prefWidth="606.0" />
+      <Button fx:id="pdfBtn" layoutX="271.0" layoutY="121.0" mnemonicParsing="false" onMouseClicked="#handlePDF"prefHeight="30.0" prefWidth="60.0" text="PDF" />
    </children>
 </AnchorPane>

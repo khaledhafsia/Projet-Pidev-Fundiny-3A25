@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <VBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11"
-      fx:controller="tn.esprit.controls.reponses.CardViewRep" stylesheets="@RepCard.css">
+      fx:controller="tn.esprit.controls.reponses.CardViewRep" stylesheets="/reponses/RepCard.css">
     <children>
         <VBox fx:id="reponse_Vbox" alignment="CENTER" prefHeight="200.0" prefWidth="300.0" spacing="10.0">
             <children>

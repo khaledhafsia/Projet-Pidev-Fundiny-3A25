@@ -139,7 +139,6 @@ public class CardViewRec implements javafx.fxml.Initializable {
             Reclamation updatedReclamation = new Reclamation(
                     ID_Reclamation,
                     emailField.getText(),
-                    Integer.parseInt(userIDField.getText()),
                     Integer.parseInt(projectIDField.getText()),
                     Integer.parseInt(typeIDField.getText()),
                     Integer.parseInt(adminIDField.getText()),
@@ -163,7 +162,6 @@ public class CardViewRec implements javafx.fxml.Initializable {
         this.ID_Reclamation = reclamation.getID_Reclamation();
 
         email_card.setText(reclamation.getEmail());
-        user_id_card.setText(String.valueOf(reclamation.getID_Utilisateur()));
         project_id_card.setText(String.valueOf(reclamation.getID_Projet()));
         type_id_card.setText(String.valueOf(reclamation.getID_Type_Reclamation()));
         admin_id_card.setText(String.valueOf(reclamation.getID_Admin()));

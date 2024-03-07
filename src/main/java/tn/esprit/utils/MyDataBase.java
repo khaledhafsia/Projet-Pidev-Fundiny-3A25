@@ -281,5 +281,80 @@ public class MyDataBase {
         }
     }
 
+    public List<Reclamation> searchReclamations(String searchText) {
+        List<Reclamation> result = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "SELECT * FROM reclamations " +
+                             "WHERE LOWER(email) LIKE ? OR " +
+                             "LOWER(objet) LIKE ? OR " +
+                             "LOWER(texte) LIKE ?")) {
+
+            String searchString = "%" + searchText.toLowerCase() + "%";
+            preparedStatement.setString(1, searchString);
+            preparedStatement.setString(2, searchString);
+            preparedStatement.setString(3, searchString);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("ID_Reclamation");
+                    String email = resultSet.getString("email");
+                    //int userId = resultSet.getInt("ID_Utilisateur");
+                    int projectId = resultSet.getInt("ID_Projet");
+                    int typeId = resultSet.getInt("ID_Type_Reclamation");
+                    int adminId = resultSet.getInt("ID_Admin");
+                    String objet = resultSet.getString("objet");
+                    String texte = resultSet.getString("texte");
+
+                    Reclamation reclamation = new Reclamation(id, email, projectId, typeId, adminId, objet, texte);
+                    result.add(reclamation);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception as needed
+        }
+
+        return result;
+    }
+
+    public List<Reponse> searchResponses(String searchText) {
+        List<Reponse> result = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "SELECT * FROM reponses " +
+                             "WHERE LOWER(email) LIKE ? OR " +
+                             "LOWER(objet) LIKE ? OR " +
+                             "LOWER(texte) LIKE ?")) {
+
+            String searchString = "%" + searchText.toLowerCase() + "%";
+            preparedStatement.setString(1, searchString);
+            preparedStatement.setString(2, searchString);
+            preparedStatement.setString(3, searchString);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("ID_Reponse");
+                    String email = resultSet.getString("email");
+                    int userId = resultSet.getInt("ID_utilisateur");
+                    String objet = resultSet.getString("objet");
+                    String texte = resultSet.getString("texte");
+
+                    Reponse reponse = new Reponse(id, userId, email, objet, texte);
+                    result.add(reponse);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle the exception as needed
+        }
+
+        return result;
+    }
+
 
 }

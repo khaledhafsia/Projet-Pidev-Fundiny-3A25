@@ -4,6 +4,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.print.PrinterJob;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -15,10 +17,10 @@ import tn.esprit.utils.MyDataBase;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 public class reponseViewController implements javafx.fxml.Initializable {
 
     @FXML
@@ -31,23 +33,31 @@ public class reponseViewController implements javafx.fxml.Initializable {
         loadData();
     }
 
+    @FXML
+    private TextField searchField;
+
+    @FXML
+    private Button refreshBtn;
+
+    @FXML
+    private Button printBtn;
+
+    @FXML
+    private Button pdfBtn;
     private void loadData() {
         ReponseListView.setItems(RepList);
         try {
             RepList.addAll(MyDataBase.getInstance().getAllReponse());
 
             ReponseListView.setCellFactory(param -> new ListCell<>() {
-                private final Button deleteButton = new Button("Delete");
                 private final Button editButton = new Button("Edit");
 
                 {
-                    deleteButton.setStyle("-fx-cursor: hand; -fx-base: #ff1744;");
                     editButton.setStyle("-fx-cursor: hand; -fx-base: #00E676;");
 
-                    deleteButton.setOnAction(event -> handleDeleteReponse());
                     editButton.setOnAction(event -> handleEditReponse());
 
-                    HBox buttons = new HBox(deleteButton, editButton);
+                    HBox buttons = new HBox(editButton);
                     buttons.setStyle("-fx-alignment:center");
                     setGraphic(buttons);
 
@@ -67,25 +77,8 @@ public class reponseViewController implements javafx.fxml.Initializable {
                         setText(null);
                         setGraphic(null);
                     } else {
-                        setText("ID: " + item.getID_Reponse() + ", Email: " + item.getemail() +
-                                ", User ID: " + item.getID_Utilisateur() + ", Objet: " + item.getobjet());
+                        setText("ID: " +item.getID_Reponse()+", User ID: " + item.getID_Utilisateur() + ", Objet: " + item.getobjet());
                         setGraphic(getGraphic());
-                    }
-                }
-
-                private void handleDeleteReponse() {
-                    Reponse selectedReponse = getItem();
-                    if (selectedReponse != null) {
-                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                        alert.setTitle("Delete Confirmation");
-                        alert.setHeaderText("Are you sure you want to delete this reclamation?");
-                        alert.setContentText("This action cannot be undone.");
-
-                        Optional<ButtonType> result = alert.showAndWait();
-                        if (result.isPresent() && result.get() == ButtonType.OK) {
-                            MyDataBase.getInstance().deleteReponse(selectedReponse);
-                            RepList.remove(selectedReponse);
-                        }
                     }
                 }
 
@@ -147,7 +140,55 @@ public class reponseViewController implements javafx.fxml.Initializable {
             Logger.getLogger(reponseViewController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
+    @FXML
+    private void handleRefresh(MouseEvent event) {
+        // Refresh the data
+        refreshData();
+
+    }
+
+    private void refreshData() {
+        RepList.clear();
+        RepList.addAll(MyDataBase.getInstance().getAllReponse());
+    }
+
+    @FXML
+    private void handleSearch(MouseEvent event) {
+        String searchText = searchField.getText().toLowerCase().trim();
+
+        // You can add more criteria as needed
+        RepList.setAll(MyDataBase.getInstance().searchResponses(searchText));
+    }
+
+    @FXML
+    private void handlePDF(MouseEvent event) {
+        // Specify the path where you want to save the PDF
+        String outputPath = "C:/Users/Amine/Desktop/Reponse.pdf";
+
+        // Call the exportToPDF method from ExportToPDF class
+        ExportToPDF.exportToPDF(RepList, outputPath);
+
+        // Optionally, show an alert indicating that the PDF has been generated
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("PDF Generation");
+        alert.setHeaderText(null);
+        alert.setContentText("PDF generated successfully.");
+        alert.showAndWait();
+    }
+
+    @FXML
+    private void handlePrint(MouseEvent event) {
+        Node nodeToPrint = ReponseListView.getScene().getRoot();
+
+        PrinterJob printerJob = PrinterJob.createPrinterJob();
+
+        if (printerJob != null && printerJob.showPrintDialog(nodeToPrint.getScene().getWindow())) {
+            boolean success = printerJob.printPage(nodeToPrint);
+
+            if (success) {
+                printerJob.endJob();
+            }
+        }
+    }
+
 }
-
-
-

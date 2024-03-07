@@ -40,7 +40,6 @@ public class serviceReclamation implements IServices<Reclamation> {
             while (rs.next()) {
                 Reclamation r = new Reclamation();
                 r.setEmail(rs.getString("email"));
-                r.setID_Utilisateur(rs.getInt("ID_Utilisateur"));
                 r.setID_Projet(rs.getInt("ID_Projet"));
                 r.setID_Type_Reclamation(rs.getInt("ID_Type_Reclamation"));
                 r.setID_Admin(rs.getInt("ID_Admin"));

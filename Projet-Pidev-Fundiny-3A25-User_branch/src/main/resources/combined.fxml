@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="693.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controller.combinedController">
+    <children>
+        <!-- Make a post section -->
+        <Label fx:id="titre" layoutX="14.0" layoutY="14.0" text="Make a post">
+            <font>
+                <Font name="Candara Light" size="25.0" />
+            </font>
+        </Label>
+        <TextField fx:id="tfdescription2" layoutX="14.0" layoutY="49.0" prefHeight="38.0" prefWidth="805.0" promptText="What's on your mind ?....">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </TextField>
+        <Button layoutX="760.0" layoutY="136.0" mnemonicParsing="false" onAction="#btnCREATEClicked" text="Create" />
+        <Button layoutX="761.0" layoutY="95.0" mnemonicParsing="false" onAction="#selectImageClicked" text="Image" textAlignment="CENTER" />
+        <TextField fx:id="searchField" promptText="Search by description" />
+        <!-- Posts section -->
+        <ScrollPane fitToHeight="true" fitToWidth="true" layoutY="188.8" prefHeight="504.0" prefWidth="840.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="189.0">
+            <content>
+                <VBox fx:id="postContainer" prefHeight="806.0" prefWidth="771.0" spacing="20.0" style="-fx-padding: 20px;">
+                </VBox>
+            </content>
+        </ScrollPane>
+    </children>
+</AnchorPane>

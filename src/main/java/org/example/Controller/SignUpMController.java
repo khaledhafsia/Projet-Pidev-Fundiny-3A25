@@ -1,26 +1,26 @@
 package org.example.Controller;
 
-        import org.example.Entities.Funder;
-        import org.example.Entities.Owner;
-        import org.example.Entities.User;
-        import org.example.Services.ServiceUser;
-        import javafx.event.ActionEvent;
-        import javafx.fxml.FXML;
-        import javafx.fxml.Initializable;
-        import javafx.scene.control.Alert;
-        import javafx.scene.control.Button;
-        import javafx.scene.control.RadioButton;
-        import javafx.scene.control.TextField;
-        import javafx.scene.control.ToggleGroup;
-        import org.mindrot.jbcrypt.BCrypt;
+import org.example.Entities.Funder;
+import org.example.Entities.Owner;
+import org.example.Entities.User;
+import org.example.Services.ServiceUser;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+import org.mindrot.jbcrypt.BCrypt;
 
-        import java.io.IOException;
-        import java.net.URL;
-        import java.util.ResourceBundle;
-        import javafx.fxml.FXMLLoader;
-        import javafx.scene.Parent;
-        import javafx.scene.Scene;
-        import javafx.stage.Stage;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 public class SignUpMController implements Initializable {
 
     @FXML
@@ -98,8 +98,9 @@ public class SignUpMController implements Initializable {
             } else if (rbfunder.isSelected()) {
                 Funder funder = new Funder(nom, prenom, email, hashpwd, User.role.Funder);
                 ServiceUser.insertUser(funder);
-               // ServiceUser.insertUser(funder, String.valueOf(funder.getInvestmentsList()), "montant");
+                // ServiceUser.insertUser(funder, String.valueOf(funder.getInvestmentsList()), "montant");
             } else if (rbadmin.isSelected()) {
+
                 User user = new User( nom, prenom, email, hashpwd, User.role.ADMIN);
 
 
@@ -108,6 +109,9 @@ public class SignUpMController implements Initializable {
                 showAlert("Please select the type of account to create.");
                 return;
             }
+            EmailSending.sendVerificationEmail(email);
+
+            showAlert("A verification email has been sent to your email address. Please verify your email before proceeding.", Alert.AlertType.INFORMATION);
 
             showAlert("Registration successful!", Alert.AlertType.INFORMATION);
         } catch (Exception ex) {

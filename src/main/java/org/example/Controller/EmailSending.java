@@ -1,4 +1,5 @@
 package org.example.Controller;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -42,6 +43,38 @@ public class EmailSending {
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Failed to send email: " + e.getMessage());
+        }
+    }
+    public static void sendVerificationEmail(String recipientEmail) {
+        String senderEmail = "namelessthe94@gmail.com"; // Update with your email
+        String senderPassword = "nxognceslogwpmup"; // Update with your password
+
+        Properties props = System.getProperties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        Session session = Session.getInstance(props, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(senderEmail, senderPassword);
+            }
+        });
+
+        try {
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(senderEmail));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipientEmail));
+            message.setSubject("Email Verification");
+            message.setText("Click the button below to verify your email:\n\n"
+                    + "<a href=\"http://yourwebsite.com/verify\">Verify Email</a>");
+
+            Transport.send(message);
+            System.out.println("Verification email sent successfully...");
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Failed to send verification email: " + e.getMessage());
         }
     }
 }

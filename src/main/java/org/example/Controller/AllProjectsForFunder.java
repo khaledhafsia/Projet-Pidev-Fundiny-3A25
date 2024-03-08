@@ -61,13 +61,12 @@ public class AllProjectsForFunder {
             for (Projet projet : projetList) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/ItemP.fxml"));
                 VBox postCard = loader.load();
-                Node node = loader.getRoot(); // Get the root node loaded from FXML
+                Node node = loader.getRoot();
                 if (node instanceof VBox) {
                     ItemController controller = loader.getController();
                     controller.initialize(projet, this);
-                    postcardProjet.getChildren().add((VBox) node); // Add the node to postcardProjet
+                    postcardProjet.getChildren().add((VBox) node);
                 } else {
-                    // Handle the case where the loaded node is not a VBox
                     System.err.println("Error: Loaded node is not a VBox");
                 }
             }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="afficherprod" maxWidth="1.0" prefHeight="500.0" prefWidth="500.0"
+            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.Controller.ListEventController">
+<children>
+    <Button fx:id="add_id" layoutX="6.0" mnemonicParsing="false" onAction="#add_page" prefHeight="42.0"
+            prefWidth="82.0" text="Add" />
+    <ScrollPane hbarPolicy="ALWAYS" layoutY="43.0" prefHeight="500.0" prefWidth="500.0" vbarPolicy="ALWAYS">
+        <content>
+            <FlowPane fx:id="cardlyout" layoutX="20.0" maxWidth="0.5" prefHeight="500.0" prefWidth="500.0" />
+        </content>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+    </ScrollPane>
+    <Button fx:id="reload_id" layoutX="140.0" mnemonicParsing="false" onAction="#reload_page" prefHeight="42.0"
+            prefWidth="82.0" text="Reload" />
+</children>
+</AnchorPane>

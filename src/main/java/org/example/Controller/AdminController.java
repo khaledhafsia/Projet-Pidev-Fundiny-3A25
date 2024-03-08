@@ -127,11 +127,11 @@ public class AdminController {
 
     public void banCurrentUser(int id) {
         userService.banUser(id);
-        initialize(); // Refresh user list after banning
+        initialize();
     }
     public void UnbanCurrentUser(int id) {
         userService.unbanUser(id);
-        initialize(); // Refresh user list after banning
+        initialize();
     }
 
 
@@ -227,10 +227,10 @@ public class AdminController {
     @FXML
     private void BlogInterface(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/adminView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/combined.fxml"));
             Parent root = loader.load();
 
-            adminControllerBlog controller = loader.getController();
+            combinedController controller = loader.getController();
          //   controller.initData(currentUser);
 
             Stage stage = new Stage();
@@ -247,6 +247,22 @@ public class AdminController {
             Parent root = loader.load();
 
             addReponseController controller = loader.getController();
+            //   controller.initData(currentUser);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    private void Event (ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListEvent.fxml"));
+            Parent root = loader.load();
+
+            ListEventController controller = loader.getController();
             //   controller.initData(currentUser);
 
             Stage stage = new Stage();

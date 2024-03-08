@@ -19,6 +19,7 @@ public class OwnerDashboardController {
     @FXML
     private Label nameLabel;
 
+
     @FXML
     private Button SignOutButton;
     public void initData(User user) {
@@ -134,5 +135,38 @@ public class OwnerDashboardController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    @FXML
+    private void Event (ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Form.fxml"));
+            Parent root = loader.load();
+
+            FormController controller = loader.getController();
+            //controller.initData(currentUser);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    private void handleUpdateAction(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UpdateUser.fxml"));
+            Parent root = loader.load();
+
+            UpdateUserController controller = loader.getController();
+            controller.initData(currentUser);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }

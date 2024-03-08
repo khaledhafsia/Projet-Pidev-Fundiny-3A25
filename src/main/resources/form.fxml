@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane  xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.Controller.FormController">
+
+    <GridPane alignment="center" hgap="10" prefHeight="543.0" prefWidth="631.0" vgap="10"
+              xmlns:fx="http://javafx.com/fxml">
+
+        <Button onAction="#back_button" text="Back" GridPane.columnIndex="0" GridPane.columnSpan="2"
+                GridPane.rowIndex="0" />
+
+
+
+        <Label text="Formulaire de demande de financement" textAlignment="CENTER" underline="true"
+               GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="0">
+         <font>
+            <Font name="System Bold Italic" size="22.0" />
+         </font></Label>
+
+        <Label text="Nom :" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <TextField fx:id="nomField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+        <Label text="Description :" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <TextArea fx:id="descriptionField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+        <Label text="Date de début :" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <DatePicker fx:id="dateDebutField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+        <Label text="Date de fin :" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <DatePicker fx:id="dateFinField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+        <Label text="Objectif de financement :" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+
+        <Spinner fx:id="objectifFSpinner" editable="true" prefHeight="40" prefWidth="100" GridPane.columnIndex="1"
+                 GridPane.rowIndex="5">
+            <valueFactory>
+                <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="1" initialValue="0" max="100" min="0" />
+            </valueFactory>
+        </Spinner>
+
+
+        <Label text="Montant collecte:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+        <Spinner fx:id="MontantFSpinner" editable="true" prefHeight="40" prefWidth="100" GridPane.columnIndex="1" GridPane.rowIndex="6">
+            <valueFactory>
+                <SpinnerValueFactory.IntegerSpinnerValueFactory amountToStepBy="1" initialValue="0" max="100" min="0" />
+            </valueFactory>
+        </Spinner>
+
+
+        <Label text="Catégorie :" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+        <TextField fx:id="CategorieField" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+
+
+        <Button  fx:id="submitButton" onAction="#submit_action" prefHeight="50" prefWidth="200"
+                 text="Soumettre" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER"
+                 GridPane.rowIndex="8" GridPane.valignment="CENTER" style="-fx-font-family: Arial;
+                 -fx-font-size: 24px;"></Button>
+      <columnConstraints>
+         <ColumnConstraints />
+         <ColumnConstraints />
+         <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+         <RowConstraints />
+      </rowConstraints>
+    </GridPane>
+
+</AnchorPane>

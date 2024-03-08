@@ -12,6 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import org.example.Entities.Owner;
+import org.example.Entities.Projet;
 import org.example.Entities.User;
 import org.example.Entities.investissements;
 import org.example.Services.serviceInvestissements;
@@ -39,49 +40,53 @@ import java.time.LocalDateTime;
 
         private User currentUser;
 
-        public void initData(User user) {this.currentUser = user;}
+        private Projet currentproject;
+        public void initData(User user,Projet projet) {
+
+            this.currentUser = user;
+            this.currentproject = projet;
+
+        }
         private SignInController signInController;
 
         public void setSignInController(SignInController signInController) {this.signInController = signInController;}
 
         // private User getCurrentUser() { return signInController.getCurrentUser();}
 
-        public void initialize(User user,SignInController signInController) {
+        public void initialize(User user,Projet projet,SignInController signInController) {
             this.currentUser = user;
+            this.currentproject = projet;
+
             this.signInController = signInController;
             this.currentUser = signInController.getCurrentUser();
 
         }    @FXML
         void ajouterBtn(ActionEvent event) throws SQLException {
             Timestamp currentTimestamp = Timestamp.valueOf(LocalDateTime.now());
-            if (isInputValid() && currentUser != null) {
+            if ( currentUser != null) {
                 try {
                     Double montant = Double.parseDouble(tfmontant.getText());
                     String description = tfdescription.getText();
-                    Timestamp date= currentTimestamp;
+                    Timestamp date = currentTimestamp;
 
-                    investissements invesment = new investissements( 1, montant, description, date);
+                    // investissements invesment = new investissements( 1, montant, description, date);
                     //investissements invesment = new investissements( montant, description, date);
-                    serviceInvestissements.add(invesment,currentUser.getId());
-
-                    //investissements invesment = new investissements(user_id, project_id, montant, description, date);
-                    //serviceInvestissements.add(invesment,currrentproejct.getId(),currentUser.getId());
+                    //serviceInvestissements.add(invesment,currentproject.getId());
+                    //serviceInvestissements.add(invesment,currentUser.getId());
+                    investissements invesment = new investissements(currentproject.getId(), currentUser.getId(), montant, description, date);
+                    serviceInvestissements.add(invesment, currentproject.getId(), currentUser.getId());
 
 
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Success");
                     alert.setContentText("Investissement ajoutée");
                     alert.showAndWait();
+                    clearFields();
                 } catch (NumberFormatException e) {
                     e.printStackTrace(); // Handle NumberFormatException appropriately
                 }
-                clearFields();
-            } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Erreur de validation");
-                alert.setHeaderText("Veuillez corriger les champs invalides.");
-                alert.setContentText("Tous les champs sont requis !\n le montant doit être un chiffre ! ");
-                alert.showAndWait();
+
+
             }
         }
 

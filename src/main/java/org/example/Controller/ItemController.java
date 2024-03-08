@@ -27,9 +27,12 @@ import org.example.Entities.User;
 
 public class ItemController {
     private User currentUser;
-    public void initData(User user) {
+    private Projet currentproject;
+    public void initData(User user,Projet projet) {
 
         this.currentUser = user;
+        this.currentproject = projet;
+
     }
     @FXML
     private HBox itemC;
@@ -43,7 +46,7 @@ public class ItemController {
     @FXML
     private Label CA;
 
-    private Projet currentproject;
+
 
     private AllProjectsForFunder allProjectsForFunder;
 
@@ -63,7 +66,7 @@ public class ItemController {
 
 
             Addinvestissement controller = loader.getController();
-            controller.initData(currentUser);
+            controller.initData(currentUser,currentproject);
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root));

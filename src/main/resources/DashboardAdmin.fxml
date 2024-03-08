@@ -33,9 +33,9 @@
                         
                                     <Button fx:id="RefreshButton" layoutX="51.0" layoutY="511.0" mnemonicParsing="false" onAction="#handleRefresh" prefHeight="30.0" prefWidth="129.0" text="Refresh" />
             <Button layoutX="36.0" layoutY="41.0" mnemonicParsing="false" onAction="#DashboardAdmin" prefHeight="71.0" prefWidth="158.0" text="Gestionaire ultlisateur " />
-            <Button layoutX="36.0" layoutY="140.0" mnemonicParsing="false" onAction="#BlogInterface" prefHeight="63.0" prefWidth="158.0" text="Gestionaire blog" />
-            <Button layoutX="36.0" layoutY="230.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="158.0" text="Gestionaire Evenement" />
-            <Button layoutX="37.0" layoutY="344.0" mnemonicParsing="false" onAction="#Reclamation" prefHeight="71.0" prefWidth="167.0" text="Gestionaire Reclamation" />
+               <Button layoutX="36.0" layoutY="140.0" mnemonicParsing="false" onAction="#BlogInterface" prefHeight="63.0" prefWidth="158.0" text="Gestionaire blog" />
+            <Button layoutX="36.0" layoutY="230.0" mnemonicParsing="false" onAction="#Event" prefHeight="71.0" prefWidth="158.0" text="Gestionaire Evenement" />
+            <Button layoutX="32.0" layoutY="327.0" mnemonicParsing="false" onAction="#Reclamation" prefHeight="71.0" prefWidth="167.0" text="Gestionaire Reclamation" />
 
                                  </children>
       </Pane>

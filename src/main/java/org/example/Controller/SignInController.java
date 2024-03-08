@@ -75,6 +75,8 @@ public class SignInController{
             if (user.isBanState()) {
                 showAlert("You are banned!");
                 System.out.println("Ban state: " + user.isBanState());
+                openBanInterface( event, user);
+
             }
             if (user != null && user.getRole() != null)  {
                 currentUser = user;
@@ -110,6 +112,20 @@ public class SignInController{
                 openDefaultInterface(event);
                 break;
         }
+    }
+    private void openBanInterface( ActionEvent event, User user) throws IOException {
+     //   private void openBanInterface(User.banState , ActionEvent event, User user) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/BannedInterface.fxml"));
+        Parent parent = loader.load();
+        Scene scene = new Scene(parent);
+
+        FunderDashboardController controller = loader.getController();
+        controller.initData(user);
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
     private void openFunderInterface(ActionEvent event, User user) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/DashboardFunder.fxml"));

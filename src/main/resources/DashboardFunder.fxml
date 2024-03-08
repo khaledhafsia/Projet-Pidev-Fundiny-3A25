@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.ScatterChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -8,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="927.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controller.FunderDashboardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="666.0" prefWidth="1099.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controller.FunderDashboardController">
    <children>
       <Label fx:id="nameLabel" layoutX="39.0" layoutY="62.0" prefHeight="31.0" prefWidth="167.0" textFill="RED" />
       <AnchorPane layoutX="-5.0" layoutY="156.0" prefHeight="515.0" prefWidth="167.0">
@@ -18,22 +21,12 @@
                   <Image url="@images/empty-white-grey-studio-backdrop-background.jpg" />
                </image>
             </ImageView>
-            <Button layoutX="27.0" layoutY="60.0" mnemonicParsing="false" onAction="#AllProjects" prefHeight="58.0" prefWidth="155.0" text="Looking to invest ?" />
-            <Button layoutX="25.0" layoutY="144.0" mnemonicParsing="false" onAction="#ShowInvestments" prefHeight="58.0" prefWidth="155.0" text="Follow your Investments !" />
-            <Button layoutX="25.0" layoutY="229.0" mnemonicParsing="false" onAction="#Blog" prefHeight="58.0" prefWidth="155.0" text="Read a blog !" />
-            <Button layoutX="25.0" layoutY="321.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="155.0" text="Participate in an Event !" />
-            <Button layoutX="25.0" layoutY="404.0" mnemonicParsing="false" onAction="#Reclamation" prefHeight="58.0" prefWidth="155.0" text="Having Problems ?" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="1.0" prefHeight="156.0" prefWidth="927.0">
-         <children>
-            <ImageView fitHeight="128.0" fitWidth="936.0" layoutX="-10.0">
-               <image>
-                  <Image url="@images/empty-white-grey-studio-backdrop-background.jpg" />
-               </image>
-            </ImageView>
-             <Label fx:id="titleLabel" layoutX="40.0" layoutY="22.0" prefHeight="31.0" prefWidth="167.0" text="Weclcome to funder interface" textFill="RED" />
-            <Button fx:id="SignOutButton" alignment="BASELINE_LEFT" graphicTextGap="8.0" layoutX="686.0" layoutY="6.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#SignOut" opacity="0.68" prefHeight="92.0" prefWidth="242.0" styleClass="passoublie-btn" stylesheets="@Style.css" text="Sign out">
+            <Button layoutX="30.0" layoutY="22.0" mnemonicParsing="false" onAction="#AllProjects" prefHeight="58.0" prefWidth="155.0" text="Looking to invest ?" />
+            <Button layoutX="30.0" layoutY="93.0" mnemonicParsing="false" onAction="#ShowInvestments" prefHeight="58.0" prefWidth="155.0" text="Follow your Investments !" />
+            <Button layoutX="30.0" layoutY="167.0" mnemonicParsing="false" onAction="#Blog" prefHeight="58.0" prefWidth="155.0" text="Read a blog !" />
+            <Button layoutX="27.0" layoutY="244.0" mnemonicParsing="false" onAction="#Event"  prefHeight="58.0" prefWidth="155.0" text="Participate in an Event !" />
+            <Button layoutX="30.0" layoutY="330.0" mnemonicParsing="false" onAction="#Reclamation" prefHeight="58.0" prefWidth="155.0" text="Having Problems ?" />
+            <Button fx:id="changepw" alignment="BASELINE_LEFT" graphicTextGap="8.0" layoutX="20.0" layoutY="470.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleUpdateAction" opacity="0.68" prefHeight="31.0" prefWidth="176.0" styleClass="passoublie-btn" stylesheets="@Style.css" text="Want to change your password ?">
                <padding>
                   <Insets left="15.0" />
                </padding>
@@ -43,6 +36,35 @@
             </Button>
          </children>
       </AnchorPane>
+      <AnchorPane layoutX="1.0" prefHeight="156.0" prefWidth="927.0">
+         <children>
+            <ImageView fitHeight="128.0" fitWidth="1105.0" layoutX="-10.0">
+               <image>
+                  <Image url="@images/empty-white-grey-studio-backdrop-background.jpg" />
+               </image>
+            </ImageView>
+             <Label fx:id="titleLabel" layoutX="14.0" layoutY="14.0" prefHeight="31.0" prefWidth="252.0" text="Weclcome to funder interface" textFill="#00ff42">
+               <font>
+                  <Font size="17.0" />
+               </font></Label>
+            <Button fx:id="SignOutButton" alignment="BASELINE_LEFT" graphicTextGap="15.0" layoutX="988.0" layoutY="64.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#SignOut" opacity="0.68" prefHeight="58.0" prefWidth="94.0" styleClass="passoublie-btn" stylesheets="@Style.css" text="Sign out" textFill="#8c1111">
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <ScatterChart layoutX="284.0" layoutY="198.0" prefHeight="400.0" prefWidth="615.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </ScatterChart>
 
    </children>
 </AnchorPane>

@@ -120,6 +120,8 @@
                     }
 
 
+
+
  */
 
 
@@ -165,12 +167,14 @@
                     while (resultSet.next()) {
                         int invID = resultSet.getInt("id");
                         int user_id = resultSet.getInt("user_id");
-                        int projetID = resultSet.getInt("projet_id");
-                        double montant = resultSet.getDouble("montant");
-                        String description = resultSet.getString("description");
-                        java.sql.Timestamp date = resultSet.getTimestamp("date");
+                        //int projetID = resultSet.getInt("projet_id");
+                        //double montant = resultSet.getDouble("montant");
+                        //String description = resultSet.getString("description");
+                        //java.sql.Timestamp date = resultSet.getTimestamp("date");
 
-                        investissements inv = new investissements(invID, user_id, projetID, montant, description, date);
+                        //investissements inv = new investissements(invID, user_id, projetID, montant, description, date);
+                       // investissements inv = new investissements(invID, user_id, description, date);
+                        investissements inv = new investissements(invID);
 
                         investmentsList.add(inv);
                     }

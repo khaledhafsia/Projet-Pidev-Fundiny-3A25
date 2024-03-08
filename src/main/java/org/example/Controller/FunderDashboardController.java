@@ -93,10 +93,10 @@ public class FunderDashboardController {
     @FXML
     private void ShowInvestments(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/testC.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/InvesmentsOfFunder.fxml"));
             Parent root = loader.load();
 
-            Testcard controller = loader.getController();
+            InvesmentsOfFunderController controller = loader.getController();
             controller.initData(currentUser);
 
             Stage stage = new Stage();
@@ -122,7 +122,58 @@ public class FunderDashboardController {
             e.printStackTrace();
         }
     }
-    /*
+
+
+    @FXML
+    private void Blog (ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/combined.fxml"));
+            Parent root = loader.load();
+
+            combinedController controller = loader.getController();
+            //controller.initData(currentUser);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    private void Event (ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListEvent.fxml"));
+            Parent root = loader.load();
+
+            ListEventController controller = loader.getController();
+            //controller.initData(currentUser);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    private void handleUpdateAction(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UpdateUser.fxml"));
+            Parent root = loader.load();
+
+            UpdateUserController controller = loader.getController();
+            controller.initData(currentUser);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+        /*
     @FXML
     private void InvestmentInterface() {
         try {
@@ -145,35 +196,5 @@ public class FunderDashboardController {
 
      */
 
-    @FXML
-    private void TacheInterface() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/addtache.fxml"));
-            Parent root = loader.load();
-
-            Addtache controller = loader.getController();
-            //controller.initData(currentUser);
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    @FXML
-    private void Blog (ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/combined.fxml"));
-            Parent root = loader.load();
-
-            combinedController controller = loader.getController();
-            //controller.initData(currentUser);
-
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }
+

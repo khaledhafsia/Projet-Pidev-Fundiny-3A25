@@ -7,6 +7,8 @@ import javafx.stage.Stage;
 import org.example.Entities.User;
 import org.example.Services.ServiceUser;
 import javafx.event.ActionEvent;
+import org.mindrot.jbcrypt.BCrypt;
+import org.apache.commons.codec.digest.DigestUtils;
 import java.sql.SQLException;
 import java.sql.SQLException;
 
@@ -19,11 +21,20 @@ public class UpdateUserController {
 
     private User currentUser;
 
-    // Method to initialize data, called from PostCardController
-    //public void initData(User user, AdminController adminController) {
         public void initData(User user ){
-        //this.adminController = adminController;
         this.currentUser = user;
+    }
+
+    @FXML
+    private void GeneratePassWord(ActionEvent event) {
+        String timestamp = String.valueOf(System.currentTimeMillis());
+        String attributeValue = DigestUtils.sha256Hex(timestamp);
+
+        ServiceUser serviceUser = new ServiceUser();
+        String hashpwd = BCrypt.hashpw(attributeValue, BCrypt.gensalt());
+        serviceUser.updateUserAttribute(currentUser.getId(), "password", hashpwd);
+
+        showAlert("Password generated: " + attributeValue, Alert.AlertType.INFORMATION);
     }
 
     @FXML
@@ -31,13 +42,8 @@ public class UpdateUserController {
         String attributeValue = attributeField.getText();
         if (!attributeValue.isEmpty()) {
             ServiceUser serviceUser = new ServiceUser();
-            // Check user role to determine which attribute to update
-            if (currentUser.getRole() == User.role.Funder) {
-                serviceUser.updateUserAttribute(currentUser.getId(), "password", attributeValue);
-            } else if (currentUser.getRole() == User.role.Owner) {
-                serviceUser.updateUserAttribute(currentUser.getId(), "password", attributeValue);
-            }
-
+            String hashpwd = BCrypt.hashpw(attributeValue, BCrypt.gensalt());
+            serviceUser.updateUserAttribute(currentUser.getId(), "password", hashpwd);
         }
         closeWindow();
         Refresh();
@@ -60,5 +66,7 @@ public class UpdateUserController {
         Stage stage = (Stage) attributeField.getScene().getWindow();
         stage.close();
     }
+
+
 }
 

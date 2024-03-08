@@ -46,8 +46,8 @@ public class PostCardController {
         nameLabel.setText(user.getNom() + " " + user.getPrenom());
         emailLabel.setText(user.getEmail());
         roleLabel.setText(String.valueOf(user.getRole()));
-/*
-        switch (user.getRole()) {
+
+/*        switch (user.getRole()) {
             case Owner:
                 List<Projet> Projet =  ((Owner) user).getProjetsList();
                 StringBuilder sb = new StringBuilder();
@@ -85,7 +85,9 @@ public class PostCardController {
         }
 
 
+
  */
+
 
     }
 

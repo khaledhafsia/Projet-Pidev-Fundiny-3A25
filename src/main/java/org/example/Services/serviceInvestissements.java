@@ -16,10 +16,10 @@
             cnx=MyDataBase.getInstance().getCnx();
         }
        // @Override
-        public static void add(investissements investissement, int user_id) {
-            //String qry ="INSERT INTO `investissements`(`user_id`, `montant`,`description`, `date`,`projet_id `) VALUES (?,?,?,?,?)";
+        public static void add(investissements investissement, int user_id,int project_id) {
+            String qry ="INSERT INTO `investissements`(`user_id`, `montant`,`description`, `date`,`projet_id `) VALUES (?,?,?,?,?)";
 
-            String qry ="INSERT INTO `investissements`(`user_id`, `montant`,`description`, `date`) VALUES (?,?,?,?)";
+            //String qry ="INSERT INTO `investissements`(`user_id`, `montant`,`description`, `date`) VALUES (?,?,?,?)";
             try {
                 PreparedStatement stm = cnx.prepareStatement(qry);
                 stm.setInt(1, user_id);
@@ -28,7 +28,7 @@
                 Timestamp currentTimestamp = Timestamp.valueOf(LocalDateTime.now());
                 investissement.setDate(currentTimestamp);
                 stm.setTimestamp(4, currentTimestamp);
-                //stm.setInt(5, investissement.getProjetID());
+                stm.setInt(5, investissement.getProjetID());
                 stm.executeUpdate();
 
             } catch (SQLException e) {

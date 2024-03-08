@@ -1,4 +1,4 @@
-package org.example.Controller;
+package tn.esprit.controls;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -6,13 +6,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
-import org.example.utils.MyDataBase;
+
+import tn.esprit.models.Reclamation;
+import tn.esprit.services.serviceReclamation;
+import tn.esprit.utils.MyDataBase;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -136,9 +136,9 @@ public class AddReclamationControllers implements Initializable {
         preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, emailFld.getText());
 // Assuming you have a method like getProjectIDByName in MyDataBase class
-       // preparedStatement.setInt(2, cnx.getProjectIDByName(projetComboBox.getValue()));
-       // preparedStatement.setInt(3, cnx.getreclamationIDByName(typeReclamationComboBox.getValue()));
-       // preparedStatement.setInt(4, cnx.getadminIDByName(adminComboBox.getValue()));
+        preparedStatement.setInt(2, cnx.getProjectIDByName(projetComboBox.getValue()));
+        preparedStatement.setInt(3, cnx.getreclamationIDByName(typeReclamationComboBox.getValue()));
+        preparedStatement.setInt(4, cnx.getadminIDByName(adminComboBox.getValue()));
         preparedStatement.setString(5, objetFld.getText());
         preparedStatement.setString(6, texte.getText());
         // Assuming texte is the Description_Reclamation field
@@ -158,17 +158,17 @@ public class AddReclamationControllers implements Initializable {
 
     private void populateAdminComboBox() {
         MyDataBase myDataBase = MyDataBase.getInstance(); // Use getInstance to get the instance
-       // adminComboBox.getItems().addAll(myDataBase.getAllAdminNames());
+        adminComboBox.getItems().addAll(myDataBase.getAllAdminNames());
     }
 
     private void populateProjetComboBox() {
         MyDataBase myDataBase = MyDataBase.getInstance(); // Use getInstance to get the instance
-      //  projetComboBox.getItems().addAll(myDataBase.getAllProjectsNames());
+        projetComboBox.getItems().addAll(myDataBase.getAllProjectsNames());
     }
 
     private void populateProblemComboBox() {
         MyDataBase myDataBase = MyDataBase.getInstance(); // Use getInstance to get the instance
-      //  typeReclamationComboBox.getItems().addAll(myDataBase.getAllProblemsNames());
+        typeReclamationComboBox.getItems().addAll(myDataBase.getAllProblemsNames());
     }
 
     @FXML

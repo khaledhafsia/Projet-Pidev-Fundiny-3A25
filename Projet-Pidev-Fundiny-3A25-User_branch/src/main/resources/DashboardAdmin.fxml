@@ -31,11 +31,13 @@
 
                         
                         
-                                    <Button fx:id="RefreshButton" layoutX="51.0" layoutY="511.0" mnemonicParsing="false" onAction="#handleRefresh" prefHeight="30.0" prefWidth="129.0" text="Refresh" />
+                                    <Button fx:id="RefreshButton" layoutX="51.0" layoutY="579.0" mnemonicParsing="false" onAction="#handleRefresh" prefHeight="30.0" prefWidth="129.0" text="Refresh" />
             <Button layoutX="36.0" layoutY="41.0" mnemonicParsing="false" onAction="#DashboardAdmin" prefHeight="71.0" prefWidth="158.0" text="Gestionaire ultlisateur " />
             <Button layoutX="36.0" layoutY="140.0" mnemonicParsing="false" onAction="#BlogInterface" prefHeight="63.0" prefWidth="158.0" text="Gestionaire blog" />
             <Button layoutX="36.0" layoutY="230.0" mnemonicParsing="false" onAction="#affchbackinv" prefHeight="71.0" prefWidth="158.0" text="Gestionaire investissement" />
-            <Button layoutX="37.0" layoutY="344.0" mnemonicParsing="false" onAction="#Proj" prefHeight="71.0" prefWidth="167.0" text="Gestionaire Projet" />
+            <Button layoutX="37.0" layoutY="329.0" mnemonicParsing="false" onAction="#Proj" prefHeight="71.0" prefWidth="167.0" text="Gestionaire Projet" />
+            <Button layoutX="37.0" layoutY="424.0" mnemonicParsing="false" onAction="#addEvent" prefHeight="71.0" prefWidth="167.0" text="Ajouter un évènement" />
+            <Button layoutX="32.0" layoutY="508.0" mnemonicParsing="false" onAction="#repAdd" prefHeight="63.0" prefWidth="167.0" text="Repondre à une réclamation" />
 
                                  </children>
       </Pane>

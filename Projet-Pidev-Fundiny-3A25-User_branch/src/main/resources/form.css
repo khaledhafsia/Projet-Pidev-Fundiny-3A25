@@ -1,0 +1,62 @@
+/* Définir la couleur de fond */
+.root {
+    -fx-background-color: black;
+}
+
+/* Style des libellés */
+.label {
+    -fx-text-fill: white; /* Couleur du texte en rouge */
+}
+
+/* Style des champs de texte */
+.text-field {
+    -fx-background-color: white; /* Fond noir */
+    -fx-text-fill: red; /* Texte en rouge */
+}
+
+/* Style des zones de texte */
+.text-area {
+    -fx-background-color: white; /* Fond noir */
+    -fx-text-fill: red; /* Texte en rouge */
+}
+
+/* Style des boutons */
+.button {
+    -fx-background-color: red; /* Fond rouge */
+    -fx-text-fill: black; /* Texte en noir */
+    -fx-font-size: 14px; /* Augmentation de la taille de la police */
+    -fx-min-width: 100px; /* Taille minimale du bouton */
+    -fx-min-height: 40px; /* Hauteur minimale du bouton */
+}
+
+/* Style des spinners */
+.spinner {
+    -fx-background-color: black; /* Fond noir */
+    -fx-text-fill: red; /* Texte en rouge */
+    -fx-border-color: red; /* Bordure en rouge */
+}
+
+/* Style des spinners lorsque survolés */
+.spinner:hover {
+    -fx-background-color: red; /* Fond rouge */
+    -fx-text-fill: black; /* Texte en noir */
+    -fx-border-color: black; /* Bordure en noir */
+}
+
+/* Style des spinners lorsqu'ils ont le focus */
+.spinner:focused {
+    -fx-background-color: red; /* Fond rouge */
+    -fx-text-fill: white; /* Texte en noir */
+    -fx-border-color: black; /* Bordure en noir */
+}
+
+/* Style du bouton "back" */
+#back-button {
+    -fx-background-color: red; /* Fond rouge */
+    -fx-text-fill: white; /* Texte en noir */
+    -fx-font-size: 14px; /* Augmentation de la taille de la police */
+    -fx-min-width: 100px; /* Taille minimale du bouton */
+    -fx-min-height: 40px; /* Hauteur minimale du bouton */
+}
+
+/* S

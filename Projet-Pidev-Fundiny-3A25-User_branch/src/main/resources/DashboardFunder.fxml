@@ -21,7 +21,7 @@
             <Button layoutX="27.0" layoutY="60.0" mnemonicParsing="false" onAction="#AllProjects" prefHeight="58.0" prefWidth="155.0" text="Ajouter un investissement" />
             <Button layoutX="25.0" layoutY="144.0" mnemonicParsing="false" onAction="#ShowInvestments" prefHeight="58.0" prefWidth="155.0" text="Voir vos investissements" />
             <Button layoutX="25.0" layoutY="229.0" mnemonicParsing="false" onAction="#Blog" prefHeight="58.0" prefWidth="155.0" text="Lire un blog" />
-            <Button layoutX="25.0" layoutY="321.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="155.0" text="Participer à un evenement" />
+            <Button layoutX="25.0" layoutY="321.0" mnemonicParsing="false" onAction="#voirEvent" prefHeight="58.0" prefWidth="155.0" text="Voir les évènements" />
             <Button layoutX="25.0" layoutY="404.0" mnemonicParsing="false" onAction="#Reclamation" prefHeight="58.0" prefWidth="155.0" text="Réclamer une problème" />
          </children>
       </AnchorPane>

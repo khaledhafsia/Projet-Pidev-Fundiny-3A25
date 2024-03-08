@@ -180,4 +180,22 @@ public class FunderDashboardController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    void voirEvent(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListEvent.fxml"));
+            Parent root = loader.load();
+
+//            combinedController controller = loader.getController();
+            //controller.initData(currentUser);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

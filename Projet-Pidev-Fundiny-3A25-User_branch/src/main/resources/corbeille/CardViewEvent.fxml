@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<HBox fx:id="produit_Hbox" maxHeight="-Infinity" maxWidth="-Infinity"
+      minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="355.0"
+      xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.Controller.CardViewController">
+
+
+    <children>
+        <VBox prefHeight="90.0" prefWidth="120.0">
+            <children>
+                <Label fx:id="nom_card" prefHeight="31.0" prefWidth="246.0" text="   Nom produit">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Label>
+                <Label fx:id="quant_card" prefHeight="31.0" prefWidth="246.0" text="   Quantité">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Label>
+                <Label fx:id="desc_card" prefHeight="31.0" prefWidth="246.0" text="   Description">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Label>
+                <Label fx:id="prix_card" contentDisplay="CENTER" prefHeight="31.0" prefWidth="246.0" text="
+                  Prix" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                </Label>
+                <Button fx:id="id_updatecard" layoutX="10.0" layoutY="135.0" mnemonicParsing="false"
+                        onAction="#update_card" prefHeight="42.0" prefWidth="114.0" text="modifier">
+                    <font>
+                        <Font name="System Italic" size="14.0" />
+                    </font>
+                </Button>
+                <Button fx:id="id_delet" layoutX="10.0" layoutY="135.0" mnemonicParsing="false"
+                        onAction="#delet_card" prefHeight="42.0" prefWidth="114.0" text="supprimer">
+                    <font>
+                        <Font name="System Italic" size="14.0" />
+                    </font>
+                </Button>
+            </children>
+        </VBox>
+    </children>
+
+
+</HBox>

@@ -73,10 +73,10 @@ public class SignInController{
 
         if (user != null) {
 
-            if (user.isBanState()) {
-                showAlert("You are banned!");
-                System.out.println("Ban state: " + user.isBanState());
-            }
+//            if (user.isBanState()) {
+//                showAlert("You are banned!");
+//                System.out.println("Ban state: " + user.isBanState());
+//            }
             if (user != null && user.getRole() != null)  {
                 currentUser = user;
                 MyDataBase.getInstance().setIdenvoi(currentUser.getId());

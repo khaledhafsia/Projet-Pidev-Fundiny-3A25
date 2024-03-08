@@ -1,0 +1,62 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 28 avr. 2023, 21:56:57
+    Author     : gille
+*/
+
+.parent{
+    -fx-background-color: transparent;
+}
+
+.pane
+{
+    -fx-background-color: #0099ff;
+}
+
+.trans-btn {
+  -fx-background-color: transparent;
+  -fx-background-radius: 25px;
+  -fx-border-color: #FFFFFF;
+  -fx-border-radius: 25px;
+  -fx-border-width: 2px;
+  -fx-text-fill: #FFFFFF; /* blanc */
+  -fx-font-family: Georgia;
+}
+
+
+.sign-btn {
+    -fx-background-color: #00ffff;
+  -fx-background-radius: 5px;
+  -fx-border-color: #FFFFFF;
+  -fx-border-radius: 5px;
+  -fx-border-width: 2px;
+  -fx-text-fill: #FFFFFF; /* blanc */
+  -fx-font-family: Georgia;
+}
+
+
+.passoublie-btn {
+  -fx-background-color: transparent;
+  -fx-text-fill: #000000; /* noir */
+  -fx-font-family: Georgia;
+  font-size: 6px;
+}
+
+
+
+.text-sign {
+  -fx-text-fill: #FFFFFF; /* couleur blanche */
+  -fx-font-family: Georgia; /* police Georgia */
+}
+/*
+.white-pane
+{
+    -fx-background-image: url("../image/backgroung.jpg");
+    -fx-background-size: 442 387;
+    -fx-background-position: center center;
+    -fx-background-color: #FFFFFF;
+}

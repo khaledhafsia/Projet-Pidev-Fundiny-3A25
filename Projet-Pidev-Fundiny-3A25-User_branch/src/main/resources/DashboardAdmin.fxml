@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="AdminController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="842.0" prefWidth="1493.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controller.AdminController">
+   <children>
+      <ScrollPane layoutX="262.0" layoutY="208.0" prefHeight="629.0" prefWidth="1146.0">
+         <content>
+            <VBox fx:id="postCardContainer" prefHeight="634.0" prefWidth="1118.0" />
+         </content>
+      </ScrollPane>
+      <ImageView fitHeight="663.0" fitWidth="242.0" layoutX="-3.0" layoutY="179.0">
+         <image>
+            <Image url="@images/empty-white-grey-studio-backdrop-background.jpg" />
+         </image>
+      </ImageView>
+      <Pane layoutX="10.0" layoutY="197.0" prefHeight="630.0" prefWidth="241.0">
+         <children>
+
+                        
+                        
+                                    <Button fx:id="RefreshButton" layoutX="51.0" layoutY="511.0" mnemonicParsing="false" onAction="#handleRefresh" prefHeight="30.0" prefWidth="129.0" text="Refresh" />
+            <Button layoutX="36.0" layoutY="41.0" mnemonicParsing="false" onAction="#DashboardAdmin" prefHeight="71.0" prefWidth="158.0" text="Gestionaire ultlisateur " />
+            <Button layoutX="36.0" layoutY="140.0" mnemonicParsing="false" onAction="#BlogInterface" prefHeight="63.0" prefWidth="158.0" text="Gestionaire blog" />
+            <Button layoutX="36.0" layoutY="230.0" mnemonicParsing="false" onAction="#affchbackinv" prefHeight="71.0" prefWidth="158.0" text="Gestionaire investissement" />
+            <Button layoutX="37.0" layoutY="344.0" mnemonicParsing="false" onAction="#Proj" prefHeight="71.0" prefWidth="167.0" text="Gestionaire Projet" />
+
+                                 </children>
+      </Pane>
+      <ImageView fitHeight="180.0" fitWidth="1421.0">
+         <image>
+            <Image url="@images/empty-white-grey-studio-backdrop-background.jpg" />
+         </image>
+      </ImageView>
+      <Pane layoutX="34.0" layoutY="29.0" prefHeight="156.0" prefWidth="1380.0">
+         <children>
+            <TextField fx:id="searchTextField" layoutX="192.0" layoutY="16.0" prefHeight="71.0" prefWidth="729.0" promptText="search" style="-fx-background-color: lightblue; -fx-background-radius: 50;">
+               <font>
+                  <Font name="Georgia" size="10.0" />
+               </font>
+            </TextField>
+            <ImageView fitHeight="71.0" fitWidth="195.0" layoutX="29.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/logo.png" />
+               </image>
+            </ImageView>
+            <Circle fill="DODGERBLUE" layoutX="1150.0" layoutY="52.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="1189.0" layoutY="38.0" prefHeight="27.0" prefWidth="147.0" text="Interface Admin">
+               <font>
+                  <Font name="Bodoni MT" size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="SignOutButton" alignment="BASELINE_LEFT" graphicTextGap="8.0" layoutX="1096.0" layoutY="83.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#SignOut" prefHeight="71.0" prefWidth="262.0" styleClass="passoublie-btn" stylesheets="@Style.css" text="Sign out" />
+
+            <Button fx:id="search" alignment="BASELINE_LEFT" graphicTextGap="8.0" layoutX="943.0" layoutY="24.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleSearch" prefHeight="55.0" prefWidth="167.0" styleClass="button_search" stylesheets="@Style.css" text="search">
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+               <font>
+                  <Font size="8.0" />
+               </font>
+            </Button>
+
+          <!---             <Button fx:id="Search" layoutX="930.0" layoutY="20.0" minHeight="17.0" mnemonicParsing="false" onAction="#handleSearch" onMouseClicked="#handleSearch2" prefHeight="63.0" prefWidth="141.0" styleClass="btn" stylesheets="@Style.css" text="Search" />
+ -->
+            <ChoiceBox fx:id="roleFilterChoiceBox" layoutX="225.0" layoutY="118.0" prefWidth="150.0" />
+            <Button fx:id="filterUsers" layoutX="383.0" layoutY="117.0" minHeight="17.0" mnemonicParsing="false" onAction="#filterUsers" onMouseClicked="#handleSearch2" prefHeight="30.0" prefWidth="129.0" text="seach by role" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

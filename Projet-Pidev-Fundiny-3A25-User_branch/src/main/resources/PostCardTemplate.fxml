@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<VBox prefHeight="191.0" prefWidth="330.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controller.PostCardController">
+   <children>
+      <!-- Add your labels or other components here -->
+      <Label fx:id="titleLabel" prefHeight="18.0" prefWidth="167.0" text="Label" textFill="RED" />
+      <Circle fill="DODGERBLUE" radius="18.0" stroke="BLACK" strokeType="INSIDE" />
+      <Label fx:id="nameLabel" prefHeight="18.0" prefWidth="154.0" text="Label" />
+      <Label fx:id="emailLabel" prefHeight="18.0" prefWidth="154.0" text="Label" />
+      <Label fx:id="roleLabel" prefHeight="18.0" prefWidth="154.0" text="Label" textFill="#0400ff" />
+
+
+      <Label fx:id="capitalLabel" prefHeight="18.0" prefWidth="154.0" text="Label" />
+      <Label fx:id="montantlabel" prefHeight="18.0" prefWidth="154.0" text="Label" />
+      <!--!-->
+
+      <Button fx:id="UpdateButton" mnemonicParsing="false" onAction="#handleUpdateAction" prefHeight="34.0" prefWidth="333.0" styleClass="sign-btn" text=" Update Capitale/participaation" textFill="#666133">
+         <graphic>
+            <ImageView fitHeight="27.0" fitWidth="44.0">
+               <image>
+                  <Image url="@images/update.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+
+       <Button fx:id="DeleteButton" onAction="#handleDeleteAction" prefHeight="34.0" prefWidth="334.0" text="              Pema Ban                    ">
+         <graphic>
+            <ImageView fitHeight="22.0" fitWidth="31.0">
+               <image>
+                  <Image url="@images/BanIcon.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="BanButton" mnemonicParsing="false" onAction="#handleBanAction" prefHeight="31.0" prefWidth="334.0" styleClass="sign-btn" text="                   Ban                        ">
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="40.0">
+               <image>
+                  <Image url="@images/ban.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="BanButton1" mnemonicParsing="false" onAction="#handleUnBanAction" prefHeight="31.0" prefWidth="334.0" styleClass="sign-btn" text="                   unBan                        ">
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="40.0">
+               <image>
+                  <Image url="@images/ban.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</VBox>

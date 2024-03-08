@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox fx:id="itemC" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="803.0" spacing="30.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-background-insets: 0;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controller.ItemPinvController">
+    <stylesheets>
+        <URL value="@stylesItem.css" />
+    </stylesheets>
+    <children>
+        <Label fx:id="nomPr" prefHeight="20.0" prefWidth="201.0">
+         <HBox.margin>
+            <Insets left="10.0" />
+         </HBox.margin></Label>
+        <Label fx:id="nomPo" prefHeight="20.0" prefWidth="215.0">
+            <HBox.margin>
+                <Insets />
+            </HBox.margin>
+        </Label>
+        <Label fx:id="dateD" prefHeight="20.0" prefWidth="204.0">
+            <HBox.margin>
+                <Insets />
+            </HBox.margin>
+        </Label>
+      <Label fx:id="CA" prefHeight="20.0" prefWidth="203.0" />
+      <Button fx:id="investir" mnemonicParsing="false" onAction="#investir" prefHeight="29.0" prefWidth="218.0" styleClass="button" text="Investir">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+    </children>
+    <effect>
+        <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0" />
+    </effect>
+</HBox>

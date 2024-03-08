@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="550.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.Controller.Showtache">
+   <children>
+      <AnchorPane prefHeight="550.0" prefWidth="110.0" style="-fx-background-color: #ad1328;" />
+      <Label layoutX="264.0" layoutY="36.0" text="La liste des taches">
+         <font>
+            <Font name="System Bold Italic" size="24.0" />
+         </font>
+      </Label>
+      <Button layoutX="508.0" layoutY="491.0" mnemonicParsing="false" onAction="#backBtn" text="Retour" />
+      <ScrollPane layoutX="138.0" layoutY="127.0" prefHeight="270.0" prefWidth="442.0">
+         <content>
+            <HBox fx:id="cardContainer" prefHeight="245.0" prefWidth="443.0" />
+         </content>
+      </ScrollPane>
+      <RadioButton layoutX="154.0" layoutY="472.0" mnemonicParsing="false" onAction="#sortBtn" prefHeight="18.0" prefWidth="220.0" text="Tri par priorité (élevée -&gt; faible)" />
+      <RadioButton layoutX="154.0" layoutY="495.0" mnemonicParsing="false" onAction="#sortSBtn" prefHeight="18.0" prefWidth="234.0" text="Tri par statut (en attente -&gt; terminée)" />
+      <TextField fx:id="searchField" layoutX="138.0" layoutY="100.0" prefHeight="26.0" prefWidth="234.0" promptText="chercher des taches selon le titre" />
+   </children>
+</AnchorPane>
